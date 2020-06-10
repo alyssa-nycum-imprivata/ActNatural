@@ -1,0 +1,21 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-size: 1.25em;
+}
+
+.main-content {
+    padding: 1em 2em;
+}
+
+.navList {
+    list-style-type: none;
+    display: flex;
+    border-bottom: 3px solid black;
+    padding: 1em;
+    margin: 0;
+}
+
+.navList__route {
+    margin: 0 0.5em;
+}
