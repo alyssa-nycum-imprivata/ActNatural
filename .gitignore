@@ -29,8 +29,5 @@ media/
 *.pid
 *.bak
 
-# django migrations
-migrations
-
 #db location
 actnaturalapp/views/connection.py
