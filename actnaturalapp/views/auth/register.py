@@ -6,6 +6,7 @@ from django.contrib.auth import authenticate, login
 from actnaturalapp.models import Employee, Team
 from django.forms import ValidationError
 
+# TODO: Need to clean appearance of error messages for registration
 
 def register(request):
     if request.method == 'POST':
@@ -37,7 +38,7 @@ def register(request):
                 # Redirect to a success page.
                 return redirect(reverse('actnaturalapp:home'))
         except Exception as e:
-            messages.error(request, f'{type(e)}: {e}')
+            messages.error(request, e)
                 
     teams = Team.objects.all()
     template = 'registration/register.html'

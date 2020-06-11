@@ -1,6 +1,9 @@
 from django.shortcuts import render, redirect, reverse
+from django.contrib.auth.decorators import login_required
 from actnaturalapp.models import EnrichmentItem
 
+
+@login_required
 def enrichment_item_list(request):
 
     if request.method == 'GET':

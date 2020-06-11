@@ -1,6 +1,9 @@
 from django.shortcuts import render, redirect, reverse
+from django.contrib.auth.decorators import login_required
 from actnaturalapp.models import Animal
 
+
+@login_required
 def animal_list(request):
     
     if request.method == 'GET':
