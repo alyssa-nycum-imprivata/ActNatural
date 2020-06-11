@@ -9,6 +9,7 @@ app_name = 'actnaturalapp'
 urlpatterns = [
     path('', home, name='home'),
     path('accounts/', include('django.contrib.auth.urls')),
+    path('accounts/register/', register, name='register'),
     path('logout/', logout_user, name='logout'),
     path('animals/', animal_list, name='animals'),
     path('enrichment_items/', enrichment_item_list, name='enrichment_items'),
