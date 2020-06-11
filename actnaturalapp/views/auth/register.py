@@ -23,9 +23,13 @@ def register(request):
                 last_name=form_data['last_name']
             )
 
-            new_user.employee.team_id=form_data['team_id']
-            new_user.employee.position=form_data['position']
-            new_user.employee.save()
+            employee = Employee.objects.create(
+                team_id=form_data['team'],
+                position=form_data['position'],
+                user=new_user
+            )
+
+            employee.save()
             
             user = authenticate(request, username=form_data['username'], password=form_data['password'])
             if user is not None:
