@@ -1,0 +1,63 @@
+{% extends 'shared/base.html' %}
+{% load static %}
+
+{% block content %}
+
+    <h1>Add Animal:</h1>
+
+        <form action="{% url 'actnaturalapp:animals' %}" method="post">
+            {% csrf_token %}
+
+            <div>
+                <label for="name">Name: </label>
+                <input id="name" type="text" name="name" value="{{ animal.name }}">
+            </div>
+
+            <div>
+                <label for="species">Species: </label>
+                <select id="species" type="text" name="species">
+                    <option value="" disabled selected>Select</option>
+                    {% for specie in species %}
+                        <option value="{{ specie.id }}">{{ specie.name }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <div>
+                <label for="sex">Sex: </label>
+                <select id="sex" type="text" name="sex">
+                    <option value="" disabled selected>Select</option>
+                    <option value="Female">Female</option>
+                    <option value="Male">Male</option>
+                </select>
+            </div>
+
+            <div>
+                <label for="age">Age (in years): </label>
+                <input id="age" type="number" name="age" value="{{ animal.age }}">
+            </div>
+
+            <div>
+                <label for="weight">Weight (in pounds): </label>
+                <input id="weight" type="number" name="weight" value="{{ animal.weight }}">
+            </div>
+
+            <div class="file-field input-field">
+                <div class="btn">
+                    <span>Upload Image</span>
+                    <input type="file">
+                </div>
+                <div class="file-path-wrapper">
+                    <input class="file-path validate" type="text" id="image" name="image">
+                </div>
+            </div>
+
+            <button type="submit" class="waves-effect waves-light btn" value="Add">Add</button>
+
+        </form>
+
+{% endblock %}
+
+{% block scripts %}
+    <script src="{% static 'scripts/base.js' %}"></script>
+{% endblock scripts %}

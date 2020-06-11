@@ -1,0 +1,18 @@
+{% extends 'shared/base.html' %}
+
+{% block content %}
+
+    <div class="animal_image">
+
+    </div>
+    
+    <div class="animal_info">
+        <p>Name: {{ animal.name }}</p>
+        <p>Species: {{ animal.species.name }}</p>
+        <p>Sex: {{ animal.sex }}</p>
+        <p>Age: {{ animal.age }} years</p>
+        <p>Weight: {{ animal.weight }} pounds</p>
+        <img src="{{ animal.image.url }}" width="500">
+    </div>
+
+{% endblock content %}

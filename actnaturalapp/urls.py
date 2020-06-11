@@ -11,8 +11,13 @@ urlpatterns = [
     path('accounts/', include('django.contrib.auth.urls')),
     path('accounts/register/', register, name='register'),
     path('logout/', logout_user, name='logout'),
+
     path('animals/', animal_list, name='animals'),
+    path('animals/<int:animal_id>/', animal_details, name='animal'),
+    path('animals/add_animal/', animal_form, name='animal_form'),
+
     path('enrichment_items/', enrichment_item_list, name='enrichment_items'),
+
     path('enrichment_log_entry/', enrichment_log_entry_list, name='enrichment_log_entries'),
-]
+] 
 

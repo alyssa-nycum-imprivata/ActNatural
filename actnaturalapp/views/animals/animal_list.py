@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect, reverse
 from django.contrib.auth.decorators import login_required
-from actnaturalapp.models import Animal
+from actnaturalapp.models import Animal, Species
 
 
 @login_required
@@ -8,11 +8,13 @@ def animal_list(request):
     
     if request.method == 'GET':
 
-        all_animals = Animal.objects.all()
+        animals = Animal.objects.all()
+        species = Species.objects.all()
 
         template = 'animals/animal_list.html'
         context = {
-            'all_animals': all_animals
+            'animals': animals,
+            'species': species
         }
 
         return render(request, template, context)

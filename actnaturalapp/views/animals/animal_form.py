@@ -1,0 +1,37 @@
+from django.shortcuts import render
+from django.contrib.auth.decorators import login_required
+from actnaturalapp.models import Animal, Species, Employee
+from .animal_details import animal_details
+
+
+@login_required
+def animal_form(request):
+    if request.method == 'GET':
+        
+        species = Species.objects.all()
+        employee = Employee.objects.get(pk=request.user.employee.id)
+
+
+
+        template = 'animals/animal_form.html'
+        context = {
+            'species': species,
+            'employee': employee
+        }
+
+        return render(request, template, context)
+
+# @login_required
+# def animal_edit_form(request, book_id):
+
+#     if request.method == 'GET':
+#         book = get_book(book_id)
+#         libraries = get_libraries()
+
+#         template = 'books/form.html'
+#         context = {
+#             'book': book,
+#             'all_libraries': libraries
+#         }
+
+#         return render(request, template, context)

@@ -2,4 +2,14 @@
 
 {% block content %}
     <h1>Animals</h1>
+
+    <ul class="animals">
+        {% for animal in animals %}
+            <li class="animal">
+                <h3><a href="{% url 'actnaturalapp:animal' animal.id %}"> {{ animal.name }}</a></h3>
+                <p>{{ animal.species.name }}</p>
+            </li>
+        {% endfor %}
+    </ul>
+
 {% endblock content %}
