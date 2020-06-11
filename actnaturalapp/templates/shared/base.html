@@ -24,18 +24,17 @@
         <div class="nav-wrapper">
             <a href="{% url 'actnaturalapp:home' %}" class="brand-logo">Act Natural</a>
             <ul id="nav-mobile" class="right hid-on-med-and-down">
-                <li><a href="{% url 'actnaturalapp:home' %}">Home</a></li>
-                <li><a href="{% url 'actnaturalapp:home' %}">Animals</a></li>
-                <li><a href="{% url 'actnaturalapp:home' %}">Enrichment Items</a></li>
-                <li><a href="{% url 'actnaturalapp:home' %}">Enrichment Log</a></li>
                 {% if request.user.is_authenticated %}
+                    <li><a href="{% url 'actnaturalapp:home' %}">Home</a></li>
+                    <li><a href="{% url 'actnaturalapp:animals' %}">Animals</a></li>
+                    <li><a href="{% url 'actnaturalapp:enrichment_items' %}">Enrichment Items</a></li>
+                    <li><a href="{% url 'actnaturalapp:enrichment_log_entries' %}">Enrichment Log</a></li>
                     <li><a href="{% url 'actnaturalapp:logout' %}">Logout</a></li>
                 {% else %}
                     <li><a href="{% url 'actnaturalapp:login' %}">Login</a></li>
                 {% endif %}
             </ul>
         </div>
-        
     </nav>
 
     <main class="main-content">
