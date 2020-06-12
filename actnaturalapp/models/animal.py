@@ -12,7 +12,7 @@ class Animal(models.Model):
     sex = models.CharField(max_length=10)
     age = models.IntegerField()
     weight = models.IntegerField()
-    image = models.ImageField(upload_to="media")
+    image = models.ImageField(upload_to="media/", null=True, blank=True)
 
     class Meta:
         verbose_name = ("Animal")

@@ -1,15 +1,21 @@
 {% extends 'shared/base.html' %}
 
 {% block content %}
-    <h1>Animals</h1>
+    <h1 class="page-header">Animals</h1>
 
-    <ul class="animals">
-        {% for animal in animals %}
-            <li class="animal">
-                <h3><a href="{% url 'actnaturalapp:animal' animal.id %}"> {{ animal.name }}</a></h3>
-                <p>{{ animal.species.name }}</p>
-            </li>
+    <a class="animal-link" href="{% url 'actnaturalapp:animal_form' %}">Add Animal</a>
+
+    <div class="animal-collection-container">
+        {% for specie in species %}
+            <ul class="animals-collection collection with-header">
+                <li class="collection-header">{{ specie.name}}</li>
+                {% for animal in animals %}
+                    {% if specie.id == animal.species_id%}
+                        <li class="collection-item"><a class="animal-link" href="{% url 'actnaturalapp:animal' animal.id %}"">{{ animal.name}}</a></li>
+                    {% endif %}
+                {% endfor %}
+            </ul>
         {% endfor %}
-    </ul>
+    </div>
 
 {% endblock content %}

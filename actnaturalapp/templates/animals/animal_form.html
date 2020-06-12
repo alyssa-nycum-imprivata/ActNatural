@@ -5,7 +5,7 @@
 
     <h1>Add Animal:</h1>
 
-        <form action="{% url 'actnaturalapp:animals' %}" method="post">
+        <form action="{% url 'actnaturalapp:animals' %}" method="post" enctype="multipart/form-data">
             {% csrf_token %}
 
             <div>
@@ -45,7 +45,7 @@
             <div class="file-field input-field">
                 <div class="btn">
                     <span>Upload Image</span>
-                    <input type="file">
+                    <input type="file" id="image_2">
                 </div>
                 <div class="file-path-wrapper">
                     <input class="file-path validate" type="text" id="image" name="image">

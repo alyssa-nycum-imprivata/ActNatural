@@ -1,5 +1,7 @@
 from django.urls import path, include
 from django.conf.urls import include
+from django.conf import settings
+from django.conf.urls.static import static
 from actnaturalapp.views import *
 from actnaturalapp.models import *
 
@@ -19,5 +21,6 @@ urlpatterns = [
     path('enrichment_items/', enrichment_item_list, name='enrichment_items'),
 
     path('enrichment_log_entry/', enrichment_log_entry_list, name='enrichment_log_entries'),
-] 
+]
+
 

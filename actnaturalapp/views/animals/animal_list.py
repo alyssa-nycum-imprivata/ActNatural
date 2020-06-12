@@ -20,7 +20,10 @@ def animal_list(request):
         return render(request, template, context)
 
     elif request.method == 'POST':
+        # file = request.FILES['filename']
+        # form_data = request.POST(file=file)
         form_data = request.POST
+        print(request)
 
         new_animal = Animal.objects.create(
             team_id = request.user.employee.team_id,

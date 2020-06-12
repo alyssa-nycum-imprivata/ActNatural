@@ -12,7 +12,10 @@
         <p>Sex: {{ animal.sex }}</p>
         <p>Age: {{ animal.age }} years</p>
         <p>Weight: {{ animal.weight }} pounds</p>
-        <img src="{{ animal.image.url }}" width="500">
+        {% if animal.image %}
+            <img src="{{ animal.image.url }}" />
+        {% endif %}
     </div>
 
 {% endblock content %}
+
