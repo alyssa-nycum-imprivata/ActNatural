@@ -1,9 +1,9 @@
 {% extends 'shared/base.html' %}
 
 {% block content %}
-    <h1 class="page-header">Animals</h1>
+    <h3 class="page-header">Animals</h3>
 
-    <a class="animal-link" href="{% url 'actnaturalapp:animal_form' %}">Add Animal</a>
+    <div class="add-link"><a class="animal-link" href="{% url 'actnaturalapp:animal_form' %}">Add Animal</a></div>
 
     <div class="animal-collection-container">
         {% for specie in species %}

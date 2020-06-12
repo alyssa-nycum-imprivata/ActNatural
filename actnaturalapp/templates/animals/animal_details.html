@@ -7,14 +7,16 @@
     </div>
     
     <div class="animal_info">
+        {% if animal.image %}
+            <img src="{{ animal.image.url }}" />
+        {% endif %}
         <p>Name: {{ animal.name }}</p>
         <p>Species: {{ animal.species.name }}</p>
         <p>Sex: {{ animal.sex }}</p>
         <p>Age: {{ animal.age }} years</p>
         <p>Weight: {{ animal.weight }} pounds</p>
-        {% if animal.image %}
-            <img src="{{ animal.image.url }}" />
-        {% endif %}
+        <button class="waves-effect waves-light btn" type="button">Edit</button>
+        <button class="waves-effect waves-light btn" type="button">Delete</button>
     </div>
 
 {% endblock content %}

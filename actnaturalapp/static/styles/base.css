@@ -14,7 +14,7 @@ nav {
     padding: 0em 2em;
 }
 
-/* ANIMAL LIST STYLING */
+/* LIST STYLING */
 
 .animal-collection-container {
     display: flex;
@@ -39,3 +39,28 @@ nav {
     color: #EE6E73 !important;
 }
 
+.page-header {
+    text-align: center;
+}
+
+.add-link {
+    text-align: center;
+}
+
+/* DETAILS STYLING */
+
+.animal_info {
+    text-align: center;
+    margin-top: 50px;
+}
+
+/* FORM STYLING */
+
+.form {
+    width: 30%;
+}
+
+.form-div {
+    display: flex;
+    justify-content: center;
+}

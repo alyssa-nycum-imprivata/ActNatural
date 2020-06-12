@@ -3,9 +3,9 @@
 
 {% block content %}
 
-    <h1>Add Animal:</h1>
-
-        <form action="{% url 'actnaturalapp:animals' %}" method="post" enctype="multipart/form-data">
+    <h3 class="page-header">Add Animal:</h3>
+    <div class="form-div">
+        <form class="form" action="{% url 'actnaturalapp:animals' %}" method="post" enctype="multipart/form-data">
             {% csrf_token %}
 
             <div>
@@ -55,6 +55,7 @@
             <button type="submit" class="waves-effect waves-light btn" value="Add">Add</button>
 
         </form>
+    </div>
 
 {% endblock %}
 
