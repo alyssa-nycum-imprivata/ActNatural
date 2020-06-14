@@ -4,7 +4,7 @@ from actnaturalapp.models import Animal, Species
 
 
 @login_required
-def animal_list(request):
+def animal_list(request, species_id=None):
     
     if request.method == 'GET':
 
@@ -23,16 +23,36 @@ def animal_list(request):
         # file = request.FILES['filename']
         # form_data = request.POST(file=file)
         form_data = request.POST
-        print(request)
 
-        new_animal = Animal.objects.create(
-            team_id = request.user.employee.team_id,
-            species_id = form_data['species'],
-            name = form_data['name'],
-            sex = form_data['sex'],
-            age = form_data['age'],
-            weight = form_data['weight'],
-            image = form_data['image']
-        )
+        if ('age' in form_data):
 
-        return redirect(reverse('actnaturalapp:animal', args=[new_animal.id]))
+            new_animal = Animal.objects.create(
+                team_id = request.user.employee.team_id,
+                species_id = form_data['species'],
+                name = form_data['name'],
+                sex = form_data['sex'],
+                age = form_data['age'],
+                weight = form_data['weight'],
+                image = form_data['image']
+            )
+
+            return redirect(reverse('actnaturalapp:animal', args=[new_animal.id]))
+
+        elif (
+            "actual_method" in form_data
+            and form_data["actual_method"] == "DELETE"
+        ):
+
+            species = Species.objects.get(pk=species_id)
+            
+            species.delete()
+
+            return redirect(reverse('actnaturalapp:animals'))
+
+        else:
+            
+            new_species = Species.objects.create(
+                name = form_data['name']
+            )
+
+            return redirect(reverse('actnaturalapp:animal_form'))

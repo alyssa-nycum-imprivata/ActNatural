@@ -11,7 +11,19 @@
     <div class="animal-collection-container">
         {% for specie in species %}
             <ul class="animals-collection collection with-header">
-                <li class="collection-header"><a class="species-link" href="">{{ specie.name}}</a></li>
+                <li class="collection-header">
+                    <div class="species-name">
+                        <a class="species-link" href="">{{ specie.name}}</a>
+                    </div>
+                    <div class="species-icons">
+                        <a href=""><i class="tiny material-icons edit-icon">edit</i></a>
+                        <form action="{% url 'actnaturalapp:specie' specie.id %}" method="POST">
+                            {% csrf_token %}
+                            <input type="hidden" name="actual_method" value="DELETE">
+                            <button class="icon-button"><i class="tiny material-icons delete-icon">delete</i></button>
+                        </form>
+                    </div>
+                </li>
                 {% for animal in animals %}
                     {% if specie.id == animal.species_id%}
                         <li class="collection-item"><a class="animal-link" href="{% url 'actnaturalapp:animal' animal.id %}"">{{ animal.name}}</a></li>
