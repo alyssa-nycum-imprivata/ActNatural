@@ -19,11 +19,15 @@ nav {
 .animal-collection-container {
     display: flex;
     justify-content: space-evenly;
+    flex-wrap: wrap;
     margin-top: 30px;
 }
 
 .animals-collection {
     width: 25%;
+    margin-left: 5px !important;
+    margin-right: 5px !important;
+    margin-bottom: 30px !important;
 }
 
 .collection-header {
@@ -39,12 +43,26 @@ nav {
     color: #EE6E73 !important;
 }
 
+.species-link {
+    color: white;
+}
+
+.species-link:hover {
+    color: black;
+}
+
 .page-header {
     text-align: center;
 }
 
 .add-link {
-    text-align: center;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.page-link-container {
+    display: flex;
+    justify-content: center;
 }
 
 /* DETAILS STYLING */
@@ -64,3 +82,19 @@ nav {
     display: flex;
     justify-content: center;
 }
+/* 
+.input-div {
+    display: flex;
+}
+
+.input-div label {
+    width: 30%;
+}
+
+.input-div input {
+    width: 70%;
+}
+
+.form_select {
+    max-width: 70% !important;
+} */

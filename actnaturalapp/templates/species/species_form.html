@@ -1,0 +1,20 @@
+{% extends 'shared/base.html' %}
+
+{% block content %}
+
+    <h3 class="page-header">Add Species:</h3>
+    <div class="form-div">
+        <form class="form" action="{% url 'actnaturalapp:species' %}" method="post">
+            {% csrf_token %}
+
+            <div class="input-div">
+                <label for="name">Name: </label>
+                <input id="name" type="text" name="name" value="{{ animal.name }}">
+            </div>
+
+            <button type="submit" class="waves-effect waves-light btn" value="Add">Add</button>
+
+        </form>
+    </div>
+
+{% endblock %}

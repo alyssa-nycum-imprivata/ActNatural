@@ -3,12 +3,15 @@
 {% block content %}
     <h3 class="page-header">Animals</h3>
 
+    <div class="page-link-container">
     <div class="add-link"><a class="animal-link" href="{% url 'actnaturalapp:animal_form' %}">Add Animal</a></div>
+    <div class="add-link"><a class="animal-link" href="{% url 'actnaturalapp:species_form' %}">Add Species</a></div>
+    </div>
 
     <div class="animal-collection-container">
         {% for specie in species %}
             <ul class="animals-collection collection with-header">
-                <li class="collection-header">{{ specie.name}}</li>
+                <li class="collection-header"><a class="species-link" href="">{{ specie.name}}</a></li>
                 {% for animal in animals %}
                     {% if specie.id == animal.species_id%}
                         <li class="collection-item"><a class="animal-link" href="{% url 'actnaturalapp:animal' animal.id %}"">{{ animal.name}}</a></li>

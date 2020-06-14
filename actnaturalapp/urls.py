@@ -18,6 +18,9 @@ urlpatterns = [
     path('animals/<int:animal_id>/', animal_details, name='animal'),
     path('animals/add_animal/', animal_form, name='animal_form'),
 
+    path('species/', species_list, name='species'),
+    path('species/add_species/', species_form, name='species_form'),
+
     path('enrichment_items/', enrichment_item_list, name='enrichment_items'),
 
     path('enrichment_log_entry/', enrichment_log_entry_list, name='enrichment_log_entries'),
