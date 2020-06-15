@@ -16,12 +16,18 @@
                         <a class="species-link" href="">{{ specie.name}}</a>
                     </div>
                     <div class="species-icons">
-                        <a href=""><i class="tiny material-icons edit-icon">edit</i></a>
+
+                        <form action="{% url 'actnaturalapp:species_edit_form' specie.id %}" method="GET">
+                            {% csrf_token %}
+                            <button class="icon-button"><i class="tiny material-icons edit-icon">edit</i></button>
+                        </form>
+
                         <form action="{% url 'actnaturalapp:specie' specie.id %}" method="POST">
                             {% csrf_token %}
                             <input type="hidden" name="actual_method" value="DELETE">
                             <button class="icon-button"><i class="tiny material-icons delete-icon">delete</i></button>
                         </form>
+
                     </div>
                 </li>
                 {% for animal in animals %}

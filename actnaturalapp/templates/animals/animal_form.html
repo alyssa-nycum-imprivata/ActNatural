@@ -3,7 +3,11 @@
 
 {% block content %}
 
-    <h3 class="page-header">Add Animal:</h3>
+    {% if animal.id is not None %}
+        <h3 class="page-header">Edit Animal:</h3>
+    {% else %}
+        <h3 class="page-header">Add Animal:</h3>
+    {% endif %}
 
     <div class="form-div">
         {% if animal.id is not None %}

@@ -21,6 +21,7 @@ urlpatterns = [
 
     path('species/<int:species_id>/', animal_list, name='specie'),
     path('species/add_species/', species_form, name='species_form'),
+    path('species/<int:species_id>/edit_species', species_edit_form, name="species_edit_form"),
 
     path('enrichment_items/', enrichment_item_list, name='enrichment_items'),
 

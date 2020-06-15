@@ -2,18 +2,32 @@
 
 {% block content %}
 
-    <h3 class="page-header">Add Species:</h3>
+    {% if species.id is not None %}
+        <h3 class="page-header">Edit Species:</h3>
+    {% else %}
+        <h3 class="page-header">Add Species:</h3>
+    {% endif %}
+    
     <div class="form-div">
-        <form class="form" action="{% url 'actnaturalapp:animals' %}" method="post">
+        {% if species.id is not None %}
+            <form action="{% url 'actnaturalapp:specie' species.id %}" method="post">
+        {% else %}
+            <form class="form" action="{% url 'actnaturalapp:animals' %}" method="post">
+        {% endif %}
+
             {% csrf_token %}
 
             <div class="input-div">
                 <label for="name">Name: </label>
-                <input id="name" type="text" name="name" value="{{ animal.name }}">
+                <input id="name" type="text" name="name" value="{{ species.name }}">
             </div>
 
-            <button type="submit" class="waves-effect waves-light btn" value="Add">Add</button>
-
+            {% if species.id is not None %}
+                <input type="hidden" name="actual_method" value="PUT">
+                <button type="submit" class="waves-effect waves-light btn" value="Update">Update</button>
+            {% else %}
+                <button type="submit" class="waves-effect waves-light btn" value="Add">Add</button>
+            {% endif %}
         </form>
     </div>
 

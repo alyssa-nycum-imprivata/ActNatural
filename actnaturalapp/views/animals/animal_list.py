@@ -20,6 +20,8 @@ def animal_list(request, species_id=None):
         return render(request, template, context)
 
     elif request.method == 'POST':
+        
+        species = Species.objects.get(pk=species_id)
         # file = request.FILES['filename']
         # form_data = request.POST(file=file)
         form_data = request.POST
@@ -49,8 +51,18 @@ def animal_list(request, species_id=None):
 
             return redirect(reverse('actnaturalapp:animals'))
 
+        elif (
+            "actual_method" in form_data and form_data["actual_method"] == "PUT"
+        ):
+
+            species.name = form_data['name']
+
+            species.save()
+
+            return redirect(reverse('actnaturalapp:animals'))
+
         else:
-            
+
             new_species = Species.objects.create(
                 name = form_data['name']
             )

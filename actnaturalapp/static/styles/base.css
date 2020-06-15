@@ -56,7 +56,7 @@ nav {
     color: white;
 }
 
-.delete-icon:hover {
+.delete-icon:hover,.edit-icon:hover {
     cursor: pointer;
     color: black;
 }
