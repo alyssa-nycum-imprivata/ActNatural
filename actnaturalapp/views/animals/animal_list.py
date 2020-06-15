@@ -21,9 +21,8 @@ def animal_list(request, species_id=None):
 
     elif request.method == 'POST':
 
-        # file = request.FILES['filename']
-        # form_data = request.POST(file=file)
         form_data = request.POST
+        form_files = request.FILES
 
         if ('age' in form_data):
 
@@ -34,7 +33,7 @@ def animal_list(request, species_id=None):
                 sex = form_data['sex'],
                 age = form_data['age'],
                 weight = form_data['weight'],
-                image = form_data['image']
+                image = form_files['image']
             )
 
             return redirect(reverse('actnaturalapp:animal', args=[new_animal.id]))
