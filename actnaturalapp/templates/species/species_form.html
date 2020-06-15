@@ -19,7 +19,7 @@
 
             <div class="input-div">
                 <label for="name">Name: </label>
-                <input id="name" type="text" name="name" value="{{ species.name }}">
+                <input required id="name" type="text" name="name" value="{{ species.name }}">
             </div>
 
             {% if species.id is not None %}

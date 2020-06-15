@@ -99,13 +99,25 @@ nav {
 
 /* DETAILS STYLING */
 
+.animal-details-container {
+    display: flex;
+    justify-content: space-evenly;
+}
+
 .animal_info {
     text-align: center;
     margin-top: 50px;
 }
 
-.details-header {
-    padidng-top: 0 !important;
+.image-div{
+    width: 300px;
+    margin-top: 50px;
+    display: flex;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
 }
 
 .details-buttons {
@@ -120,7 +132,7 @@ nav {
 
 .back-link {
     text-decoration: underline;
-    margin-top: 30px;
+    margin-top: 20px;
 }
 
 /* FORM STYLING */
