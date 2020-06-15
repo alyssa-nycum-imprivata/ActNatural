@@ -27,6 +27,7 @@ def animal_details(request, animal_id):
     elif request.method == 'POST':
 
         form_data = request.POST
+        form_files = request.FILES
 
         if (
             "actual_method" in form_data
@@ -39,7 +40,7 @@ def animal_details(request, animal_id):
             animal.sex = form_data['sex']
             animal.age = form_data['age']
             animal.weight = form_data['weight']
-            animal.image = form_data['image']
+            animal.image = animal.image
 
             animal.save()
 

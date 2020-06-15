@@ -11,7 +11,7 @@
 
     <div class="form-div">
         {% if animal.id is not None %}
-            <form action="{% url 'actnaturalapp:animal' animal.id %}" method="post">
+            <form action="{% url 'actnaturalapp:animal' animal.id %}" method="post" enctype="multipart/form-data">
         {% else %}
             <form class="form" action="{% url 'actnaturalapp:animals' %}" method="post" enctype="multipart/form-data">
         {% endif %}
@@ -52,15 +52,17 @@
                     <input id="weight" type="number" name="weight" value="{{ animal.weight }}">
                 </div>
 
-                <div class="file-field input-field">
-                    <div class="btn">
-                        <span>Upload Image</span>
-                        <input type="file" id="image_2">
+                {% if animal.id is None %}
+                    <div class="file-field input-field">
+                        <div class="btn">
+                            <span>Upload Image</span>
+                            <input type="file" id="image" name="image">
+                        </div>
+                        <div class="file-path-wrapper">
+                            <input class="file-path validate" type="text" value="{{ animal.image }}">
+                        </div>
                     </div>
-                    <div class="file-path-wrapper">
-                        <input class="file-path validate" type="text" id="image" name="image" value="{{animal.image}}">
-                    </div>
-                </div>
+                {% endif %}
 
                 {% if animal.id is not None %}
                     <input type="hidden" name="actual_method" value="PUT">
