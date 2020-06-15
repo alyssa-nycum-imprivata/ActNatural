@@ -15,4 +15,4 @@ def species_list(request):
             'species': species
         }
 
-        return render(request, template)
+        return render(request, template, context)

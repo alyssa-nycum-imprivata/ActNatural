@@ -28,6 +28,11 @@
 
         </div>
 
+        <form action="{% url 'actnaturalapp:animal_note_form' animal.id %}" method="GET">
+            {% csrf_token %}
+            <button class="waves-effect waves-light btn details-button">Add Note</button>
+        </form>
+
         <div class="page-link-container">
             <div class="back-link"><a class="animal-link" href="{% url 'actnaturalapp:animals' %}">Back to Animals</a></div>
         </div>

@@ -1,0 +1,28 @@
+{% extends 'shared/base.html' %}
+
+{% block content %}
+
+    <h3 class="page-header">Add Note:</h3>
+
+    <div class="form-div">
+
+        <form class="form" action="{% url 'actnaturalapp:animal' animal.id %}" method="post">
+
+            {% csrf_token %}
+
+            <div class="input-div">
+                <label for="date">Date: </label>
+                <input id="date" type="date" name="date" value="{{ note.date }}">
+            </div>
+
+            <div class="input-div">
+                <label for="note">Date: </label>
+                <input id="note" type="text" name="note" value="{{ note.note }}">
+            </div>
+
+            <button type="submit" class="waves-effect waves-light btn" value="Add">Add</button>
+
+        </form>
+    </div>
+
+{% endblock %}

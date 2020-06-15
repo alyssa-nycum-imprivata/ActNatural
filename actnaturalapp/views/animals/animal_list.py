@@ -67,27 +67,3 @@ def animal_list(request, species_id=None):
             )
 
             return redirect(reverse('actnaturalapp:animal_form'))
-
-
-        # elif (
-        #     "actual_method" in form_data
-        #     and form_data["actual_method"] == "DELETE"
-        # ):
-
-        #     species = Species.objects.get(pk=species_id)
-            
-        #     species.delete()
-
-        #     return redirect(reverse('actnaturalapp:animals'))
-
-        # elif (
-        #     "actual_method" in form_data and form_data["actual_method"] == "PUT"
-        # ):
-
-        #     species = Species.objects.get(pk=species_id)
-
-        #     species.name = form_data['name']
-
-        #     species.save()
-
-        #     return redirect(reverse('actnaturalapp:animals'))
