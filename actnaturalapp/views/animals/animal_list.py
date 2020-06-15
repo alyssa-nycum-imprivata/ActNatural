@@ -20,8 +20,7 @@ def animal_list(request, species_id=None):
         return render(request, template, context)
 
     elif request.method == 'POST':
-        
-        species = Species.objects.get(pk=species_id)
+
         # file = request.FILES['filename']
         # form_data = request.POST(file=file)
         form_data = request.POST
@@ -42,24 +41,24 @@ def animal_list(request, species_id=None):
 
         elif (
             "actual_method" in form_data
-            and form_data["actual_method"] == "DELETE"
         ):
 
             species = Species.objects.get(pk=species_id)
-            
-            species.delete()
 
-            return redirect(reverse('actnaturalapp:animals'))
 
-        elif (
-            "actual_method" in form_data and form_data["actual_method"] == "PUT"
-        ):
+            if (form_data["actual_method"] == "DELETE"):
 
-            species.name = form_data['name']
+                species.delete()
 
-            species.save()
+                return redirect(reverse('actnaturalapp:animals'))
 
-            return redirect(reverse('actnaturalapp:animals'))
+            elif (form_data["actual_method"] == "PUT"):
+
+                species.name = form_data['name']
+
+                species.save()
+
+                return redirect(reverse('actnaturalapp:animals'))
 
         else:
 
@@ -68,3 +67,27 @@ def animal_list(request, species_id=None):
             )
 
             return redirect(reverse('actnaturalapp:animal_form'))
+
+
+        # elif (
+        #     "actual_method" in form_data
+        #     and form_data["actual_method"] == "DELETE"
+        # ):
+
+        #     species = Species.objects.get(pk=species_id)
+            
+        #     species.delete()
+
+        #     return redirect(reverse('actnaturalapp:animals'))
+
+        # elif (
+        #     "actual_method" in form_data and form_data["actual_method"] == "PUT"
+        # ):
+
+        #     species = Species.objects.get(pk=species_id)
+
+        #     species.name = form_data['name']
+
+        #     species.save()
+
+        #     return redirect(reverse('actnaturalapp:animals'))
