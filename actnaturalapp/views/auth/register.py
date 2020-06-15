@@ -35,7 +35,6 @@ def register(request):
             user = authenticate(request, username=form_data['username'], password=form_data['password'])
             if user is not None:
                 login(request, user)
-                # Redirect to a success page.
                 return redirect(reverse('actnaturalapp:home'))
         except Exception as e:
             messages.error(request, e)

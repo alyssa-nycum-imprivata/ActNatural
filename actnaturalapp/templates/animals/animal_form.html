@@ -1,0 +1,80 @@
+{% extends 'shared/base.html' %}
+{% load static %}
+
+{% block content %}
+
+    {% if animal.id is not None %}
+        <h3 class="page-header">Edit Animal:</h3>
+    {% else %}
+        <h3 class="page-header">Add Animal:</h3>
+    {% endif %}
+
+    <div class="form-div">
+        {% if animal.id is not None %}
+            <form action="{% url 'actnaturalapp:animal' animal.id %}" method="post" enctype="multipart/form-data">
+        {% else %}
+            <form class="form" action="{% url 'actnaturalapp:animals' %}" method="post" enctype="multipart/form-data">
+        {% endif %}
+
+                {% csrf_token %}
+
+                <div class="input-div">
+                    <label for="name">Name: </label>
+                    <input required id="name" type="text" name="name" value="{{ animal.name }}">
+                </div>
+
+                <div class="input-div">
+                    <label for="species">Species: </label>
+                    <select required class="form_select" id="species" type="text" name="species">
+                        <option value="" disabled selected>Select</option>
+                        {% for specie in species %}
+                            <option {% if specie.id == animal.species_id %}selected{% endif %} value="{{ specie.id }}">{{ specie.name }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+
+                <div class="input-div">
+                    <label for="sex">Sex: </label>
+                    <select required id="sex" type="text" name="sex">
+                        <option value="" disabled selected>Select</option>
+                        <option {% if animal.sex == "Female" %}selected{% endif %} value="Female">Female</option>
+                        <option {% if animal.sex == "Male" %}selected{% endif %} value="Male">Male</option>
+                    </select>
+                </div>
+
+                <div class="input-div">
+                    <label for="age">Age (in years): </label>
+                    <input required id="age" type="number" name="age" value="{{ animal.age }}">
+                </div>
+
+                <div class="input-div">
+                    <label for="weight">Weight (in pounds): </label>
+                    <input required id="weight" type="number" name="weight" value="{{ animal.weight }}">
+                </div>
+
+                {% if animal.id is None %}
+                    <div class="file-field input-field">
+                        <div class="btn">
+                            <span>Upload Image</span>
+                            <input required type="file" id="image" name="image">
+                        </div>
+                        <div class="file-path-wrapper">
+                            <input class="file-path validate" type="text" value="{{ animal.image }}">
+                        </div>
+                    </div>
+                {% endif %}
+
+                {% if animal.id is not None %}
+                    <input type="hidden" name="actual_method" value="PUT">
+                    <button type="submit" class="waves-effect waves-light btn" value="Update">Update</button>
+                {% else %}
+                    <button type="submit" class="waves-effect waves-light btn" value="Add">Add</button>
+                {% endif %}
+        </form>
+    </div>
+
+{% endblock %}
+
+{% block scripts %}
+    <script src="{% static 'scripts/base.js' %}"></script>
+{% endblock scripts %}

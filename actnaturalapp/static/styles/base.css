@@ -1,3 +1,5 @@
+/* UNIVERSAL STYLING */
+
 body {
     margin: 0;
     padding: 0;
@@ -11,3 +13,151 @@ nav {
 .main-content {
     padding: 0em 2em;
 }
+
+/* NAVBAR STYLING */
+
+.nav-link {
+    color: white;
+}
+
+.nav-link:hover {
+    color: black;
+}
+
+/* LIST STYLING */
+
+.animal-collection-container {
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+    margin-top: 30px;
+}
+
+.animals-collection {
+    width: 25%;
+    margin-left: 5px !important;
+    margin-right: 5px !important;
+    margin-bottom: 30px !important;
+}
+
+.collection-header {
+    background-color: #26A69A !important;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+}
+
+.species-icons {
+    display: flex;
+}
+
+.delete-icon,.edit-icon {
+    align-self: center;
+    color: white;
+}
+
+.delete-icon:hover,.edit-icon:hover {
+    cursor: pointer;
+    color: black;
+}
+
+.icon-button {
+    background-color: #26A69A;
+    border: none;
+}
+
+.animal-link {
+    color: black !important;
+}
+
+.animal-link:hover {
+    color: #EE6E73 !important;
+}
+
+.species-link {
+    color: white;
+}
+
+.species-link:hover {
+    color: black;
+}
+
+.page-header {
+    text-align: center;
+}
+
+.add-link {
+    margin-left: 10px;
+    margin-right: 10px;
+    text-decoration: underline;
+}
+
+.page-link-container {
+    display: flex;
+    justify-content: center
+}
+
+/* DETAILS STYLING */
+
+.animal-details-container {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.animal_info {
+    text-align: center;
+    margin-top: 50px;
+}
+
+.image-div{
+    width: 300px;
+    margin-top: 50px;
+    display: flex;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+.details-buttons {
+    display: flex;
+    justify-content: center;
+}
+
+.details-button {
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
+.back-link {
+    text-decoration: underline;
+    margin-top: 20px;
+}
+
+/* FORM STYLING */
+
+.form {
+    width: 30%;
+}
+
+.form-div {
+    display: flex;
+    justify-content: center;
+}
+/* 
+.input-div {
+    display: flex;
+}
+
+.input-div label {
+    width: 30%;
+}
+
+.input-div input {
+    width: 70%;
+}
+
+.form_select {
+    max-width: 70% !important;
+} */
