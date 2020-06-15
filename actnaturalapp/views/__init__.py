@@ -5,6 +5,7 @@ from .auth.register import register
 from .animals.animal_list import animal_list
 from .animals.animal_details import animal_details
 from .animals.animal_form import animal_form
+from .animals.animal_form import animal_edit_form
 
 from .species.species_list import species_list
 from .species.species_form import species_form

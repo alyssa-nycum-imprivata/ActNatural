@@ -17,6 +17,7 @@ urlpatterns = [
     path('animals/', animal_list, name='animals'),
     path('animals/<int:animal_id>/', animal_details, name='animal'),
     path('animals/add_animal/', animal_form, name='animal_form'),
+    path('animals/<int:animal_id>/edit_animal', animal_edit_form, name='animal_edit_form'),
 
     path('species/<int:species_id>/', animal_list, name='specie'),
     path('species/add_species/', species_form, name='species_form'),
