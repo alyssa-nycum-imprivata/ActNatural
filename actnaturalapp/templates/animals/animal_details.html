@@ -63,12 +63,15 @@
                         {% endfor %}
                         {% if note.employee_id == request.user.employee.id %}
                             <div class="note-icons">
+
                                 <button class="note-icon"><i class="small material-icons note-icon">edit</i></button>
-                                <form action="{% url 'actnaturalapp:note' animal.id note.id %}" method="POST">
+
+                                <form action="{% url 'actnaturalapp:note' note.id %}" method="POST">
                                     {% csrf_token %}
                                     <input type="hidden" name="actual_method" value="DELETE">
                                     <button class="note-icon"><i class="small material-icons note-icon">delete</i></button>
                                 </form>
+
                             </div>
                         {% endif %}
                     </div>

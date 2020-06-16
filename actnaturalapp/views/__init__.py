@@ -9,7 +9,7 @@ from .animals.animal_form import animal_form, animal_edit_form
 # from .species.species_list import species_list
 from .species.species_form import species_form, species_edit_form
 
-# from .notes.animal_note_list import animal_note_list
+from .notes.animal_note_details import animal_note_details
 from .notes.animal_note_form import animal_note_form
 
 from .enrichment_items.enrichment_item_list import enrichment_item_list

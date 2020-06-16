@@ -23,7 +23,7 @@ urlpatterns = [
     path('species/add_species/', species_form, name='species_form'),
     path('species/<int:species_id>/edit_species', species_edit_form, name="species_edit_form"),
 
-    path('animals/<int:animal_id>/notes/<int:note_id>', animal_details, name='note'),
+    path('notes/<int:note_id>', animal_note_details, name='note'),
     path('animals/<int:animal_id>/notes/add_note', animal_note_form, name='animal_note_form'),
 
     path('enrichment_items/', enrichment_item_list, name='enrichment_items'),

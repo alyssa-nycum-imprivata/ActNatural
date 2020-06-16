@@ -6,7 +6,7 @@ from django.contrib.auth.models import User
 
 
 @login_required
-def animal_details(request, animal_id=None, note_id=None):
+def animal_details(request, animal_id):
 
     animal = Animal.objects.get(pk=animal_id)
     team = Team.objects.get(pk=animal.team_id)
@@ -23,8 +23,8 @@ def animal_details(request, animal_id=None, note_id=None):
             'team': team,
             'species': species,
             'employee': employee,
-            'notes': notes,
-            'users': users
+            'users': users,
+            'notes': notes
         }
 
         return render(request, template, context)
@@ -54,25 +54,11 @@ def animal_details(request, animal_id=None, note_id=None):
         elif (
             "actual_method" in form_data
             and form_data["actual_method"] == "DELETE"
-        ):  
-
-            if (
-                "age" in form_data
-            ):
+        ):
             
-                animal.delete()
+            animal.delete()
 
-                return redirect(reverse('actnaturalapp:animals'))
-
-            elif (
-                "note" in form_data
-            ):
-
-                note = AnimalNote.object.get(pk=note_id)
-
-                note.delete()
-
-                return redirect(reverse('actnaturalapp:animal', args=[animal.id]))
+            return redirect(reverse('actnaturalapp:animals'))
 
         else:
 
