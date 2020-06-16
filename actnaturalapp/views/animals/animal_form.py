@@ -7,8 +7,14 @@ from actnaturalapp.models import Animal, Species, Employee
 def animal_form(request):
     if request.method == 'GET':
         
-        species = Species.objects.all()
         employee = Employee.objects.get(pk=request.user.employee.id)
+        animals = Animal.objects.filter(team_id=request.user.employee.team_id)
+        all_species = Species.objects.all()
+        species = []
+        for specie in all_species:
+            for animal in animals:
+                if animal.species_id == specie.id:
+                    species.append(specie)
 
         template = 'animals/animal_form.html'
         context = {

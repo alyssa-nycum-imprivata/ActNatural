@@ -10,7 +10,12 @@ def animal_list(request, species_id=None):
 
         employee = Employee.objects.get(pk=request.user.employee.id)
         animals = Animal.objects.filter(team_id=request.user.employee.team_id)
-        species = Species.objects.all()
+        all_species = Species.objects.all()
+        species = []
+        for specie in all_species:
+            for animal in animals:
+                if animal.species_id == specie.id:
+                    species.append(specie)
 
         template = 'animals/animal_list.html'
         context = {
