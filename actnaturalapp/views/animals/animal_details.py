@@ -1,7 +1,8 @@
 from django.urls import reverse
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
-from actnaturalapp.models import Animal, Team, Species, Employee
+from actnaturalapp.models import Animal, Team, Species, Employee, AnimalNote
+from django.contrib.auth.models import User
 
 
 @login_required
@@ -11,6 +12,8 @@ def animal_details(request, animal_id):
     team = Team.objects.get(pk=animal.team_id)
     species = Species.objects.get(pk=animal.species_id)
     employee = Employee.objects.get(pk=request.user.employee.id)
+    notes = AnimalNote.objects.filter(animal_id=animal_id)
+    users = User.objects.all()
 
     if request.method == 'GET':
 
@@ -19,7 +22,9 @@ def animal_details(request, animal_id):
             'animal': animal,
             'team': team,
             'species': species,
-            'employee': employee
+            'employee': employee,
+            'users': users,
+            'notes': notes
         }
 
         return render(request, template, context)
@@ -54,3 +59,14 @@ def animal_details(request, animal_id):
             animal.delete()
 
             return redirect(reverse('actnaturalapp:animals'))
+
+        else:
+
+            new_note = AnimalNote.objects.create(
+                employee_id = request.user.employee.id,
+                animal_id = animal_id,
+                note = form_data['note'],
+                date = form_data['date']
+            )
+
+            return redirect(reverse('actnaturalapp:animal', args=[new_note.animal_id]))

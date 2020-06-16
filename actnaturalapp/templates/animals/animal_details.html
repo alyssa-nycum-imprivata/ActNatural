@@ -3,38 +3,83 @@
 {% block content %}
 
     <div class="animal-details-container">
+
+        <div class="animal-profile">
         
-        <div class="animal_info">
-            <h3 class="details-header">{{ animal.name }}</h3>
-            <p>Species: {{ animal.species.name }}</p>
-            <p>Sex: {{ animal.sex }}</p>
-            <p>Age: {{ animal.age }} years</p>
-            <p>Weight: {{ animal.weight }} pounds</p>
+            <div class="animal_info">
+                <h3 class="details-header">{{ animal.name }}</h3>
+                <p>Species: {{ animal.species.name }}</p>
+                <p>Sex: {{ animal.sex }}</p>
+                <p>Age: {{ animal.age }} years</p>
+                <p>Weight: {{ animal.weight }} pounds</p>
 
-            <div class="details-buttons">
+                <div class="details-buttons">
 
-                <form action="{% url 'actnaturalapp:animal_edit_form' animal.id %}" method="GET">
+                    <form action="{% url 'actnaturalapp:animal_edit_form' animal.id %}" method="GET">
+                        {% csrf_token %}
+                        <button class="waves-effect waves-light btn details-button">Edit</button>
+                    </form>
+
+                    <form action="{% url 'actnaturalapp:animal' animal.id %}" method="POST">
+                        {% csrf_token %}
+                        <input type="hidden" name="actual_method" value="DELETE">
+                        <button class="waves-effect waves-light btn details-button">Delete</button>
+                    </form>
+
+                </div>
+
+                <form action="{% url 'actnaturalapp:animal_note_form' animal.id %}" method="GET">
                     {% csrf_token %}
-                    <button class="waves-effect waves-light btn details-button">Edit</button>
+                    <button class="waves-effect waves-light btn add-note">Add Note</button>
                 </form>
 
-                <form action="{% url 'actnaturalapp:animal' animal.id %}" method="POST">
-                    {% csrf_token %}
-                    <input type="hidden" name="actual_method" value="DELETE">
-                    <button class="waves-effect waves-light btn details-button">Delete</button>
-                </form>
+                <div class="back-link">
+                    <a class="animal-link" href="{% url 'actnaturalapp:animals' %}">Back to Animals</a>
+                </div>
 
             </div>
 
-            
-            <div class="back-link">
-                <a class="animal-link" href="{% url 'actnaturalapp:animals' %}">Back to Animals</a>
+            <div class="image-div">
+                <img src="{{ animal.image.url }}" />
             </div>
 
         </div>
 
-        <div class="image-div">
-            <img src="{{ animal.image.url }}" />
+        <div class="animal-notes-container">
+            <div class="notes-header">
+                {% if notes %}
+                    <h5>Notes:</h5>
+                {% endif %}
+            </div>
+            <div class="note-container">
+                {% for note in notes %}
+                    <div class="note-card">
+                        <p>{{ note.date }}</p>
+                        <p>{{ note.note }}</p>
+                        {% for user in users %}
+                            {% if user.employee.id == note.employee_id %}
+                                <p>Added By: {{ user.first_name }} {{ user.last_name }}</p>
+                            {% endif %}
+                        {% endfor %}
+                        {% if note.employee_id == request.user.employee.id %}
+                            <div class="note-icons">
+
+                                <form action="{% url 'actnaturalapp:animal_note_edit_form' note.id %}" method="GET">
+                                    {% csrf_token %}
+                                    <button class="note-icon"><i class="small material-icons note-icon">edit</i></button>
+                                </form>
+
+                                <form action="{% url 'actnaturalapp:note' note.id %}" method="POST">
+                                    {% csrf_token %}
+                                    <input type="hidden" name="actual_method" value="DELETE">
+                                    <button class="note-icon"><i class="small material-icons note-icon">delete</i></button>
+                                </form>
+
+                            </div>
+                        {% endif %}
+                    </div>
+                {% endfor %}
+            </div>
         </div>
 
     </div>
