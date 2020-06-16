@@ -21,3 +21,16 @@ def animal_note_details(request, note_id):
             note.delete()
 
             return redirect(reverse('actnaturalapp:animal', args=[animal.id]))
+
+        elif (
+            "actual_method" in form_data and form_data["actual_method"] == "PUT"
+        ):
+
+            note.employee_id = request.user.employee.id
+            note.animal_id = animal.id
+            note.date = form_data["date"]
+            note.note = form_data["note"]
+
+            note.save()
+
+            return redirect(reverse('actnaturalapp:animal', args=[animal.id]))

@@ -64,7 +64,10 @@
                         {% if note.employee_id == request.user.employee.id %}
                             <div class="note-icons">
 
-                                <button class="note-icon"><i class="small material-icons note-icon">edit</i></button>
+                                <form action="{% url 'actnaturalapp:animal_note_edit_form' note.id %}" method="GET">
+                                    {% csrf_token %}
+                                    <button class="note-icon"><i class="small material-icons note-icon">edit</i></button>
+                                </form>
 
                                 <form action="{% url 'actnaturalapp:note' note.id %}" method="POST">
                                     {% csrf_token %}

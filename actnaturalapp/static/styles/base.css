@@ -179,6 +179,10 @@ img {
     cursor: pointer;
 }
 
+.note-icon:focus {
+    background-color: white !important;
+}
+
 .note-container {
     display: flex;
     flex-wrap: wrap;

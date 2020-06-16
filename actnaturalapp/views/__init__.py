@@ -6,11 +6,10 @@ from .animals.animal_list import animal_list
 from .animals.animal_details import animal_details
 from .animals.animal_form import animal_form, animal_edit_form
 
-# from .species.species_list import species_list
 from .species.species_form import species_form, species_edit_form
 
 from .notes.animal_note_details import animal_note_details
-from .notes.animal_note_form import animal_note_form
+from .notes.animal_note_form import animal_note_form, animal_note_edit_form
 
 from .enrichment_items.enrichment_item_list import enrichment_item_list
 
