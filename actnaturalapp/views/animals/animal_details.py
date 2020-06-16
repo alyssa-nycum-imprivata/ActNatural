@@ -39,17 +39,34 @@ def animal_details(request, animal_id):
             and form_data["actual_method"] == "PUT"
         ):
 
-            animal.team_id = request.user.employee.team_id
-            animal.species_id = form_data['species']
-            animal.name = form_data['name']
-            animal.sex = form_data['sex']
-            animal.age = form_data['age']
-            animal.weight = form_data['weight']
-            animal.image = animal.image
+            if (
+                "updated_photo" in form_data
+            ):
 
-            animal.save()
+                animal.team_id = request.user.employee.team_id
+                animal.species_id = animal.species_id
+                animal.name = animal.name
+                animal.sex = animal.sex
+                animal.age = animal.age
+                animal.weight = animal.weight
+                animal.image = form_files['image']
 
-            return redirect(reverse('actnaturalapp:animal', args=[animal.id]))
+                animal.save()
+
+                return redirect(reverse('actnaturalapp:animal', args=[animal.id]))
+
+            else:
+                animal.team_id = request.user.employee.team_id
+                animal.species_id = form_data['species']
+                animal.name = form_data['name']
+                animal.sex = form_data['sex']
+                animal.age = form_data['age']
+                animal.weight = form_data['weight']
+                animal.image = animal.image
+
+                animal.save()
+
+                return redirect(reverse('actnaturalapp:animal', args=[animal.id]))
     
         elif (
             "actual_method" in form_data

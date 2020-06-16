@@ -7,8 +7,10 @@ from actnaturalapp.models import Animal, Species, Employee
 def animal_form(request):
     if request.method == 'GET':
         
-        species = Species.objects.all()
         employee = Employee.objects.get(pk=request.user.employee.id)
+        animals = Animal.objects.filter(team_id=request.user.employee.team_id)
+        species = Species.objects.filter(team_id=request.user.employee.team_id)
+
 
         template = 'animals/animal_form.html'
         context = {
@@ -24,10 +26,28 @@ def animal_edit_form(request, animal_id):
     if request.method == 'GET':
         
         animal = Animal.objects.get(pk=animal_id)
-        species = Species.objects.all()
+        species = Species.objects.filter(team_id=request.user.employee.team_id)
         employee = Employee.objects.get(pk=request.user.employee.id)
 
         template = 'animals/animal_form.html'
+        context = {
+            'animal': animal,
+            'species': species,
+            'employee': employee
+        }
+
+        return render(request, template, context)
+
+@login_required
+def animal_photo_edit_form(request, animal_id):
+
+    if request.method == 'GET':
+
+        animal = Animal.objects.get(pk=animal_id)
+        species = Species.objects.filter(team_id=request.user.employee.team_id)
+        employee = Employee.objects.get(pk=request.user.employee.id)
+
+        template = 'animals/animal_photo_edit_form.html'
         context = {
             'animal': animal,
             'species': species,
