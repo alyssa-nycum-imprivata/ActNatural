@@ -148,16 +148,41 @@ img {
 
 .animal-notes-container {
     margin-top: 50px;
+    width: 100%;
     text-align: center;
-    width: 50%;
     display: flex;
     flex-direction: column;
     justify-content: center;
 }
 
 .note-card {
-    color: white;
-    padding: 2px !important;
+    color: black;
+    width: 25%;
+    margin-left: 5px !important;
+    margin-right: 5px !important;
+    margin-bottom: 30px !important;
+    align-self: center;
+}
+
+.note-icons {
+    display: flex;
+    justify-content: center;
+}
+
+.note-icon {
+    border: none;
+    background-color: white;
+}
+
+.note-icon:hover {
+    color: #EE6E73;
+    cursor: pointer;
+}
+
+.note-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
 }
 
 /* FORM STYLING */

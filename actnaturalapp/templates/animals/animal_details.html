@@ -46,15 +46,34 @@
         </div>
 
         <div class="animal-notes-container">
-            {% if notes %}
-                <h5>Notes:</h5>
-            {% endif %}
-            {% for note in notes %}
-                <div class="card-panel teal note-card">
-                    <p>{{ note.date }} - {{ note.note }}</p>
-                    <p>Added By: {{ user.first_name }} {{ user.last_name }}</p>
-                </div>
-            {% endfor %}
+            <div class="notes-header">
+                {% if notes %}
+                    <h5>Notes:</h5>
+                {% endif %}
+            </div>
+            <div class="note-container">
+                {% for note in notes %}
+                    <div class="note-card">
+                        <p>{{ note.date }}</p>
+                        <p>{{ note.note }}</p>
+                        {% for user in users %}
+                            {% if user.employee.id == note.employee_id %}
+                                <p>Added By: {{ user.first_name }} {{ user.last_name }}</p>
+                            {% endif %}
+                        {% endfor %}
+                        {% if note.employee_id == request.user.employee.id %}
+                            <div class="note-icons">
+                                <button class="note-icon"><i class="small material-icons note-icon">edit</i></button>
+                                <form action="{% url 'actnaturalapp:note' animal.id note.id %}" method="POST">
+                                    {% csrf_token %}
+                                    <input type="hidden" name="actual_method" value="DELETE">
+                                    <button class="note-icon"><i class="small material-icons note-icon">delete</i></button>
+                                </form>
+                            </div>
+                        {% endif %}
+                    </div>
+                {% endfor %}
+            </div>
         </div>
 
     </div>
