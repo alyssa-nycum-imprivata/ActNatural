@@ -4,7 +4,7 @@ from .auth.register import register
 
 from .animals.animal_list import animal_list
 from .animals.animal_details import animal_details
-from .animals.animal_form import animal_form, animal_edit_form
+from .animals.animal_form import animal_form, animal_edit_form, animal_photo_edit_form
 
 from .species.species_form import species_form, species_edit_form
 

@@ -22,7 +22,6 @@ def species_edit_form(request, species_id):
     if request.method == 'GET':
         
         species = Species.objects.get(pk=species_id)
-        # employee = Employee.objects.get(pk=request.user.employee.id)
         team = Team.objects.get(pk=request.user.employee.team_id)
 
         template = 'species/species_form.html'

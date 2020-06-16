@@ -78,10 +78,6 @@ nav {
     color: white;
 }
 
-.species-link:hover {
-    color: black;
-}
-
 .page-header {
     text-align: center;
 }
@@ -116,15 +112,21 @@ nav {
 }
 
 .image-div{
-    width: 400px;
+    width: 300px;
     margin-top: 50px;
     display: flex;
+    flex-direction: column;
     margin-left: 50px;
+    justify-content: center;
 }
 
 img {
     max-width: 100%;
     height: auto;
+}
+
+.change-photo {
+    width: 100%;
 }
 
 .details-buttons {

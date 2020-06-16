@@ -37,3 +37,21 @@ def animal_edit_form(request, animal_id):
         }
 
         return render(request, template, context)
+
+@login_required
+def animal_photo_edit_form(request, animal_id):
+
+    if request.method == 'GET':
+
+        animal = Animal.objects.get(pk=animal_id)
+        species = Species.objects.filter(team_id=request.user.employee.team_id)
+        employee = Employee.objects.get(pk=request.user.employee.id)
+
+        template = 'animals/animal_photo_edit_form.html'
+        context = {
+            'animal': animal,
+            'species': species,
+            'employee': employee
+        }
+
+        return render(request, template, context)
