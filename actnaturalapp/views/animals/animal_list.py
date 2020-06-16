@@ -10,12 +10,7 @@ def animal_list(request, species_id=None):
 
         employee = Employee.objects.get(pk=request.user.employee.id)
         animals = Animal.objects.filter(team_id=request.user.employee.team_id)
-        all_species = Species.objects.all()
-        species = []
-        for specie in all_species:
-            for animal in animals:
-                if animal.species_id == specie.id:
-                    species.append(specie)
+        species = Species.objects.filter(team_id=request.user.employee.team_id)
 
         template = 'animals/animal_list.html'
         context = {
@@ -60,6 +55,7 @@ def animal_list(request, species_id=None):
 
             elif (form_data["actual_method"] == "PUT"):
 
+                species.team_id = request.user.employee.team_id
                 species.name = form_data['name']
 
                 species.save()
@@ -69,6 +65,7 @@ def animal_list(request, species_id=None):
         else:
 
             new_species = Species.objects.create(
+                team_id = request.user.employee.team_id,
                 name = form_data['name']
             )
 

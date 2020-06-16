@@ -9,12 +9,8 @@ def animal_form(request):
         
         employee = Employee.objects.get(pk=request.user.employee.id)
         animals = Animal.objects.filter(team_id=request.user.employee.team_id)
-        all_species = Species.objects.all()
-        species = []
-        for specie in all_species:
-            for animal in animals:
-                if animal.species_id == specie.id:
-                    species.append(specie)
+        species = Species.objects.filter(team_id=request.user.employee.team_id)
+
 
         template = 'animals/animal_form.html'
         context = {
@@ -30,7 +26,7 @@ def animal_edit_form(request, animal_id):
     if request.method == 'GET':
         
         animal = Animal.objects.get(pk=animal_id)
-        species = Species.objects.all()
+        species = Species.objects.filter(team_id=request.user.employee.team_id)
         employee = Employee.objects.get(pk=request.user.employee.id)
 
         template = 'animals/animal_form.html'
