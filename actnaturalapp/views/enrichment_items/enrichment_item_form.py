@@ -8,7 +8,7 @@ def enrichment_item_form(request):
     if request.method == 'GET':
         
         # employee = Employee.objects.get(pk=request.user.employee.id)
-        enrichment_types = EnrichmentType.objects.all()
+        enrichment_types = EnrichmentType.objects.filter(team_id=request.user.employee.team_id)
 
         template = 'enrichment_items/enrichment_item_form.html'
         context = {

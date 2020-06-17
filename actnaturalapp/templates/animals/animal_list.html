@@ -4,35 +4,35 @@
     <h3 class="page-header">Animals</h3>
 
     <div class="page-link-container">
-    <div class="add-link"><a class="animal-link" href="{% url 'actnaturalapp:animal_form' %}">Add Animal</a></div>
-    <div class="add-link"><a class="animal-link" href="{% url 'actnaturalapp:species_form' %}">Add Species</a></div>
+    <div class="page-link-div"><a class="page-link" href="{% url 'actnaturalapp:animal_form' %}">Add Animal</a></div>
+    <div class="page-link-div"><a class="page-link" href="{% url 'actnaturalapp:species_form' %}">Add Species</a></div>
     </div>
 
-    <div class="animal-collection-container">
+    <div class="collection-container">
         {% for specie in species %}
-            <ul class="animals-collection collection with-header">
+            <ul class="collection collection with-header">
                 <li class="collection-header">
                     <div class="species-name">
                         {{ specie.name }}
                     </div>
-                    <div class="species-icons">
+                    <div class="collection-header-icons">
 
                         <form action="{% url 'actnaturalapp:species_edit_form' specie.id %}" method="GET">
                             {% csrf_token %}
-                            <button class="icon-button"><i class="tiny material-icons edit-icon">edit</i></button>
+                            <button class="collection-header-icon-button"><i class="tiny material-icons collection-header-edit-icon">edit</i></button>
                         </form>
 
                         <form action="{% url 'actnaturalapp:specie' specie.id %}" method="POST">
                             {% csrf_token %}
                             <input type="hidden" name="actual_method" value="DELETE">
-                            <button class="icon-button"><i class="tiny material-icons delete-icon">delete</i></button>
+                            <button class="collection-header-icon-button"><i class="tiny material-icons collection-header-delete-icon">delete</i></button>
                         </form>
 
                     </div>
                 </li>
                 {% for animal in animals %}
                     {% if specie.id == animal.species_id%}
-                        <li class="collection-item"><a class="animal-link" href="{% url 'actnaturalapp:animal' animal.id %}"">{{ animal.name}}</a></li>
+                        <li class="collection-item"><a class="page-link" href="{% url 'actnaturalapp:animal' animal.id %}"">{{ animal.name}}</a></li>
                     {% endif %}
                 {% endfor %}
             </ul>

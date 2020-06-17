@@ -9,7 +9,7 @@ def enrichment_item_list(request, enrichment_type_id=None):
     if request.method == 'GET':
 
         enrichment_items = EnrichmentItem.objects.filter(team_id=request.user.employee.team_id)
-        enrichment_types = EnrichmentType.objects.all()
+        enrichment_types = EnrichmentType.objects.filter(team_id=request.user.employee.team_id)
 
         template = 'enrichment_items/enrichment_item_list.html'
         context = {
@@ -42,6 +42,7 @@ def enrichment_item_list(request, enrichment_type_id=None):
         else:
 
             new_enrichment_type = EnrichmentType.objects.create(
+                team_id = request.user.employee.team_id,
                 name = form_data['name']
             )
 

@@ -2,43 +2,43 @@
 
 {% block content %}
 
-    <div class="animal-details-container">
+    <div class="details-container">
 
-        <div class="animal-profile">
+        <div class="profile">
         
-            <div class="animal_info">
+            <div class="profile-info">
                 <h3 class="details-header">{{ enrichment_item.name }}</h3>
                 <p>Enrichment Type: {{ enrichment_item.enrichment_type.name }}</p>
                 {% if enrichment_item.note %}
                     <p>Note: {{ enrichment_item.note }}</p>
                 {% endif %}
 
-                {% comment %} <div class="details-buttons">
+                {% comment %} <div class="details-buttons-container">
 
                     <form action="{% url 'actnaturalapp:animal_edit_form' animal.id %}" method="GET">
                         {% csrf_token %}
-                        <button class="waves-effect waves-light btn details-button">Edit</button>
+                        <button class="waves-effect waves-light btn details-edit-button">Edit</button>
                     </form>
 
                     <form action="{% url 'actnaturalapp:animal' animal.id %}" method="POST">
                         {% csrf_token %}
                         <input type="hidden" name="actual_method" value="DELETE">
-                        <button class="waves-effect waves-light btn details-button">Delete</button>
+                        <button class="waves-effect waves-light btn details-delete-button">Delete</button>
                     </form>
 
                 </div> {% endcomment %}
 
                 <div class="back-link">
-                    <a class="animal-link" href="{% url 'actnaturalapp:enrichment_items' %}">Back to Enrichment Items</a>
+                    <a class="page-link" href="{% url 'actnaturalapp:enrichment_items' %}">Back to Enrichment Items</a>
                 </div>
 
             </div>
 
             <div class="image-div">
-                <img src="{{ enrichment_item.image.url }}" />
+                <img class="profile-image" src="{{ enrichment_item.image.url }}" />
                 {% comment %} <form action="{% url 'actnaturalapp:animal_photo_edit_form' animal.id %}" method="GET">
                     {% csrf_token %}
-                    <button class="waves-effect waves-light btn change-photo">Change Photo</button>
+                    <button class="waves-effect waves-light btn change-photo-button">Change Photo</button>
                 </form> {% endcomment %}
             </div>
 
