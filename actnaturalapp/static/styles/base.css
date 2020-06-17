@@ -26,14 +26,14 @@ nav {
 
 /* LIST STYLING */
 
-.animal-collection-container {
+.collection-container {
     display: flex;
     justify-content: space-evenly;
     flex-wrap: wrap;
     margin-top: 30px;
 }
 
-.animals-collection {
+.collection {
     width: 25%;
     margin-left: 5px !important;
     margin-right: 5px !important;
@@ -47,42 +47,38 @@ nav {
     justify-content: space-between;
 }
 
-.species-icons {
+.collection-header-icons {
     display: flex;
 }
 
-.delete-icon,.edit-icon {
+.collection-header-delete-icon,.collection-header-edit-icon {
     align-self: center;
     color: white;
 }
 
-.delete-icon:hover,.edit-icon:hover {
+.collection-header-delete-icon:hover,.collection-header-edit-icon:hover {
     cursor: pointer;
     color: black;
 }
 
-.icon-button {
+.collection-header-icon-button {
     background-color: #26A69A;
     border: none;
 }
 
-.animal-link {
+.page-link {
     color: black !important;
 }
 
-.animal-link:hover {
+.page-link:hover {
     color: #EE6E73 !important;
-}
-
-.species-link {
-    color: white;
 }
 
 .page-header {
     text-align: center;
 }
 
-.add-link {
+.page-link-div {
     margin-left: 10px;
     margin-right: 10px;
     text-decoration: underline;
@@ -95,20 +91,39 @@ nav {
 
 /* DETAILS STYLING */
 
-.animal-details-container {
+.details-container {
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
-.animal-profile {
+.profile {
     display: flex;
 }
 
-.animal_info {
+.profile-info {
     text-align: center;
     margin-top: 50px;
     margin-right: 50px;
+}
+
+.details-buttons-container {
+    display: flex;
+    justify-content: center;
+}
+
+.details-edit-button,.details-delete-button {
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
+.add-note-button {
+    margin-top: 10px;
+}
+
+.back-link {
+    text-decoration: underline;
+    margin-top: 20px;
 }
 
 .image-div{
@@ -120,41 +135,28 @@ nav {
     justify-content: center;
 }
 
-img {
+.profile-image {
     max-width: 100%;
     height: auto;
 }
 
-.change-photo {
+.change-photo-button {
     width: 100%;
 }
 
-.details-buttons {
-    display: flex;
-    justify-content: center;
-}
-
-.details-button {
-    margin-left: 5px;
-    margin-right: 5px;
-}
-
-.add-note {
-    margin-top: 10px;
-}
-
-.back-link {
-    text-decoration: underline;
-    margin-top: 20px;
-}
-
-.animal-notes-container {
+.notes-container {
     margin-top: 50px;
     width: 100%;
     text-align: center;
     display: flex;
     flex-direction: column;
     justify-content: center;
+}
+
+.note-collection {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
 }
 
 .note-card {
@@ -166,29 +168,23 @@ img {
     align-self: center;
 }
 
-.note-icons {
+.note-icons-container {
     display: flex;
     justify-content: center;
 }
 
-.note-icon {
+.note-icon-button {
     border: none;
     background-color: white;
 }
 
-.note-icon:hover {
+.note-icon-button:hover {
     color: #EE6E73;
     cursor: pointer;
 }
 
-.note-icon:focus {
+.note-icon-button:focus {
     background-color: white !important;
-}
-
-.note-container {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-evenly;
 }
 
 /* FORM STYLING */
@@ -201,19 +197,3 @@ img {
     display: flex;
     justify-content: center;
 }
-/* 
-.input-div {
-    display: flex;
-}
-
-.input-div label {
-    width: 30%;
-}
-
-.input-div input {
-    width: 70%;
-}
-
-.form_select {
-    max-width: 70% !important;
-} */

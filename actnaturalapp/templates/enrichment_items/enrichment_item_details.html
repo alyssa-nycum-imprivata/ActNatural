@@ -1,0 +1,49 @@
+{% extends 'shared/base.html' %}
+
+{% block content %}
+
+    <div class="details-container">
+
+        <div class="profile">
+        
+            <div class="profile-info">
+                <h3 class="details-header">{{ enrichment_item.name }}</h3>
+                <p>Enrichment Type: {{ enrichment_item.enrichment_type.name }}</p>
+                {% if enrichment_item.note %}
+                    <p>Note: {{ enrichment_item.note }}</p>
+                {% endif %}
+
+                <div class="details-buttons-container">
+
+                    <form action="{% url 'actnaturalapp:enrichment_item_edit_form' enrichment_item.id %}" method="GET">
+                        {% csrf_token %}
+                        <button class="waves-effect waves-light btn details-edit-button">Edit</button>
+                    </form>
+
+                    <form action="{% url 'actnaturalapp:enrichment_item' enrichment_item.id %}" method="POST">
+                        {% csrf_token %}
+                        <input type="hidden" name="actual_method" value="DELETE">
+                        <button class="waves-effect waves-light btn details-delete-button">Delete</button>
+                    </form>
+
+                </div>
+
+                <div class="back-link">
+                    <a class="page-link" href="{% url 'actnaturalapp:enrichment_items' %}">Back to Enrichment Items</a>
+                </div>
+
+            </div>
+
+            <div class="image-div">
+                <img class="profile-image" src="{{ enrichment_item.image.url }}" />
+                <form action="{% url 'actnaturalapp:enrichment_item_photo_edit_form' enrichment_item.id %}" method="GET">
+                    {% csrf_token %}
+                    <button class="waves-effect waves-light btn change-photo-button">Change Photo</button>
+                </form>
+            </div>
+
+        </div>
+
+    </div>
+
+{% endblock content %}

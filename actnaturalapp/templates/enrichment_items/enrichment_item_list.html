@@ -1,5 +1,43 @@
 {% extends 'shared/base.html' %}
 
 {% block content %}
-    <h1>Enrichment Items</h1>
+
+    <h3 class="page-header">Enrichment Items</h3>
+
+    <div class="page-link-container">
+        <div class="page-link-div"><a class="page-link" href="{% url 'actnaturalapp:enrichment_item_form' %}">Add Enrichment Item</a></div>
+        <div class="page-link-div"><a class="page-link" href="{% url 'actnaturalapp:enrichment_type_form' %}">Add Enrichment Type</a></div>
+    </div>
+
+    <div class="collection-container">
+        {% for enrichment_type in enrichment_types %}
+            <ul class="collection collection with-header">
+                <li class="collection-header">
+                    <div class="species-name">
+                        {{ enrichment_type.name }}
+                    </div>
+                    <div class="collection-header-icons">
+
+                        <form action="{% url 'actnaturalapp:enrichment_type_edit_form' enrichment_type.id %}" method="GET">
+                            {% csrf_token %}
+                            <button class="collection-header-icon-button"><i class="tiny material-icons collection-header-edit-icon">edit</i></button>
+                        </form>
+
+                        <form action="{% url 'actnaturalapp:enrichment_type' enrichment_type.id %}" method="POST">
+                            {% csrf_token %}
+                            <input type="hidden" name="actual_method" value="DELETE">
+                            <button class="collection-header-icon-button"><i class="tiny material-icons collection-header-delete-icon">delete</i></button>
+                        </form>
+
+                    </div>
+                </li>
+                {% for enrichment_item in enrichment_items %}
+                    {% if enrichment_type.id == enrichment_item.enrichment_type_id%}
+                        <li class="collection-item"><a class="page-link" href="{% url 'actnaturalapp:enrichment_item' enrichment_item.id %}"">{{ enrichment_item.name}}</a></li>
+                    {% endif %}
+                {% endfor %}
+            </ul>
+        {% endfor %}
+    </div>
+
 {% endblock content %}
