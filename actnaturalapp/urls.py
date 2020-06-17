@@ -29,6 +29,11 @@ urlpatterns = [
     path('notes/<int:note_id>/edit_note', animal_note_edit_form, name="animal_note_edit_form"),
 
     path('enrichment_items/', enrichment_item_list, name='enrichment_items'),
+    path('enrichment_items/<int:enrichment_item_id>/', enrichment_item_details, name='enrichment_item'),
+    path('enrichment_items/add_enrichment_item/', enrichment_item_form, name='enrichment_item_form'),
+
+    path('enrichment_types/<int:enrichment_type_id>/', enrichment_item_list, name='enrichment_type'),
+    path('enrichment_types/add_enrichment_type/', enrichment_type_form, name='enrichment_type_form'),
 
     path('enrichment_log_entry/', enrichment_log_entry_list, name='enrichment_log_entries'),
 ]

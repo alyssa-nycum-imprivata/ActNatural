@@ -1,0 +1,54 @@
+{% extends 'shared/base.html' %}
+{% load static %}
+
+{% block content %}
+
+    <h3 class="page-header">Add Enrichment Item:</h3>
+
+    <div class="form-div">
+        <form class="form" action="{% url 'actnaturalapp:enrichment_items' %}" method="post" enctype="multipart/form-data">
+
+            {% csrf_token %}
+
+            <div class="input-div">
+                <label for="name">Name: </label>
+                <input required id="name" type="text" name="name" value="{{ enrichment_item.name }}">
+            </div>
+
+            <div class="input-div">
+                <label for="enrichment_type">Enrichment Type: </label>
+                <select required class="form_select" id="enrichment_type" type="text" name="enrichment_type">
+                    <option value="" disabled selected>Select</option>
+                    {% for enrichment_type in enrichment_types %}
+                        <option value="{{ enrichment_type.id }}">{{ enrichment_type.name }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <div class="input-div">
+                <label for="note">Note: </label>
+                <input id="note" type="text" name="note" value="{{ enrichment_item.note }}">
+            </div>
+
+            {% if enrichment_type.id is None %}
+                <div class="file-field input-field">
+                    <div class="btn">
+                        <span>Upload Image</span>
+                        <input required type="file" id="image" name="image">
+                    </div>
+                    <div class="file-path-wrapper">
+                        <input class="file-path validate" type="text">
+                    </div>
+                </div>
+            {% endif %}
+
+            <button type="submit" class="waves-effect waves-light btn" value="Add">Add</button>
+
+        </form>
+    </div>
+
+{% endblock %}
+
+{% block scripts %}
+    <script src="{% static 'scripts/base.js' %}"></script>
+{% endblock scripts %}

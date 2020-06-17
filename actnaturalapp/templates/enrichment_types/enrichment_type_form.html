@@ -1,0 +1,21 @@
+{% extends 'shared/base.html' %}
+
+{% block content %}
+
+    <h3 class="page-header">Add Enrichment Type:</h3>
+    
+        <form class="form" action="{% url 'actnaturalapp:enrichment_items' %}" method="post">
+
+            {% csrf_token %}
+
+            <div class="input-div">
+                <label for="name">Name: </label>
+                <input required id="name" type="text" name="name" value="{{ enrichment_type.name }}">
+            </div>
+
+            <button type="submit" class="waves-effect waves-light btn" value="Add">Add</button>
+
+        </form>
+    </div>
+
+{% endblock %}
