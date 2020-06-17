@@ -1,7 +1,7 @@
 from django.urls import reverse
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
-from actnaturalapp.models import EnrichmentItem, EnrichmentType, Employee, Team
+from actnaturalapp.models import EnrichmentItem, EnrichmentType, Employee, Team, AnimalEnrichmentItem
 
 
 
@@ -10,6 +10,7 @@ def enrichment_item_details(request, enrichment_item_id):
 
     enrichment_item = EnrichmentItem.objects.get(pk=enrichment_item_id)
     enrichment_type = EnrichmentType.objects.get(pk=enrichment_item.enrichment_type_id)
+    animal_enrichment_items = AnimalEnrichmentItem.objects.filter(enrichment_item_id=enrichment_item.id)
     employee = Employee.objects.get(pk=request.user.employee.id)
     team = Team.objects.get(pk=enrichment_item.team_id)
 
@@ -20,7 +21,8 @@ def enrichment_item_details(request, enrichment_item_id):
             "enrichment_item": enrichment_item,
             "enrichment_type": enrichment_type,
             "employee": employee,
-            "team": team
+            "team": team,
+            "animal_enrichment_items": animal_enrichment_items
         }
 
         return render(request, template, context)

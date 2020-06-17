@@ -44,6 +44,21 @@
 
         </div>
 
+        <div class="approved-for-container">
+            <div class="approved-for-header">
+                {% if animal_enrichment_items %}
+                    <h5>Approved For:</h5>
+                {% endif %}
+            </div>
+            <div class="approved-for-collection">
+                <div class="approved-for-card">
+                    {% for animal in animal_enrichment_items %}
+                        <p>{{animal.animal.name}}</p>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+
     </div>
 
 {% endblock content %}

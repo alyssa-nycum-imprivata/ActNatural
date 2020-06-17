@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect, reverse
 from django.contrib.auth.decorators import login_required
-from actnaturalapp.models import EnrichmentItem, EnrichmentType
+from actnaturalapp.models import EnrichmentItem, EnrichmentType, AnimalEnrichmentItem, Animal
 
 
 @login_required
@@ -27,6 +27,8 @@ def enrichment_item_list(request, enrichment_type_id=None):
             "note" in form_data
         ):
 
+            animals = Animal.objects.filter(team_id=request.user.employee.team_id)
+
             new_enrichment_item = EnrichmentItem.objects.create(
                 team_id = request.user.employee.team_id,
                 name = form_data['name'],
@@ -36,6 +38,15 @@ def enrichment_item_list(request, enrichment_type_id=None):
                 is_vet_approved = False,
                 image = form_files['image']
             )
+
+            selected_animals = form_data.getlist('animals')
+
+            for animal in selected_animals:
+                animal_instance = Animal.objects.get(pk=animal)
+                new_animal_enrichment_item = AnimalEnrichmentItem.objects.create(
+                    animal = animal_instance,
+                    enrichment_item = new_enrichment_item
+                )
 
             return redirect(reverse('actnaturalapp:enrichment_item', args=[new_enrichment_item.id]))
 

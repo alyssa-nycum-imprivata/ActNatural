@@ -144,7 +144,7 @@ nav {
     width: 100%;
 }
 
-.notes-container {
+.notes-container,.approved-for-container {
     margin-top: 50px;
     width: 100%;
     text-align: center;
@@ -153,13 +153,13 @@ nav {
     justify-content: center;
 }
 
-.note-collection {
+.note-collection,.approved-for-collection {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-evenly;
 }
 
-.note-card {
+.note-card,.approved-for-card {
     color: black;
     width: 25%;
     margin-left: 5px !important;
