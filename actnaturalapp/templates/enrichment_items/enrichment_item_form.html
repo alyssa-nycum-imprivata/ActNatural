@@ -3,10 +3,18 @@
 
 {% block content %}
 
-    <h3 class="page-header">Add Enrichment Item:</h3>
+    {% if enrichment_item.id is not None %}
+        <h3 class="page-header">Edit Enrichment Item:</h3>
+    {% else %}
+        <h3 class="page-header">Add Enrichment Item:</h3>
+    {% endif %}
 
     <div class="form-div">
-        <form class="form" action="{% url 'actnaturalapp:enrichment_items' %}" method="post" enctype="multipart/form-data">
+        {% if enrichment_item.id is not None %}
+            <form class="form" action="{% url 'actnaturalapp:enrichment_item' enrichment_item.id %}" method="post" enctype="multipart/form-data">
+        {% else %}
+            <form class="form" action="{% url 'actnaturalapp:enrichment_items' %}" method="post" enctype="multipart/form-data">
+        {% endif %}
 
             {% csrf_token %}
 
@@ -20,7 +28,7 @@
                 <select required class="form_select" id="enrichment_type" type="text" name="enrichment_type">
                     <option value="" disabled selected>Select</option>
                     {% for enrichment_type in enrichment_types %}
-                        <option value="{{ enrichment_type.id }}">{{ enrichment_type.name }}</option>
+                        <option {% if enrichment_type.id == enrichment_item.enrichment_type_id %}selected{% endif %} value="{{ enrichment_type.id }}">{{ enrichment_type.name }}</option>
                     {% endfor %}
                 </select>
             </div>
@@ -30,7 +38,7 @@
                 <input id="note" type="text" name="note" value="{{ enrichment_item.note }}">
             </div>
 
-            {% if enrichment_type.id is None %}
+            {% if enrichment_item.id is None %}
                 <div class="file-field input-field">
                     <div class="btn">
                         <span>Upload Image</span>
@@ -42,7 +50,12 @@
                 </div>
             {% endif %}
 
-            <button type="submit" class="waves-effect waves-light btn" value="Add">Add</button>
+            {% if enrichment_item.id is not None %}
+                <input type="hidden" name="actual_method" value="PUT">
+                <button type="submit" class="waves-effect waves-light btn" value="Update">Update</button>
+            {% else %}
+                <button type="submit" class="waves-effect waves-light btn" value="Add">Add</button>
+            {% endif %}
 
         </form>
     </div>

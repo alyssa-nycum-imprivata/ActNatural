@@ -13,7 +13,7 @@ from .notes.animal_note_form import animal_note_form, animal_note_edit_form
 
 from .enrichment_items.enrichment_item_list import enrichment_item_list
 from .enrichment_items.enrichment_item_details import enrichment_item_details
-from .enrichment_items.enrichment_item_form import enrichment_item_form
+from .enrichment_items.enrichment_item_form import enrichment_item_form, enrichment_item_edit_form, enrichment_item_photo_edit_form
 
 from .enrichment_types.enrichment_type_form import enrichment_type_form, enrichment_type_edit_form
 

@@ -1,0 +1,28 @@
+{% extends 'shared/base.html' %}
+
+{% block content %}
+
+    <h3 class="page-header">Change Photo:</h3>
+
+    <div class="form-div">
+        <form action="{% url 'actnaturalapp:enrichment_item' enrichment_item.id %}" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+
+            <div class="file-field input-field">
+                <div class="btn">
+                    <span>Upload Image</span>
+                    <input required type="file" id="image" name="image">
+                </div>
+                <div class="file-path-wrapper">
+                    <input class="file-path validate" type="text">
+                </div>
+            </div>
+
+            <input type="hidden" name="actual_method" value="PUT">
+            <input type="hidden" name="updated_photo">
+            <button type="submit" class="waves-effect waves-light btn" value="Update">Update</button>
+
+        </form>
+    </div>
+
+{% endblock content %}
