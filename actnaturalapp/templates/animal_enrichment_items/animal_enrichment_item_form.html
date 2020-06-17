@@ -1,0 +1,28 @@
+{% extends 'shared/base.html' %}
+{% load static %}
+
+{% block content %}
+
+
+    <h3 class="page-header">Add Animal(s) For Approval:</h3>
+    <h5 class="page-header">For Enrichment Item: {{ enrichment_item.name }}</h5>
+
+    <div class="form-div">
+        <form class="form" action="{% url 'actnaturalapp:animal_enrichment_item_form' enrichment_item.id %}" method="post">
+
+            {% csrf_token %}
+
+            {% for animal in unapproved_animals %}
+                <p>{{animal.name}}</p>
+            {% endfor %}
+
+            <button type="submit" class="waves-effect waves-light btn" value="Add">Add</button>
+
+        </form>
+    </div>
+
+{% endblock %}
+
+{% block scripts %}
+    <script src="{% static 'scripts/base.js' %}"></script>
+{% endblock scripts %}
