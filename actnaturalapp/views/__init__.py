@@ -15,7 +15,7 @@ from .enrichment_items.enrichment_item_list import enrichment_item_list
 from .enrichment_items.enrichment_item_details import enrichment_item_details
 from .enrichment_items.enrichment_item_form import enrichment_item_form
 
-from .enrichment_types.enrichment_type_form import enrichment_type_form
+from .enrichment_types.enrichment_type_form import enrichment_type_form, enrichment_type_edit_form
 
 from .enrichment_log_entries.enrichment_log_entry_list import enrichment_log_entry_list
 

@@ -39,6 +39,27 @@ def enrichment_item_list(request, enrichment_type_id=None):
 
             return redirect(reverse('actnaturalapp:enrichment_item', args=[new_enrichment_item.id]))
 
+        elif (
+            "actual_method" in form_data
+        ):
+
+            enrichment_type = EnrichmentType.objects.get(pk=enrichment_type_id)
+
+            if (form_data["actual_method"] == "DELETE"):
+
+                enrichment_type.delete()
+
+                return redirect(reverse('actnaturalapp:enrichment_items'))
+
+            elif (form_data["actual_method"] == "PUT"):
+
+                enrichment_type.team_id = request.user.employee.team_id
+                enrichment_type.name = form_data["name"]
+
+                enrichment_type.save()
+
+                return redirect(reverse('actnaturalapp:enrichment_items'))
+
         else:
 
             new_enrichment_type = EnrichmentType.objects.create(

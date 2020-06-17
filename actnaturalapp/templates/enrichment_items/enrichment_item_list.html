@@ -18,16 +18,16 @@
                     </div>
                     <div class="collection-header-icons">
 
-                        {% comment %} <form action="{% url 'actnaturalapp:species_edit_form' specie.id %}" method="GET">
+                        <form action="{% url 'actnaturalapp:enrichment_type_edit_form' enrichment_type.id %}" method="GET">
                             {% csrf_token %}
                             <button class="collection-header-icon-button"><i class="tiny material-icons collection-header-edit-icon">edit</i></button>
                         </form>
 
-                        <form action="{% url 'actnaturalapp:specie' specie.id %}" method="POST">
+                        <form action="{% url 'actnaturalapp:enrichment_type' enrichment_type.id %}" method="POST">
                             {% csrf_token %}
                             <input type="hidden" name="actual_method" value="DELETE">
                             <button class="collection-header-icon-button"><i class="tiny material-icons collection-header-delete-icon">delete</i></button>
-                        </form> {% endcomment %}
+                        </form>
 
                     </div>
                 </li>
