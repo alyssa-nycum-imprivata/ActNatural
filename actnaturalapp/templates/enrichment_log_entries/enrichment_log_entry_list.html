@@ -11,7 +11,23 @@
     <div class="collection-container">
         {% for enrichment_log_entry in enrichment_log_entries %}
             <ul class="collection log-collection">
-                <li class="collection-item">{{ enrichment_log_entry.date }} - {{ enrichment_log_entry.animal.name }} - {{ enrichment_log_entry.enrichment_item.name }} {% if enrichment_log_entry.note %}- {{ enrichment_log_entry.note }} {% endif %}</li>
+                <li class="collection-item">
+                {{ enrichment_log_entry.date }} - {{ enrichment_log_entry.animal.name }} - {{ enrichment_log_entry.enrichment_item.name }}
+                {% if enrichment_log_entry.note %}
+                    - {{ enrichment_log_entry.note }} 
+                {% endif %}
+                {% for user in users %}
+                    {% if user.employee.id == enrichment_log_entry.employee_id %}
+                        - Added By: {{ user.first_name }} {{ user.last_name }}
+                    {% endif %}
+                {% endfor %}
+                </li>
+                {% if enrichment_log_entry.employee_id == request.user.employee.id %}
+                    <li class="entry-log-button-container">
+                        <button><i class="tiny material-icons">edit</i></button>
+                        <button><i class="tiny material-icons">delete</i></button>
+                    </li>
+                {% endif %}
             </ul>
         {% endfor %}
     </div>

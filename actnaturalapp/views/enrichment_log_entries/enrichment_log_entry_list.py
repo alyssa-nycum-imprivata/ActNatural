@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect, reverse
 from django.contrib.auth.decorators import login_required
-from actnaturalapp.models import EnrichmentLogEntry
+from django.contrib.auth.models import User
+from actnaturalapp.models import EnrichmentLogEntry, Employee
 
 
 @login_required
@@ -8,11 +9,21 @@ def enrichment_log_entry_list(request):
 
     if request.method == 'GET':
 
-        enrichment_log_entries = EnrichmentLogEntry.objects.all()
+        employees = Employee.objects.filter(team_id=request.user.employee.team_id)
+        users = User.objects.all()
+
+        enrichment_log_entries = []
+        for employee in employees:
+            employee_entries = EnrichmentLogEntry.objects.filter(employee_id=employee.id)
+            for entry in employee_entries:
+                enrichment_log_entries.append(entry)
+
+        enrichment_log_entries = sorted(enrichment_log_entries, key=lambda enrichment_log_entry: enrichment_log_entry.date, reverse=True)
 
         template = 'enrichment_log_entries/enrichment_log_entry_list.html'
         context = {
-            'enrichment_log_entries': enrichment_log_entries
+            'enrichment_log_entries': enrichment_log_entries,
+            'users': users
         }
 
         return render(request, template, context)

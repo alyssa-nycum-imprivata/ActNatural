@@ -16,12 +16,11 @@ class EnrichmentLogEntry(models.Model):
     note = models.CharField(max_length=500, null=True)
 
     class Meta:
-        ordering = (F('date').desc(),)
         verbose_name = ("EnrichmentLogEntry")
         verbose_name_plural = ("EnrichmentLogEntries")
 
     def __str__(self):
-        return self.note
+        return f'{self.date} {self.animal.name} {self.enrichment_item.name}'
     
     def get_absolute_url(self):
         return reverse("EnrichmentLogEntry_detail", kwargs={"pk": self.pk})
