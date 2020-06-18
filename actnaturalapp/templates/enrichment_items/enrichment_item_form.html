@@ -50,6 +50,18 @@
                 </div>
             {% endif %}
 
+            <div class="input-div">
+                <label>Animals:</label>
+                    {% for animal in animals %}
+                        <p>
+                            <label for="animal-{{animal.id}}">
+                            <input class="filled-in" type="checkbox" id="animal-{{animal.id}}" name="animals" value="{{ animal.id }}"/>
+                            <span>{{animal.name}}</span>
+                            </label>
+                        </p>
+                    {% endfor %}
+            </div>
+
             {% if enrichment_item.id is not None %}
                 <input type="hidden" name="actual_method" value="PUT">
                 <button type="submit" class="waves-effect waves-light btn" value="Update">Update</button>

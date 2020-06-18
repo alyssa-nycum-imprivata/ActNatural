@@ -38,6 +38,9 @@ urlpatterns = [
     path('enrichment_types/add_enrichment_type/', enrichment_type_form, name='enrichment_type_form'),
     path('enrichment_types/<int:enrichment_type_id>/edit_enrichment_type', enrichment_type_edit_form, name="enrichment_type_edit_form"),
 
+    path('animal_enrichment_items/<int:animal_enrichment_item_id>/', animal_enrichment_item_details, name='animal_enrichment_item'),
+    path('enrichment_items/<int:enrichment_item_id>/animals/add_approval', animal_enrichment_item_form, name='animal_enrichment_item_form'),
+
     path('enrichment_log_entry/', enrichment_log_entry_list, name='enrichment_log_entries'),
 ]
 

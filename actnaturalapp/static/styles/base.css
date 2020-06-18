@@ -117,7 +117,7 @@ nav {
     margin-right: 5px;
 }
 
-.add-note-button {
+.add-note-button,.add-approval-button {
     margin-top: 10px;
 }
 
@@ -144,7 +144,7 @@ nav {
     width: 100%;
 }
 
-.notes-container {
+.notes-container,.approved-for-container {
     margin-top: 50px;
     width: 100%;
     text-align: center;
@@ -153,13 +153,13 @@ nav {
     justify-content: center;
 }
 
-.note-collection {
+.note-collection,.approved-for-collection {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-evenly;
 }
 
-.note-card {
+.note-card,.approved-for-card {
     color: black;
     width: 25%;
     margin-left: 5px !important;
@@ -168,22 +168,28 @@ nav {
     align-self: center;
 }
 
+.approved-for-list-item {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+}
+
 .note-icons-container {
     display: flex;
     justify-content: center;
 }
 
-.note-icon-button {
+.note-icon-button,.approved-for-icon-button {
     border: none;
     background-color: white;
 }
 
-.note-icon-button:hover {
+.note-icon-button:hover,.approved-for-icon-button:hover {
     color: #EE6E73;
     cursor: pointer;
 }
 
-.note-icon-button:focus {
+.note-icon-button:focus,.approved-for-icon-button:focus {
     background-color: white !important;
 }
 
