@@ -1,7 +1,7 @@
 from django.urls import reverse
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
-from actnaturalapp.models import EnrichmentItem, EnrichmentType, Employee, Team, AnimalEnrichmentItem
+from actnaturalapp.models import EnrichmentItem, EnrichmentType, Employee, Team, AnimalEnrichmentItem, Animal
 
 
 
@@ -74,5 +74,19 @@ def enrichment_item_details(request, enrichment_item_id):
             enrichment_item.delete()
 
             return redirect(reverse('actnaturalapp:enrichment_items'))
+
+        else:
+
+            selected_animals = form_data.getlist('animals')
+
+            for animal in selected_animals:
+                animal_instance = Animal.objects.get(pk=animal)
+                new_animal_enrichment_item = AnimalEnrichmentItem.objects.create(
+                    animal = animal_instance,
+                    enrichment_item = enrichment_item
+                )
+
+            return redirect(reverse('actnaturalapp:enrichment_item', args=[enrichment_item.id]))
+
 
     
