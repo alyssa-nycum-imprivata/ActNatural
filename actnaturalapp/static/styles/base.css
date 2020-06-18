@@ -40,6 +40,11 @@ nav {
     margin-bottom: 30px !important;
 }
 
+.log-collection {
+    width: 50% !important;
+    margin-bottom: 5px !important;
+}
+
 .collection-header {
     background-color: #26A69A !important;
     color: white;

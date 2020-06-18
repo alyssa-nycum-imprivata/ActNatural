@@ -1,5 +1,6 @@
 from django.db import models
 from django.urls import reverse
+from django.db.models import F
 from .employee import Employee
 from .team import Team
 from .animal import Animal
@@ -12,9 +13,10 @@ class EnrichmentLogEntry(models.Model):
     animal = models.ForeignKey(Animal, on_delete=models.CASCADE)
     enrichment_item = models.ForeignKey(EnrichmentItem, on_delete=models.DO_NOTHING)
     date = models.DateField()
-    note = models.CharField(max_length=500)
+    note = models.CharField(max_length=500, null=True)
 
     class Meta:
+        ordering = (F('date').desc(),)
         verbose_name = ("EnrichmentLogEntry")
         verbose_name_plural = ("EnrichmentLogEntries")
 

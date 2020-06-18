@@ -1,5 +1,19 @@
 {% extends 'shared/base.html' %}
 
 {% block content %}
-    <h1>Enrichment Log</h1>
+    
+    <h3 class="page-header">Animals</h3>
+
+    <div class="page-link-container">
+        <div class="page-link-div"><a class="page-link" href="{% url 'actnaturalapp:enrichment_log_entry_form' %}">Add Enrichment Log Entry</a></div>
+    </div>
+
+    <div class="collection-container">
+        {% for enrichment_log_entry in enrichment_log_entries %}
+            <ul class="collection log-collection">
+                <li class="collection-item">{{ enrichment_log_entry.date }} - {{ enrichment_log_entry.animal.name }} - {{ enrichment_log_entry.enrichment_item.name }} {% if enrichment_log_entry.note %}- {{ enrichment_log_entry.note }} {% endif %}</li>
+            </ul>
+        {% endfor %}
+    </div>
+
 {% endblock content %}

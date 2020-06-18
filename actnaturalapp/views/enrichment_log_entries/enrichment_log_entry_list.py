@@ -8,11 +8,11 @@ def enrichment_log_entry_list(request):
 
     if request.method == 'GET':
 
-        all_enrichment_log_entries = EnrichmentLogEntry.objects.all()
+        enrichment_log_entries = EnrichmentLogEntry.objects.all()
 
         template = 'enrichment_log_entries/enrichment_log_entry_list.html'
         context = {
-            'all_enrichment_log_entries': all_enrichment_log_entries
+            'enrichment_log_entries': enrichment_log_entries
         }
 
         return render(request, template, context)
@@ -28,4 +28,4 @@ def enrichment_log_entry_list(request):
             note = form_data['note']
         )
 
-        return redirect(reverse('actnaturalapp:enrichment_log_entry', args=[new_enrichment_log_entry.id]))
+        return redirect(reverse('actnaturalapp:enrichment_log_entries'))
