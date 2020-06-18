@@ -57,9 +57,18 @@
             </div>
             <div class="approved-for-collection">
                 <div class="approved-for-card">
-                    {% for animal in animal_enrichment_items %}
-                        <p>{{animal.animal.name}}</p>
-                    {% endfor %}
+                    <ul>
+                        {% for animal in animal_enrichment_items %}
+                            <li class="approved-for-list-item">
+                                <a class="page-link" href="{% url 'actnaturalapp:animal' animal.animal.id %}">{{ animal.animal.name}}</a>
+                                <form action="{% url 'actnaturalapp:animal_enrichment_item' animal.id %}" method="POST">
+                                    {% csrf_token %}
+                                    <input type="hidden" name="actual_method" value="DELETE">
+                                    <button class="approved-for-icon-button"><i class="tiny material-icons">delete</i></button>
+                                </form>
+                            </li>
+                        {% endfor %}
+                    </ul>
                 </div>
             </div>
         </div>

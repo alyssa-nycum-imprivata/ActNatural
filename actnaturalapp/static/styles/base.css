@@ -168,22 +168,28 @@ nav {
     align-self: center;
 }
 
+.approved-for-list-item {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+}
+
 .note-icons-container {
     display: flex;
     justify-content: center;
 }
 
-.note-icon-button {
+.note-icon-button,.approved-for-icon-button {
     border: none;
     background-color: white;
 }
 
-.note-icon-button:hover {
+.note-icon-button:hover,.approved-for-icon-button:hover {
     color: #EE6E73;
     cursor: pointer;
 }
 
-.note-icon-button:focus {
+.note-icon-button:focus,.approved-for-icon-button:focus {
     background-color: white !important;
 }
 
