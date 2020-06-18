@@ -40,6 +40,17 @@ nav {
     margin-bottom: 30px !important;
 }
 
+.log-collection {
+    width: 50% !important;
+    margin-bottom: 5px !important;
+    display: flex;
+    justify-content: space-between;
+}
+
+.entry-log-button-container {
+    display: flex;
+}
+
 .collection-header {
     background-color: #26A69A !important;
     color: white;

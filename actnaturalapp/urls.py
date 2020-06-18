@@ -41,7 +41,10 @@ urlpatterns = [
     path('animal_enrichment_items/<int:animal_enrichment_item_id>/', animal_enrichment_item_details, name='animal_enrichment_item'),
     path('enrichment_items/<int:enrichment_item_id>/animals/add_approval', animal_enrichment_item_form, name='animal_enrichment_item_form'),
 
-    path('enrichment_log_entry/', enrichment_log_entry_list, name='enrichment_log_entries'),
+    path('enrichment_log_entries/', enrichment_log_entry_list, name='enrichment_log_entries'),
+    path('enrichment_log_entries/<int:enrichment_log_entry_id>/', enrichment_log_entry_list, name='enrichment_log_entry'),
+    path('enrichment_log_entries/add_enrichment_log_entry', enrichment_log_entry_form, name="enrichment_log_entry_form"),
+    path('enrichment_log_entries/<int:enrichment_log_entry_id>/edit_enrichment_log_entry', enrichment_log_entry_edit_form, name="enrichment_log_entry_edit_form"),
 ]
 
 
