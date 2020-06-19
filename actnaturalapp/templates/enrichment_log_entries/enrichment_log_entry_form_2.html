@@ -1,0 +1,52 @@
+{% extends 'shared/base.html' %}
+{% load static %}
+
+{% block content %}
+
+    {% if enrichment_log_entry.id is not None %}
+        <h3 class="page-header">Edit Enrichment Log Entry:</h3>
+    {% else %}
+        <h3 class="page-header">Add Enrichment Log Entry:</h3>
+    {% endif %}
+
+    <div class="form-div">
+        {% if enrichment_log_entry.id is not None %}
+            <form action="{% url 'actnaturalapp:enrichment_log_entry' enrichment_log_entry.id %}" method="post">
+        {% else %}
+            <form class="form" action="{% url 'actnaturalapp:enrichment_log_entries' %}" method="post">
+        {% endif %}
+
+                {% csrf_token %}
+
+                <input type="hidden" name="animal" id="animal" value="{{ animal }}">
+                <input type="hidden" name="date" id="date" value="{{ date }}">
+
+                <div class="input-div">
+                        <label for="enrichment_item">Enrichment Item: </label>
+                        <select required class="form_select" id="enrichment_item" type="text" name="enrichment_item">
+                            <option value="" disabled selected>Select</option>
+                            {% for enrichment_item in animal_enrichment_items %}
+                                <option {% if enrichment_item.enrichment_item.id == enrichment_log_entry.enrichment_item_id %}selected{% endif %} value="{{ enrichment_item.enrichment_item.id }}">{{ enrichment_item.enrichment_item.name }}</option>
+                            {% endfor %}
+                        </select>
+                </div>
+
+                <div class="input-div">
+                    <label for="note">Note (optional): </label>
+                    <input id="note" type="text" name="note" value="{{ enrichment_log_entry.note }}">
+                </div>
+
+                {% if enrichment_log_entry.id is not None %}
+                    <input type="hidden" name="actual_method" value="PUT">
+                    <button type="submit" class="waves-effect waves-light btn" value="Update">Update</button>
+                {% else %}
+                    <button type="submit" class="waves-effect waves-light btn" value="Add">Add</button>
+                {% endif %}
+        </form>
+    </div>
+
+{% endblock %}
+
+{% block scripts %}
+    <script src="{% static 'scripts/base.js' %}"></script>
+{% endblock scripts %}

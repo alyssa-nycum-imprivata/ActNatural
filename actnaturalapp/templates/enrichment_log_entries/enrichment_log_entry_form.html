@@ -3,18 +3,63 @@
 
 {% block content %}
 
-    {% comment %} {% if animal.id is not None %}
-        <h3 class="page-header">Edit Animal:</h3>
-    {% else %} {% endcomment %}
+    {% if enrichment_log_entry.id is not None %}
+        <h3 class="page-header">Edit Enrichment Log Entry:</h3>
+    {% else %}
         <h3 class="page-header">Add Enrichment Log Entry:</h3>
-    {% comment %} {% endif %} {% endcomment %}
+    {% endif %}
 
     <div class="form-div">
-        {% comment %} {% if animal.id is not None %}
-            <form action="{% url 'actnaturalapp:animal' animal.id %}" method="post" enctype="multipart/form-data">
-        {% else %} {% endcomment %}
+        {% if enrichment_log_entry.id is not None %}
+            <form class="form" action="{% url 'actnaturalapp:enrichment_log_entry_edit_form_2' enrichment_log_entry.id %}" method="get">
+        {% else %}
+            <form class="form" action="{% url 'actnaturalapp:enrichment_log_entry_form_2' %}" method="get">
+        {% endif %}
+
+                {% csrf_token %}
+
+                <div class="input-div">
+                    <label for="date">Date: </label>
+                    <input required id="date" type="date" name="date" value="{{ enrichment_log_entry.date }}">
+                </div>
+
+                <div class="input-div">
+                    <label for="animal">Animal: </label>
+                    <select required class="form_select" id="animal" type="text" name="animal">
+                        <option value="" disabled selected>Select</option>
+                        {% for animal in animals %}
+                            <option {% if animal.id == enrichment_log_entry.animal_id %}selected{% endif %} value="{{ animal.id }}">{{ animal.name }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+
+                <button type="submit" class="waves-effect waves-light btn" value="Next">Next</button>
+            </form>
+    </div>
+
+{% endblock %}
+
+{% block scripts %}
+    <script src="{% static 'scripts/base.js' %}"></script>
+{% endblock scripts %}
+
+{% comment %} {% extends 'shared/base.html' %}
+{% load static %}
+
+{% block content %}
+
+    {% if enrichment_log_entry.id is not None %}
+        <h3 class="page-header">Edit Enrichment Log Entry:</h3>
+    {% else %}
+        <h3 class="page-header">Add Enrichment Log Entry:</h3>
+    {% endif %}
+
+    <div class="form-div">
+        {% if enrichment_log_entry.id is not None %}
+            <form action="{% url 'actnaturalapp:enrichment_log_entry' enrichment_log_entry.id %}" method="post">
+        {% else %}
             <form class="form" action="{% url 'actnaturalapp:enrichment_log_entries' %}" method="post">
-        {% comment %} {% endif %} {% endcomment %}
+        {% endif %}
 
                 {% csrf_token %}
 
@@ -48,12 +93,12 @@
                     <input id="note" type="text" name="note" value="{{ enrichment_log_entry.note }}">
                 </div>
 
-                {% comment %} {% if animal.id is not None %}
+                {% if enrichment_log_entry.id is not None %}
                     <input type="hidden" name="actual_method" value="PUT">
                     <button type="submit" class="waves-effect waves-light btn" value="Update">Update</button>
-                {% else %} {% endcomment %}
+                {% else %}
                     <button type="submit" class="waves-effect waves-light btn" value="Add">Add</button>
-                {% comment %} {% endif %} {% endcomment %}
+                {% endif %}
         </form>
     </div>
 
@@ -61,4 +106,4 @@
 
 {% block scripts %}
     <script src="{% static 'scripts/base.js' %}"></script>
-{% endblock scripts %}
+{% endblock scripts %} {% endcomment %}
