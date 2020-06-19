@@ -26,7 +26,7 @@
                         <select required class="form_select" id="enrichment_item" type="text" name="enrichment_item">
                             <option value="" disabled selected>Select</option>
                             {% for enrichment_item in animal_enrichment_items %}
-                                <option {% if enrichment_item.id == enrichment_log_entry.enrichment_item_id %}selected{% endif %} value="{{ enrichment_item.enrichment_item_id }}">{{ enrichment_item.enrichment_item.name }}</option>
+                                <option {% if enrichment_item.enrichment_item.id == enrichment_log_entry.enrichment_item_id %}selected{% endif %} value="{{ enrichment_item.enrichment_item.id }}">{{ enrichment_item.enrichment_item.name }}</option>
                             {% endfor %}
                         </select>
                 </div>

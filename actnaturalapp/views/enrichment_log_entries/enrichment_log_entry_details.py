@@ -1,29 +1,39 @@
 from django.shortcuts import render, redirect, reverse
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
-from actnaturalapp.models import Animal, EnrichmentItem, AnimalEnrichmentItem
+from actnaturalapp.models import EnrichmentLogEntry
 
 
-@login_required
-def enrichment_log_entry_details(request):
+@login_required 
+def enrichment_log_entry_details(request, enrichment_log_entry_id):
+    
+    if request.method == 'POST':
+        form_data = request.POST
 
-    form_data = request.GET
+        if (
+            "actual_method" in form_data
+        ):
 
-    animal = form_data['animal']
-    date = form_data['date']
-    print(date)
+            enrichment_log_entry = EnrichmentLogEntry.objects.get(pk=enrichment_log_entry_id)
 
-    animal_enrichment_items = AnimalEnrichmentItem.objects.filter(animal_id=animal)
-    enrichment_items = EnrichmentItem.objects.all()
+            if (form_data["actual_method"] == "DELETE"):
 
-    if request.method == 'GET':
+                '''Deletes an enrichment log entry and re-directs to the main enrichment log page'''
 
-        template = 'enrichment_log_entries/enrichment_log_entry_form_2.html'
-        context = {
-            "animal": animal,
-            "date": date,
-            "animal_enrichment_items": animal_enrichment_items,
-            "enrichment_items": enrichment_items
-        }
+                enrichment_log_entry.delete()
 
-        return render(request, template, context)
+                return redirect(reverse('actnaturalapp:enrichment_log_entries'))
+
+            elif (form_data["actual_method"] == "PUT"):
+
+                '''Updates an enrichment log entry and re-directs to the main enrichment log page'''
+
+                enrichment_log_entry.employee_id = request.user.employee.id
+                enrichment_log_entry.animal_id = form_data['animal']
+                enrichment_log_entry.enrichment_item_id = form_data['enrichment_item']
+                enrichment_log_entry.date = form_data['date']
+                enrichment_log_entry.note = form_data['note']
+
+                enrichment_log_entry.save()
+
+                return redirect(reverse('actnaturalapp:enrichment_log_entries'))
