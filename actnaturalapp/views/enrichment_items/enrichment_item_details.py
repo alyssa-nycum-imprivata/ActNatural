@@ -16,16 +16,21 @@ def enrichment_item_details(request, enrichment_item_id):
 
     if request.method == 'GET':
 
-        template = 'enrichment_items/enrichment_item_details.html'
-        context = {
-            "enrichment_item": enrichment_item,
-            "enrichment_type": enrichment_type,
-            "employee": employee,
-            "team": team,
-            "animal_enrichment_items": animal_enrichment_items
-        }
+        if request.user.employee.team_id == enrichment_item.team_id:
 
-        return render(request, template, context)
+            template = 'enrichment_items/enrichment_item_details.html'
+            context = {
+                "enrichment_item": enrichment_item,
+                "enrichment_type": enrichment_type,
+                "employee": employee,
+                "team": team,
+                "animal_enrichment_items": animal_enrichment_items
+            }
+
+            return render(request, template, context)
+
+        else:
+            return redirect(reverse('actnaturalapp:enrichment_items'))
 
     elif request.method == 'POST':
 
