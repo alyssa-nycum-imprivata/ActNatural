@@ -21,5 +21,6 @@ from .animal_enrichment_items.animal_enrichment_item_details import animal_enric
 from .animal_enrichment_items.animal_enrichment_item_form import animal_enrichment_item_form
 
 from .enrichment_log_entries.enrichment_log_entry_list import enrichment_log_entry_list
+from .enrichment_log_entries.enrichment_log_entry_details import enrichment_log_entry_details
 from .enrichment_log_entries.enrichment_log_entry_form import enrichment_log_entry_form, enrichment_log_entry_edit_form
 
