@@ -27,13 +27,13 @@
                         
                         <form action="{% url 'actnaturalapp:enrichment_log_entry_edit_form' enrichment_log_entry.id %}" method="GET">
                             {% csrf_token %}
-                            <button class="collection-header-icon-button"><i class="tiny material-icons collection-header-edit-icon">edit</i></button>
+                            <button class="log-icon-button"><i class="tiny material-icons log-edit-icon">edit</i></button>
                         </form>
 
                         <form action="{% url 'actnaturalapp:enrichment_log_entry' enrichment_log_entry.id %}" method="POST">
                             {% csrf_token %}
                             <input type="hidden" name="actual_method" value="DELETE">
-                            <button class="collection-header-icon-button"><i class="tiny material-icons collection-header-delete-icon">delete</i></button>
+                            <button class="log-icon-button"><i class="tiny material-icons log-delete-icon">delete</i></button>
                         </form>
 
                     </li>
