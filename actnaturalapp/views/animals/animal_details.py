@@ -8,7 +8,11 @@ from django.contrib.auth.models import User
 @login_required
 def animal_details(request, animal_id):
 
-    animal = Animal.objects.get(pk=animal_id)
+    try: 
+        animal = Animal.objects.get(pk=animal_id)
+    except:
+        return redirect(reverse('actnaturalapp:animals'))
+
     team = Team.objects.get(pk=animal.team_id)
     species = Species.objects.get(pk=animal.species_id)
     employee = Employee.objects.get(pk=request.user.employee.id)
@@ -20,20 +24,25 @@ def animal_details(request, animal_id):
 
     if request.method == 'GET':
 
-        template = 'animals/animal_details.html'
-        context = {
-            'animal': animal,
-            'team': team,
-            'species': species,
-            'employee': employee,
-            'users': users,
-            'notes': notes,
-            'animal_enrichment_items': animal_enrichment_items,
-            'enrichment_items': enrichment_items,
-            'enrichment_log_entries': enrichment_log_entries
-        }
+        if request.user.employee.team_id == animal.team_id:
 
-        return render(request, template, context)
+            template = 'animals/animal_details.html'
+            context = {
+                'animal': animal,
+                'team': team,
+                'species': species,
+                'employee': employee,
+                'users': users,
+                'notes': notes,
+                'animal_enrichment_items': animal_enrichment_items,
+                'enrichment_items': enrichment_items,
+                'enrichment_log_entries': enrichment_log_entries
+            }
+
+            return render(request, template, context)
+
+        else: 
+            return redirect(reverse('actnaturalapp:animals'))
 
     elif request.method == 'POST':
 

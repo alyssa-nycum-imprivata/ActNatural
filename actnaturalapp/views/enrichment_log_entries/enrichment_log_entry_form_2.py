@@ -30,7 +30,10 @@ def enrichment_log_entry_form_2(request):
 @login_required
 def enrichment_log_entry_edit_form_2(request, enrichment_log_entry_id):
 
-    enrichment_log_entry = EnrichmentLogEntry.objects.get(pk=enrichment_log_entry_id)
+    try:
+        enrichment_log_entry = EnrichmentLogEntry.objects.get(pk=enrichment_log_entry_id)
+    except: 
+        return redirect(reverse('actnaturalapp:enrichment_log_entries'))
 
     form_data = request.GET
 
@@ -42,16 +45,22 @@ def enrichment_log_entry_edit_form_2(request, enrichment_log_entry_id):
 
     if request.method == 'GET':
 
-        template = 'enrichment_log_entries/enrichment_log_entry_form_2.html'
-        context = {
-            "animal": animal,
-            "date": date,
-            "animal_enrichment_items": animal_enrichment_items,
-            "enrichment_items": enrichment_items,
-            "enrichment_log_entry": enrichment_log_entry
-        }
+        if request.user.employee.id == enrichment_log_entry.employee_id:
 
-        return render(request, template, context)
+            template = 'enrichment_log_entries/enrichment_log_entry_form_2.html'
+            context = {
+                "animal": animal,
+                "date": date,
+                "animal_enrichment_items": animal_enrichment_items,
+                "enrichment_items": enrichment_items,
+                "enrichment_log_entry": enrichment_log_entry
+            }
+
+            return render(request, template, context)
+        
+        else: 
+            return redirect(reverse('actnaturalapp:enrichment_log_entries'))
+
 
 
 
