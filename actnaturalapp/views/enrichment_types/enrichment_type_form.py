@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect, reverse
 from django.contrib.auth.decorators import login_required
 from actnaturalapp.models import Team, EnrichmentType
 
@@ -19,15 +19,24 @@ def enrichment_type_form(request):
 @login_required
 def enrichment_type_edit_form(request, enrichment_type_id):
 
-    if request.method == 'GET':
-        
+    try:
         enrichment_type = EnrichmentType.objects.get(pk=enrichment_type_id)
-        team = Team.objects.get(pk=request.user.employee.team_id)
+    except:
+        return redirect(reverse('actnaturalapp:enrichment_items'))
 
-        template = 'enrichment_types/enrichment_type_form.html'
-        context = {
-            'enrichment_type': enrichment_type,
-            'team': team
-        }
+    if request.method == 'GET':
 
-        return render(request, template, context)
+        if request.user.employee.team_id == enrichment_type.team_id:
+        
+            team = Team.objects.get(pk=request.user.employee.team_id)
+
+            template = 'enrichment_types/enrichment_type_form.html'
+            context = {
+                'enrichment_type': enrichment_type,
+                'team': team
+            }
+
+            return render(request, template, context)
+
+        else:
+            return redirect(reverse('actnaturalapp:enrichment_items'))

@@ -8,7 +8,11 @@ from actnaturalapp.models import EnrichmentItem, EnrichmentType, Employee, Team,
 @login_required
 def enrichment_item_details(request, enrichment_item_id):
 
-    enrichment_item = EnrichmentItem.objects.get(pk=enrichment_item_id)
+    try:
+        enrichment_item = EnrichmentItem.objects.get(pk=enrichment_item_id)
+    except: 
+        return redirect(reverse('actnaturalapp:enrichment_items'))
+
     enrichment_type = EnrichmentType.objects.get(pk=enrichment_item.enrichment_type_id)
     animal_enrichment_items = AnimalEnrichmentItem.objects.filter(enrichment_item_id=enrichment_item.id)
     employee = Employee.objects.get(pk=request.user.employee.id)

@@ -2,6 +2,7 @@ from django.urls import path, include
 from django.conf.urls import include
 from django.conf import settings
 from django.conf.urls.static import static
+from django.views.defaults import *
 from actnaturalapp.views import *
 from actnaturalapp.models import *
 
@@ -42,16 +43,9 @@ urlpatterns = [
     path('enrichment_items/<int:enrichment_item_id>/animals/add_approval', animal_enrichment_item_form, name='animal_enrichment_item_form'),
 
     path('enrichment_log_entries/', enrichment_log_entry_list, name='enrichment_log_entries'),
-
     path('enrichment_log_entries/<int:enrichment_log_entry_id>/', enrichment_log_entry_details, name='enrichment_log_entry'),
-
     path('enrichment_log_entries/add_enrichment_log_entry', enrichment_log_entry_form, name="enrichment_log_entry_form"),
-
     path('enrichment_log_entries/edit_enrichment_log_entry/<int:enrichment_log_entry_id>/', enrichment_log_entry_edit_form, name="enrichment_log_entry_edit_form"),
-
     path('enrichment_log_entries/add_enrichment_log_entry_continued/', enrichment_log_entry_form_2, name="enrichment_log_entry_form_2"),
-    
     path('enrichment_log_entries/edit_enrichment_log_entry_continued/<int:enrichment_log_entry_id>/', enrichment_log_entry_edit_form_2, name="enrichment_log_entry_edit_form_2"),
 ]
-
-
