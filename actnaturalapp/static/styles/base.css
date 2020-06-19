@@ -100,6 +100,32 @@ nav {
     justify-content: center
 }
 
+.entry-log-button-container {
+    display: flex;
+    align-items: center;
+}
+
+.log-icon-button {
+    background-color: white !important;
+    border: none !important;
+}
+
+.log-icon-button:hover {
+    cursor: pointer;
+}
+
+.log-icon-button:focus {
+    background-color: white !important;
+}
+
+.log-edit-icon, .log-delete-icon {
+    color: black;
+}
+
+.log-edit-icon:hover, .log-delete-icon:hover {
+    color: #EE6E73;
+}
+
 /* DETAILS STYLING */
 
 .details-container {
@@ -155,7 +181,7 @@ nav {
     width: 100%;
 }
 
-.notes-container,.approved-for-container {
+.notes-container,.approved-for-container,.entry-log-container {
     margin-top: 50px;
     width: 100%;
     text-align: center;
@@ -164,13 +190,13 @@ nav {
     justify-content: center;
 }
 
-.note-collection,.approved-for-collection {
+.note-collection,.approved-for-collection,.entry-log-collection {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-evenly;
 }
 
-.note-card,.approved-for-card {
+.note-card,.approved-for-card,.entry-log-collection {
     color: black;
     width: 25%;
     margin-left: 5px !important;
