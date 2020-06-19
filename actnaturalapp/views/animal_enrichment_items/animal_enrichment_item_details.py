@@ -19,19 +19,14 @@ def animal_enrichment_item_details(request, animal_enrichment_item_id):
             "actual_method" in form_data and form_data["actual_method"] == "DELETE"
         ):
 
-            animal_enrichment_item.delete()
+            if ("enrichment_page" in form_data):
 
-            return redirect(reverse('actnaturalapp:enrichment_item', args=[enrichment_item.id]))
+                animal_enrichment_item.delete()
 
-        # elif (
-        #     "actual_method" in form_data and form_data["actual_method"] == "PUT"
-        # ):
+                return redirect(reverse('actnaturalapp:enrichment_item', args=[enrichment_item.id]))
 
-        #     note.employee_id = request.user.employee.id
-        #     note.animal_id = animal.id
-        #     note.date = form_data["date"]
-        #     note.note = form_data["note"]
+            elif ("animal_page" in form_data):
 
-        #     note.save()
+                animal_enrichment_item.delete()
 
-        #     return redirect(reverse('actnaturalapp:animal', args=[animal.id]))
+                return redirect(reverse('actnaturalapp:animal', args=[animal.id]))

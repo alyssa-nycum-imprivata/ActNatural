@@ -86,6 +86,58 @@
             </div>
         </div>
 
+        <div class="approved-for-container">
+            <div class="approved-for-header">
+                {% if animal_enrichment_items %}
+                    <h5>Approved For:</h5>
+                {% endif %}
+            </div>
+            <div class="approved-for-collection">
+                <div class="approved-for-card">
+                    <ul>
+                        {% for item in animal_enrichment_items %}
+                            <li class="approved-for-list-item">
+                                <a class="page-link" href="{% url 'actnaturalapp:enrichment_item' item.enrichment_item.id %}">{{ item.enrichment_item.name }}</a>
+                                <form action="{% url 'actnaturalapp:animal_enrichment_item' item.id %}" method="POST">
+                                    {% csrf_token %}
+                                    <input type="hidden" name="actual_method" value="DELETE">
+                                    <input type="hidden" name="animal_page">
+                                    <button class="approved-for-icon-button"><i class="tiny material-icons">delete</i></button>
+                                </form>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="log-container">
+            <div class="log-header">
+                {% if enrichment_log_entries %}
+                    <h5>Enrichment Log:</h5>
+                {% endif %}
+            </div>
+            <div class="log-collection">
+                <div class="log-card">
+                    <ul>
+                        {% for entry in enrichment_log_entries %}
+                            <li class="log-list-item">
+                                {{ entry.date }} - {{ entry.animal.name }} - {{ entry.enrichment_item.name }}
+                                {% if entry.note %}
+                                    - {{ entry.note }} 
+                                {% endif %}
+                                {% for user in users %}
+                                    {% if user.employee.id == entry.employee_id %}
+                                        - Added By: {{ user.first_name }} {{ user.last_name }}
+                                    {% endif %}
+                                {% endfor %}
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+        </div>
+
     </div>
 
 {% endblock content %}

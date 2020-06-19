@@ -1,7 +1,7 @@
 from django.urls import reverse
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
-from actnaturalapp.models import Animal, Team, Species, Employee, AnimalNote
+from actnaturalapp.models import Animal, Team, Species, Employee, AnimalNote, EnrichmentItem, AnimalEnrichmentItem, EnrichmentLogEntry
 from django.contrib.auth.models import User
 
 
@@ -14,6 +14,9 @@ def animal_details(request, animal_id):
     employee = Employee.objects.get(pk=request.user.employee.id)
     notes = AnimalNote.objects.filter(animal_id=animal_id)
     users = User.objects.all()
+    animal_enrichment_items = AnimalEnrichmentItem.objects.filter(animal_id=animal_id)
+    enrichment_items = EnrichmentItem.objects.all()
+    enrichment_log_entries = EnrichmentLogEntry.objects.filter(animal_id=animal_id)
 
     if request.method == 'GET':
 
@@ -24,7 +27,10 @@ def animal_details(request, animal_id):
             'species': species,
             'employee': employee,
             'users': users,
-            'notes': notes
+            'notes': notes,
+            'animal_enrichment_items': animal_enrichment_items,
+            'enrichment_items': enrichment_items,
+            'enrichment_log_entries': enrichment_log_entries
         }
 
         return render(request, template, context)
