@@ -11,7 +11,7 @@ class EnrichmentLogEntry(models.Model):
 
     employee = models.ForeignKey(Employee, on_delete=models.DO_NOTHING)
     animal = models.ForeignKey(Animal, on_delete=models.CASCADE)
-    enrichment_item = models.ForeignKey(EnrichmentItem, on_delete=models.DO_NOTHING)
+    enrichment_item = models.ForeignKey(EnrichmentItem, on_delete=models.CASCADE)
     date = models.DateField()
     note = models.CharField(max_length=500, null=True)
 
