@@ -18,15 +18,15 @@
 
                 {% csrf_token %}
 
-                <input type="hidden" name="date" value="{{ enrichment_log_entry.animal_id }}">
-                <input type="hidden" name="date" value="{{ enrichment_log_entry.date }}">
+                <input type="hidden" name="animal" id="animal" value="{{ animal }}">
+                <input type="hidden" name="date" id="date" value="{{ date }}">
 
                 <div class="input-div">
                         <label for="enrichment_item">Enrichment Item: </label>
                         <select required class="form_select" id="enrichment_item" type="text" name="enrichment_item">
                             <option value="" disabled selected>Select</option>
-                            {% for enrichment_item in enrichment_items %}
-                                <option {% if enrichment_item.id == enrichment_log_entry.enrichment_item_id %}selected{% endif %} value="{{ enrichment_item.id }}">{{ enrichment_item.name }}</option>
+                            {% for enrichment_item in animal_enrichment_items %}
+                                <option {% if enrichment_item.id == enrichment_log_entry.enrichment_item_id %}selected{% endif %} value="{{ enrichment_item.enrichment_item_id }}">{{ enrichment_item.enrichment_item.name }}</option>
                             {% endfor %}
                         </select>
                 </div>

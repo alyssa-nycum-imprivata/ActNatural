@@ -5,10 +5,15 @@ from actnaturalapp.models import Animal, EnrichmentItem, AnimalEnrichmentItem
 
 
 @login_required
-def enrichment_log_entry_details(request, animal_id):
+def enrichment_log_entry_details(request):
 
-    animal = Animal.objects.get(pk=animal_id)
-    animal_enrichment_items = AnimalEnrichmentItem.objects.filter(animal_id=animal.id)
+    form_data = request.GET
+
+    animal = form_data['animal']
+    date = form_data['date']
+    print(date)
+
+    animal_enrichment_items = AnimalEnrichmentItem.objects.filter(animal_id=animal)
     enrichment_items = EnrichmentItem.objects.all()
 
     if request.method == 'GET':
@@ -16,6 +21,7 @@ def enrichment_log_entry_details(request, animal_id):
         template = 'enrichment_log_entries/enrichment_log_entry_form_2.html'
         context = {
             "animal": animal,
+            "date": date,
             "animal_enrichment_items": animal_enrichment_items,
             "enrichment_items": enrichment_items
         }
