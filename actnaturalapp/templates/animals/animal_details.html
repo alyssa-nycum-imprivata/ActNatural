@@ -91,32 +91,39 @@
         <div class="approved-for-container">
             <div class="approved-for-header">
                 {% if animal_enrichment_items %}
-                    <h5>Approved For:</h5>
+                    <h4>Approved For:</h4>
                 {% endif %}
             </div>
-            <div class="approved-for-collection">
-                <div class="approved-for-card">
-                    <ul>
+            <div class="collection-container">
+                {% for type in enrichment_types %}
+                    <ul class="collection with-header">
+                        <li class="collection-header">
+                            <div class="species-name">
+                                {{ type }}
+                            </div>
+                        </li>
                         {% for item in animal_enrichment_items %}
-                            <li class="approved-for-list-item">
-                                <a class="page-link" href="{% url 'actnaturalapp:enrichment_item' item.enrichment_item.id %}">{{ item.enrichment_item.name }}</a>
-                                <form action="{% url 'actnaturalapp:animal_enrichment_item' item.id %}" method="POST">
-                                    {% csrf_token %}
-                                    <input type="hidden" name="actual_method" value="DELETE">
-                                    <input type="hidden" name="animal_page">
-                                    <button class="approved-for-icon-button"><i class="tiny material-icons">delete</i></button>
-                                </form>
-                            </li>
+                            {% if item.enrichment_item.enrichment_type.name == type %}
+                                <li class="collection-item approved-for-list-item">
+                                    <a class="page-link approved-for-link" href="{% url 'actnaturalapp:enrichment_item' item.enrichment_item.id %}"">{{ item.enrichment_item.name}}</a>
+                                    <form action="{% url 'actnaturalapp:animal_enrichment_item' item.id %}" method="POST">
+                                        {% csrf_token %}
+                                        <input type="hidden" name="actual_method" value="DELETE">
+                                        <input type="hidden" name="animal_page">
+                                        <button class="approved-for-icon-button"><i class="small material-icons">delete</i></button>
+                                    </form>
+                                </li>
+                            {% endif %}
                         {% endfor %}
                     </ul>
-                </div>
+                {% endfor %}
             </div>
         </div>
 
         <div class="entry-log-container">
             <div class="entry-log-header">
                 {% if enrichment_log_entries %}
-                    <h5>Enrichment Log:</h5>
+                    <h4>Enrichment Log:</h4>
                 {% endif %}
             </div>
             <div class="entry-log-collection">
@@ -143,4 +150,3 @@
     </div>
 
 {% endblock content %}
-

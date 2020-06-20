@@ -1,7 +1,7 @@
 from django.urls import reverse
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
-from actnaturalapp.models import Animal, Team, Species, Employee, AnimalNote, EnrichmentItem, AnimalEnrichmentItem, EnrichmentLogEntry
+from actnaturalapp.models import Animal, Team, Species, Employee, AnimalNote, EnrichmentItem, AnimalEnrichmentItem, EnrichmentLogEntry, EnrichmentType
 from django.contrib.auth.models import User
 
 
@@ -22,6 +22,14 @@ def animal_details(request, animal_id):
     enrichment_items = EnrichmentItem.objects.all()
     enrichment_log_entries = EnrichmentLogEntry.objects.filter(animal_id=animal_id)
 
+    enrichment_types = []
+    for item in animal_enrichment_items:
+        item = item.enrichment_item.enrichment_type.name
+        enrichment_types.append(item)
+
+    enrichment_types = set(enrichment_types)
+    enrichment_types = list(enrichment_types)
+
     if request.method == 'GET':
 
         if request.user.employee.team_id == animal.team_id:
@@ -36,7 +44,8 @@ def animal_details(request, animal_id):
                 'notes': notes,
                 'animal_enrichment_items': animal_enrichment_items,
                 'enrichment_items': enrichment_items,
-                'enrichment_log_entries': enrichment_log_entries
+                'enrichment_log_entries': enrichment_log_entries,
+                'enrichment_types': enrichment_types
             }
 
             return render(request, template, context)
