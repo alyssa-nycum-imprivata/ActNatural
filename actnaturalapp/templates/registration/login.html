@@ -1,12 +1,16 @@
 {% extends 'shared/base.html' %}
 
 {% block content %}
-<h2>Login</h2>
-<form method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <p>If you are a new user, please register <a href="{% url 'actnaturalapp:register' %}">here</a>.</p>
-    <button type="submit" class="waves-effect waves-light btn">Login</button>
-</form>
+    <h3 class="page-header">Login</h3>
+    <div class="form-div">
+        <form class="form" method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <p class="register-text">If you are a new user, register <a href="{% url 'actnaturalapp:register' %}" class="registration-link">here</a>.</p>
+            <div class="form-button-container">
+                <button type="submit" class="waves-effect waves-light btn">Login</button>
+            </div>
+        </form>
+    </div>
 {% endblock content %}
 

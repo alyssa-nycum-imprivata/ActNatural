@@ -240,3 +240,44 @@ nav {
     display: flex;
     justify-content: center;
 }
+
+.form-button-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 5px;
+}
+
+.cancel-button-link {
+    text-decoration: underline;
+    color: black;
+    margin-top: 10px;
+    margin-bottom: 30px;    
+}
+
+.cancel-button-link:hover {
+    color: #EE6E73;
+}
+
+.animal-list-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.animal-list-label:hover {
+    color: #EE6E73;
+}
+
+.no-animal-list,.register-text {
+    text-align: center;
+}
+
+.registration-link {
+    text-decoration: underline;
+    color: #EE6E73;
+}
+
+.registration-link:hover {
+    color: #26A69A;
+}

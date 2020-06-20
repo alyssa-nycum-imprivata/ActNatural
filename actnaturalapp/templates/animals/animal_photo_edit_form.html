@@ -2,10 +2,10 @@
 
 {% block content %}
 
-    <h3 class="page-header">Change Photo:</h3>
+    <h4 class="page-header">Change Photo:</h4>
 
     <div class="form-div">
-        <form action="{% url 'actnaturalapp:animal' animal.id %}" method="post" enctype="multipart/form-data">
+        <form class="form" action="{% url 'actnaturalapp:animal' animal.id %}" method="post" enctype="multipart/form-data">
             {% csrf_token %}
 
             <div class="file-field input-field">
@@ -18,9 +18,12 @@
                 </div>
             </div>
 
-            <input type="hidden" name="actual_method" value="PUT">
-            <input type="hidden" name="updated_photo">
-            <button type="submit" class="waves-effect waves-light btn" value="Update">Update</button>
+            <div class="form-button-container">
+                <input type="hidden" name="actual_method" value="PUT">
+                <input type="hidden" name="updated_photo">
+                <button type="submit" class="waves-effect waves-light btn" value="Update">Update</button>
+                <a class= "cancel-button-link" href="{% url 'actnaturalapp:animal' animal.id %}">Cancel</a>
+            </div>
 
         </form>
     </div>
