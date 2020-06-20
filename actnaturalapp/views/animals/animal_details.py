@@ -30,6 +30,16 @@ def animal_details(request, animal_id):
     enrichment_types = set(enrichment_types)
     enrichment_types = list(enrichment_types)
 
+    dates = []
+    for date in enrichment_log_entries:
+        date = date.date
+        dates.append(date)
+
+    dates = set(dates)
+    dates = list(dates)
+
+    dates = sorted(dates, key=lambda date:date, reverse=True)
+
     if request.method == 'GET':
 
         if request.user.employee.team_id == animal.team_id:
@@ -45,7 +55,8 @@ def animal_details(request, animal_id):
                 'animal_enrichment_items': animal_enrichment_items,
                 'enrichment_items': enrichment_items,
                 'enrichment_log_entries': enrichment_log_entries,
-                'enrichment_types': enrichment_types
+                'enrichment_types': enrichment_types,
+                'dates': dates
             }
 
             return render(request, template, context)

@@ -125,7 +125,9 @@ nav {
 
 .entry-log-button-container {
     display: flex;
-    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    margin-left: 30px;
 }
 
 .log-icon-button {
@@ -147,6 +149,40 @@ nav {
 
 .log-edit-icon:hover, .log-delete-icon:hover {
     color: #EE6E73;
+}
+
+.log-collection-container {
+    display: flex;
+    flex-direction: column;
+    margin-top: 30px;
+}
+
+.log-collection {
+    display: flex;
+    flex-direction: column;
+    width: 100% !important;
+    margin-left: 5px !important;
+    margin-right: 5px !important;
+    margin-bottom: 30px !important;
+}
+
+.log-collection-item {
+    display: flex;
+    justify-content: space-between;
+}
+
+.log-content-container {
+    width: 100%;
+}
+
+.log-entry-content {
+    display: flex;
+    justify-content: space-between;
+}
+
+.log-entry-note {
+    display: flex;
+    justify-content: flex-start;
 }
 
 /* DETAILS STYLING */
