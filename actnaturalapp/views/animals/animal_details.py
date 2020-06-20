@@ -112,7 +112,7 @@ def animal_details(request, animal_id):
 
             return redirect(reverse('actnaturalapp:animals'))
 
-        else:
+        elif ("note" in form_data):
 
             new_note = AnimalNote.objects.create(
                 employee_id = request.user.employee.id,
@@ -122,3 +122,18 @@ def animal_details(request, animal_id):
             )
 
             return redirect(reverse('actnaturalapp:animal', args=[new_note.animal_id]))
+
+        else:
+            selected_enrichment = form_data.getlist('enrichment_items')
+
+            for item in selected_enrichment:
+                enrichment_instance = EnrichmentItem.objects.get(pk=item)
+                new_animal_enrichment_item = AnimalEnrichmentItem.objects.create(
+                    enrichment_item = enrichment_instance,
+                    animal = animal
+                )
+
+            return redirect(reverse('actnaturalapp:animal', args=[animal.id]))
+            
+
+            

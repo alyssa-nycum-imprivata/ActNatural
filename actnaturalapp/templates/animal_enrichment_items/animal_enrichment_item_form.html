@@ -18,8 +18,11 @@
                         <div class="animal-list-container">
                         {% for animal in unapproved_animals %}
                             <p class="animal-list-item">
+
                                 <label for="animal-{{animal.id}}" class="animal-list-label">
+
                                 <input class="filled-in" type="checkbox" id="animal-{{animal.id}}" name="animals" value="{{ animal.id }}"/>
+                                
                                 <span>{{animal.name}}</span>
                                 </label>
                             </p>

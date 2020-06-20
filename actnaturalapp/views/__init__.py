@@ -18,14 +18,11 @@ from .enrichment_items.enrichment_item_form import enrichment_item_form, enrichm
 from .enrichment_types.enrichment_type_form import enrichment_type_form, enrichment_type_edit_form
 
 from .animal_enrichment_items.animal_enrichment_item_details import animal_enrichment_item_details
-from .animal_enrichment_items.animal_enrichment_item_form import animal_enrichment_item_form
+from .animal_enrichment_items.animal_enrichment_item_form import animal_enrichment_item_form, animal_enrichment_item_form_2
 
 from .enrichment_log_entries.enrichment_log_entry_list import enrichment_log_entry_list
-
 from .enrichment_log_entries.enrichment_log_entry_details import enrichment_log_entry_details
-
 from .enrichment_log_entries.enrichment_log_entry_form import enrichment_log_entry_form, enrichment_log_entry_edit_form
-
 from .enrichment_log_entries.enrichment_log_entry_form_2 import enrichment_log_entry_form_2, enrichment_log_entry_edit_form_2
 
 
