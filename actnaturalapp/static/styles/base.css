@@ -26,6 +26,24 @@ nav {
 
 /* LIST STYLING */
 
+.home-page {
+    display: flex;
+    flex-direction: column;
+}
+
+.home-page-line-1 {
+    align-self: flex-end;
+}
+
+.home-page-line-2 {
+    align-self: center;
+}
+
+.home-page-line-3 {
+    align-self: center;
+    margin-top: 40px;
+}
+
 .collection-container {
     display: flex;
     justify-content: space-evenly;

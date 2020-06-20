@@ -1,5 +1,9 @@
 {% extends 'shared/base.html' %}
 
 {% block content %}
-    <h1>Welcome to Act Natural</h1>
+    <div class="home-page">
+        <h4 class="home-page-line-1">Hi, {{ user.first_name }}</h4>
+        <h1 class="home-page-line-2">Welcome to Act Natural</h1>
+        <h5 class="home-page-line-3">What will the animals on the {{ employee.team.name}} team get for enrichment today?</h5>
+    <div>
 {% endblock content %}

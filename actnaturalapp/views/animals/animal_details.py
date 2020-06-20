@@ -87,7 +87,7 @@ def animal_details(request, animal_id):
             "actual_method" in form_data
             and form_data["actual_method"] == "DELETE"
         ):
-            
+                    
             animal.delete()
 
             return redirect(reverse('actnaturalapp:animals'))
