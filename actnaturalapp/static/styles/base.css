@@ -44,6 +44,11 @@ nav {
     margin-top: 40px;
 }
 
+.home-button {
+    align-self: center;
+    margin-top: 40px;
+}
+
 .collection-container {
     display: flex;
     justify-content: space-evenly;
