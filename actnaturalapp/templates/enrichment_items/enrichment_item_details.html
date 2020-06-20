@@ -28,11 +28,6 @@
 
                 </div>
 
-                <form action="{% url 'actnaturalapp:animal_enrichment_item_form' enrichment_item.id %}" method="GET">
-                    {% csrf_token %}
-                    <button class="waves-effect waves-light btn add-approval-button">Add Animal(s) For Approval</button>
-                </form>
-
                 <div class="back-link">
                     <a class="page-link" href="{% url 'actnaturalapp:enrichment_items' %}">Back to Enrichment Items</a>
                 </div>
@@ -53,6 +48,10 @@
             <div class="approved-for-header">
                 {% if animal_enrichment_items %}
                     <h4>Approved For:</h4>
+                        <form action="{% url 'actnaturalapp:animal_enrichment_item_form' enrichment_item.id %}" method="GET">
+                            {% csrf_token %}
+                            <button class="waves-effect waves-light btn add-approval-button">Add Animal(s) For Approval</button>
+                        </form>
                 {% endif %}
             </div>
             <div class="collection-container">

@@ -21,8 +21,8 @@
                         <li class="collection-item log-collection-item">
                         <div class="log-content-container">
                                 <div class="log-entry-content">
-                                    <p><strong>Animal:</strong> {{ enrichment_log_entry.animal.name }}</p>
-                                    <p><strong>Enrichment:</strong> {{ enrichment_log_entry.enrichment_item.name }}</p>
+                                    <p><a class="page-link approved-for-link" href="{% url 'actnaturalapp:animal' enrichment_log_entry.animal.id %}"><strong>Animal:</strong> {{ enrichment_log_entry.animal.name }}</a></p>
+                                    <p><a class="page-link approved-for-link" href="{% url 'actnaturalapp:enrichment_item' enrichment_log_entry.enrichment_item.id %}"><strong>Enrichment:</strong> {{ enrichment_log_entry.enrichment_item.name }}</a></p>
                                     {% for user in users %}
                                         {% if user.employee.id == enrichment_log_entry.employee_id %}
                                             <p><strong>Added By:</strong> {{ user.first_name }} {{ user.last_name }}</p>

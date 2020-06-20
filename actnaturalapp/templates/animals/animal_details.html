@@ -105,7 +105,7 @@
                         {% for item in animal_enrichment_items %}
                             {% if item.enrichment_item.enrichment_type.name == type %}
                                 <li class="collection-item approved-for-list-item">
-                                    <a class="page-link approved-for-link" href="{% url 'actnaturalapp:enrichment_item' item.enrichment_item.id %}"">{{ item.enrichment_item.name}}</a>
+                                    <a class="page-link approved-for-link" href="{% url 'actnaturalapp:enrichment_item' item.enrichment_item.id %}">{{ item.enrichment_item.name}}</a>
                                     <form action="{% url 'actnaturalapp:animal_enrichment_item' item.id %}" method="POST">
                                         {% csrf_token %}
                                         <input type="hidden" name="actual_method" value="DELETE">
@@ -124,6 +124,10 @@
             <div class="entry-log-header">
                 {% if enrichment_log_entries %}
                     <h4>Enrichment Log:</h4>
+                    <form class="home-button" action="{% url 'actnaturalapp:enrichment_log_entry_form' %}" method="get">
+                        <input type="hidden" name="actual_method" value="GET">
+                        <button type="submit" class="waves-effect waves-light btn" value="Add">Add Entry</button>
+                    </form>
                 {% endif %}
             </div>
 <div class="log-collection-container">
