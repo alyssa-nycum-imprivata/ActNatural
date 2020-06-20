@@ -52,19 +52,21 @@
         <div class="notes-container">
             <div class="notes-header">
                 {% if notes %}
-                    <h5>Notes:</h5>
+                    <h4>Notes:</h4>
                 {% endif %}
             </div>
             <div class="note-collection">
                 {% for note in notes %}
-                    <div class="note-card">
-                        <p>{{ note.date }}</p>
-                        <p>{{ note.note }}</p>
-                        {% for user in users %}
-                            {% if user.employee.id == note.employee_id %}
-                                <p>Added By: {{ user.first_name }} {{ user.last_name }}</p>
-                            {% endif %}
-                        {% endfor %}
+                    <div class="note-card card ">
+                        <div class="card-content">
+                            <p class="card-date">{{ note.date }}</p>
+                            <p>{{ note.note }}</p>
+                            {% for user in users %}
+                                {% if user.employee.id == note.employee_id %}
+                                    <p class="card-footer">Added By: {{ user.first_name }} {{ user.last_name }}</p>
+                                {% endif %}
+                            {% endfor %}
+                        </div>
                         {% if note.employee_id == request.user.employee.id %}
                             <div class="note-icons-container">
 
