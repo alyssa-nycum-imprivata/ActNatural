@@ -8,7 +8,7 @@
 
 ## Installations to test locally:
 
-1. git clone this repo in your terminal and cd into it:
+1. Clone this repo by pasting the SSH key in your terminal and cd into it:
 ```shell session
 $ git clone git@github.com:alyssanycum/ActNatural.git && cd $_
 ```

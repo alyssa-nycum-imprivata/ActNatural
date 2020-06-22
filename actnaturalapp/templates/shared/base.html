@@ -23,7 +23,7 @@
 
     <nav>
         <div class="nav-wrapper">
-            <a href="{% url 'actnaturalapp:home' %}" class="brand-logo nav-link">Act Natural</a>
+            <a href="{% url 'actnaturalapp:home' %}" class="brand-logo nav-link site-title">Act Natural</a>
             <ul id="nav-mobile" class="right hid-on-med-and-down">
                 {% if request.user.is_authenticated %}
                     <li><a class="nav-link" href="{% url 'actnaturalapp:home' %}">Home</a></li>

@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect, reverse
 from django.contrib.auth.decorators import login_required
 from actnaturalapp.models import Animal, Employee, EnrichmentLogEntry
+import datetime
 
 
 @login_required
@@ -10,10 +11,13 @@ def enrichment_log_entry_form(request):
         employee = Employee.objects.get(pk=request.user.employee.id)
         animals = Animal.objects.filter(team_id=request.user.employee.team_id)
 
+        date = str(datetime.date.today())
+
         template = 'enrichment_log_entries/enrichment_log_entry_form.html'
         context = {
             'employee': employee,
             'animals': animals,
+            'date': date
         }
 
         return render(request, template, context)
