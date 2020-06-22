@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect, reverse
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from actnaturalapp.models import EnrichmentLogEntry, Employee
+import datetime
 
 
 @login_required
@@ -20,12 +21,21 @@ def enrichment_log_entry_list(request):
             for entry in employee_entries:
                 enrichment_log_entries.append(entry)
 
-        enrichment_log_entries = sorted(enrichment_log_entries, key=lambda enrichment_log_entry: enrichment_log_entry.date, reverse=True)
+        dates = []
+        for date in enrichment_log_entries:
+            date = date.date
+            dates.append(date)
+
+        dates = set(dates)
+        dates = list(dates)
+
+        dates = sorted(dates, key=lambda date:date, reverse=True)
 
         template = 'enrichment_log_entries/enrichment_log_entry_list.html'
         context = {
             'enrichment_log_entries': enrichment_log_entries,
-            'users': users
+            'users': users,
+            'dates': dates
         }
 
         return render(request, template, context)

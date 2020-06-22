@@ -1,11 +1,14 @@
 from django.shortcuts import render, redirect, reverse
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
-from actnaturalapp.models import EnrichmentLogEntry
+from actnaturalapp.models import EnrichmentLogEntry, Animal
 
 
 @login_required 
 def enrichment_log_entry_details(request, enrichment_log_entry_id):
+
+    enrichment_log_entry = EnrichmentLogEntry.objects.get(pk=enrichment_log_entry_id)
+    animal = Animal.objects.get(pk=enrichment_log_entry.animal_id)
     
     if request.method == 'POST':
         form_data = request.POST
@@ -18,11 +21,19 @@ def enrichment_log_entry_details(request, enrichment_log_entry_id):
 
             if (form_data["actual_method"] == "DELETE"):
 
-                '''Deletes an enrichment log entry and re-directs to the main enrichment log page'''
+                if ("animal_page" in form_data):
+                    
+                    enrichment_log_entry.delete()
 
-                enrichment_log_entry.delete()
+                    return redirect(reverse('actnaturalapp:animal', args=[animal.id]))
 
-                return redirect(reverse('actnaturalapp:enrichment_log_entries'))
+                else:
+
+                    '''Deletes an enrichment log entry and re-directs to the main enrichment log page'''
+
+                    enrichment_log_entry.delete()
+
+                    return redirect(reverse('actnaturalapp:enrichment_log_entries'))
 
             elif (form_data["actual_method"] == "PUT"):
 

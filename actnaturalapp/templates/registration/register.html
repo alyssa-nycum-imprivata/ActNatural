@@ -10,61 +10,68 @@
         </ul>
     {% endif %}
 
-    <form action="{% url 'actnaturalapp:register' %}" method="post">
-        {% csrf_token %}
+    <h3 class="page-header">Register</h3>
+    <div class="form-div">
+        <form class="form" action="{% url 'actnaturalapp:register' %}" method="post">
+            {% csrf_token %}
 
-            <div class="input-field">
-                <label for="username">Username: </label>
-                <input id="username" type="text" name="username">
-            </div>
+                <div class="input-div">
+                    <label for="username">Username: </label>
+                    <input id="username" type="text" name="username">
+                </div>
 
-            <div class="input-field">
-                <label for="password">Password: </label>
-                <input id="password" type="password" name="password">
-            </div>
+                <div class="input-div">
+                    <label for="password">Password: </label>
+                    <input id="password" type="password" name="password">
+                </div>
 
-            <div class="input-field">
-                <label for="password_confirmation">Password Confirmation: </label>
-                <input id="password_confirmation" type="password" name="password_confirmation">
-            </div>
+                <div class="input-div">
+                    <label for="password_confirmation">Password Confirmation: </label>
+                    <input id="password_confirmation" type="password" name="password_confirmation">
+                </div>
 
-            <div class="input-field">
-                <label for="email">Email: </label>
-                <input id="email" type="email" name="email">
-            </div>
+                <div class="input-div">
+                    <label for="email">Email: </label>
+                    <input id="email" type="email" name="email">
+                </div>
 
-            <div class="input-field">
-                <label for="first_name">First Name: </label>
-                <input id="first_name" type="text" name="first_name">
-            </div>
+                <div class="input-div">
+                    <label for="first_name">First Name: </label>
+                    <input id="first_name" type="text" name="first_name">
+                </div>
 
-            <div class="input-field">
-                <label for="last_name">Last Name: </label>
-                <input id="last_name" type="text" name="last_name">
-            </div>
-            <div>
-            <label for="team">Team: </label>
-                <select id="team" type="text" name="team">
-                    <option value="" disabled selected>Select</option>
-                    {% for team in teams %}
-                        <option value="{{ team.id }}">{{ team.name }}</option>
-                    {% endfor %}
-                </select>
-            </div>
+                <div class="input-div">
+                    <label for="last_name">Last Name: </label>
+                    <input id="last_name" type="text" name="last_name">
+                </div>
 
-            <div>
-                <label for="position">Position: </label>
-                <select id="position" type="text" name="position">
-                    <option value="" disabled selected>Select</option>
-                    <option value="Keeper">Keeper</option>
-                    <option value="Manager">Manager</option>
-                    <option value="Vet">Vet</option>
-                    <option value="Vet Tech">Vet Tech</option>
-                </select>
-            </div>
+                <div class="input-div">
+                <label for="team">Team: </label>
+                    <select id="team" type="text" name="team">
+                        <option value="" disabled selected>Select</option>
+                        {% for team in teams %}
+                            <option value="{{ team.id }}">{{ team.name }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
 
-            <button type="submit" class="waves-effect waves-light btn" value="Submit">Register</button>
-    </form>
+                <div class="input-div">
+                    <label for="position">Position: </label>
+                    <select id="position" type="text" name="position">
+                        <option value="" disabled selected>Select</option>
+                        <option value="Keeper">Keeper</option>
+                        <option value="Manager">Manager</option>
+                        <option value="Vet">Vet</option>
+                        <option value="Vet Tech">Vet Tech</option>
+                    </select>
+                </div>
+
+                <div class="form-button-container">
+                    <button type="submit" class="waves-effect waves-light btn" value="Submit">Register</button>
+                    <a class= "cancel-button-link" href="{% url 'actnaturalapp:login' %}">Cancel</a>
+                </div>
+        </form>
+    </div>
 {% endblock %}
 
 {% block scripts %}

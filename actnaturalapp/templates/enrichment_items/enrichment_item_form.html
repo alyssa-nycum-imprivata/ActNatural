@@ -4,9 +4,9 @@
 {% block content %}
 
     {% if enrichment_item.id is not None %}
-        <h3 class="page-header">Edit Enrichment Item:</h3>
+        <h4 class="page-header">Edit Enrichment Item:</h4>
     {% else %}
-        <h3 class="page-header">Add Enrichment Item:</h3>
+        <h4 class="page-header">Add Enrichment Item:</h4>
     {% endif %}
 
     <div class="form-div">
@@ -53,23 +53,29 @@
             {% if enrichment_item.id is None %}
                 <div class="input-div">
                     <label>Animals:</label>
+                    <div class="animal-list-container">
                         {% for animal in animals %}
-                            <p>
-                                <label for="animal-{{animal.id}}">
+                            <p class="animal-list-item">
+                                <label for="animal-{{animal.id}}" class="animal-list-label">
                                 <input class="filled-in" type="checkbox" id="animal-{{animal.id}}" name="animals" value="{{ animal.id }}"/>
                                 <span>{{animal.name}}</span>
                                 </label>
                             </p>
                         {% endfor %}
+                    </div>
                 </div>
             {% endif %}
 
-            {% if enrichment_item.id is not None %}
-                <input type="hidden" name="actual_method" value="PUT">
-                <button type="submit" class="waves-effect waves-light btn" value="Update">Update</button>
-            {% else %}
-                <button type="submit" class="waves-effect waves-light btn" value="Add">Add</button>
-            {% endif %}
+            <div class="form-button-container">
+                {% if enrichment_item.id is not None %}
+                    <input type="hidden" name="actual_method" value="PUT">
+                    <button type="submit" class="waves-effect waves-light btn" value="Update">Update</button>
+                    <a class= "cancel-button-link" href="{% url 'actnaturalapp:enrichment_item' enrichment_item.id %}">Cancel</a>
+                {% else %}
+                    <button type="submit" class="waves-effect waves-light btn" value="Add">Add</button>
+                    <a class= "cancel-button-link" href="{% url 'actnaturalapp:enrichment_items' %}">Cancel</a>
+                {% endif %}
+            </div>
 
         </form>
     </div>

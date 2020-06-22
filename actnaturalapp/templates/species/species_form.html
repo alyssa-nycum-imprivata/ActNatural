@@ -3,14 +3,14 @@
 {% block content %}
 
     {% if species.id is not None %}
-        <h3 class="page-header">Edit Species:</h3>
+        <h4 class="page-header">Edit Species:</h4>
     {% else %}
-        <h3 class="page-header">Add Species:</h3>
+        <h4 class="page-header">Add Species:</h4>
     {% endif %}
     
     <div class="form-div">
         {% if species.id is not None %}
-            <form action="{% url 'actnaturalapp:specie' species.id %}" method="post">
+            <form class="form" action="{% url 'actnaturalapp:specie' species.id %}" method="post">
         {% else %}
             <form class="form" action="{% url 'actnaturalapp:animals' %}" method="post">
         {% endif %}
@@ -22,12 +22,16 @@
                 <input required id="name" type="text" name="name" value="{{ species.name }}">
             </div>
 
-            {% if species.id is not None %}
-                <input type="hidden" name="actual_method" value="PUT">
-                <button type="submit" class="waves-effect waves-light btn" value="Update">Update</button>
-            {% else %}
-                <button type="submit" class="waves-effect waves-light btn" value="Add">Add</button>
-            {% endif %}
+            <div class="form-button-container">
+                {% if species.id is not None %}
+                    <input type="hidden" name="actual_method" value="PUT">
+                    <button type="submit" class="waves-effect waves-light btn" value="Update">Update</button>
+                    <a class= "cancel-button-link" href="{% url 'actnaturalapp:animals' %}">Cancel</a>
+                {% else %}
+                    <button type="submit" class="waves-effect waves-light btn" value="Add">Add</button>
+                    <a class= "cancel-button-link" href="{% url 'actnaturalapp:animals' %}">Cancel</a>
+                {% endif %}
+            </div>
         </form>
     </div>
 

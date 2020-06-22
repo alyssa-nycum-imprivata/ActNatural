@@ -3,9 +3,9 @@
 {% block content %}
 
     {% if enrichment_type.id is not None %}
-        <h3 class="page-header">Edit Enrichment Type:</h3>
+        <h4 class="page-header">Edit Enrichment Type:</h4>
     {% else %}
-        <h3 class="page-header">Add Enrichment Type:</h3>
+        <h4 class="page-header">Add Enrichment Type:</h4>
     {% endif %}
     
         <div class="form-div">
@@ -22,12 +22,16 @@
                     <input required id="name" type="text" name="name" value="{{ enrichment_type.name }}">
                 </div>
 
-                {% if enrichment_type.id is not None %}
-                    <input type="hidden" name="actual_method" value="PUT">
-                    <button type="submit" class="waves-effect waves-light btn" value="Update">Update</button>
-                {% else %}
-                    <button type="submit" class="waves-effect waves-light btn" value="Add">Add</button>
-                {% endif %}
+                <div class="form-button-container">
+                    {% if enrichment_type.id is not None %}
+                        <input type="hidden" name="actual_method" value="PUT">
+                        <button type="submit" class="waves-effect waves-light btn" value="Update">Update</button>
+                        <a class= "cancel-button-link" href="{% url 'actnaturalapp:enrichment_items' %}">Cancel</a>
+                    {% else %}
+                        <button type="submit" class="waves-effect waves-light btn" value="Add">Add</button>
+                        <a class= "cancel-button-link" href="{% url 'actnaturalapp:enrichment_items' %}">Cancel</a>
+                    {% endif %}
+                </div>
             </form>
         </div>
 
