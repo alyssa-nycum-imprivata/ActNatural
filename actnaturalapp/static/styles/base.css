@@ -368,6 +368,11 @@ nav {
     color: #EE6E73;
 }
 
+.animal-list-item {
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
 .no-animal-list,.register-text {
     text-align: center;
 }
