@@ -7,6 +7,12 @@ Enrichment is used in zoos to enhance the welfare of the animals by stimulating 
 Act Natural allows keepers to collaborate with their fellow team members by being able to view/add/edit/delete animals, enrichment items, and enrichment log entries to their team's dashboard.
 
 ## Technologies used:
+* Python
+* Django
+* Django ORM
+* JavaScript
+* [Pillow](https://pillow.readthedocs.io/en/stable/)
+* [Materialize CSS](https://materializecss.com/)
 
 ## Installations to test locally:
 
