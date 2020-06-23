@@ -1,0 +1,50 @@
+{% extends 'shared/base.html' %}
+
+{% block content %}
+
+    <div class="pending-approval-page-container">
+        <div class="page-header">
+            <h3>{{ team.name }} Items Waiting For Approval:</h3>
+        </div>
+        
+        {% if unapproved_team_animal_enrichment_items %}
+            <div class="pending-approval-items-container">
+                {% for item in enrichment_items %}
+                    <ul class="pending-approval-item collection with-header">
+                        <li class="pending-approval-image-container collection-item">
+                            <img class="pending-approval-image" src="{{ item.image.url }}" />
+                        </li>
+                        <li class="pending-approval-item-container collection-header">
+                            <span><a class="pending-approval-item-link" href="{% url 'actnaturalapp:enrichment_item' item.id %}">{{ item.name }}</a></span>
+                            <span>{{ item.enrichment_type.name }}</span>
+                        </li>
+                        {% if item.note %}
+                            <li class="pending-approval-note-container collection-item">
+                                {{ item.note }}
+                            </li>
+                        {% endif %}
+                        <div class="pending-approval-all-animals">
+                            {% for animal in unapproved_team_animal_enrichment_items %}
+                                {% if animal.enrichment_item_id == item.id %}
+                                    <li class="pending-approval-animal-container">
+                                        <label class="pending-approval-animal" for="animal-{{animal.animal.id}}">
+
+                                            <input class="filled-in" type="checkbox" id="animal-{{animal.animal.id}}" name="animals" value="{{ animal.animal.id }}"/>
+
+                                            <span><a class="page-link approved-for-link" href="{% url 'actnaturalapp:animal' animal.animal.id %}">{{ animal.animal.name}}</a></span>
+
+                                        </label>
+                                    </li>
+                                {% endif %}
+                            {% endfor %}
+                        </div>
+                    </ul>
+                {% endfor %}
+            </div>
+            <button class="waves-effect waves-light btn pending-approval-button">Approve</button>
+        {% else %}
+            <h5>There are no items waiting for approval</h5>
+        {% endif %}
+    </div>
+
+{% endblock content %}
