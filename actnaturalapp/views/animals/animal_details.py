@@ -15,17 +15,27 @@ def animal_details(request, animal_id):
         return redirect(reverse('actnaturalapp:animals'))
 
     team = Team.objects.get(pk=animal.team_id)
-    species = Species.objects.get(pk=animal.species_id)
     employee = Employee.objects.get(pk=request.user.employee.id)
-    notes = AnimalNote.objects.filter(animal_id=animal_id)
     users = User.objects.all()
-    animal_enrichment_items = AnimalEnrichmentItem.objects.filter(animal_id=animal_id)
-    enrichment_items = EnrichmentItem.objects.all()
+
+    notes = AnimalNote.objects.filter(animal_id=animal_id)
     enrichment_log_entries = EnrichmentLogEntry.objects.filter(animal_id=animal_id)
+
+    species = Species.objects.get(pk=animal.species_id)
+    all_animal_enrichment_items = AnimalEnrichmentItem.objects.filter(animal_id=animal_id)
+    enrichment_items = EnrichmentItem.objects.all()
+
+    approved_animal_enrichment_items = []
+    unapproved_animal_enrichment_items = []
+    for item in all_animal_enrichment_items:
+        if (item.is_manager_approved == True & item.is_vet_approved == True):
+            approved_animal_enrichment_items.append(item)
+        else:
+            unapproved_animal_enrichment_items.append(item)
 
     # this grabs the name of each enrichment type associated with each enrichment item in the list of animal enrichment item objects
     enrichment_types = []
-    for item in animal_enrichment_items:
+    for item in approved_animal_enrichment_items:
         item = item.enrichment_item.enrichment_type.name
         enrichment_types.append(item)
 
@@ -59,7 +69,7 @@ def animal_details(request, animal_id):
                 'employee': employee,
                 'users': users,
                 'notes': notes,
-                'animal_enrichment_items': animal_enrichment_items,
+                'approved_animal_enrichment_items': approved_animal_enrichment_items,
                 'enrichment_items': enrichment_items,
                 'enrichment_log_entries': enrichment_log_entries,
                 'enrichment_types': enrichment_types,
@@ -155,6 +165,65 @@ def animal_details(request, animal_id):
                 )
 
             return redirect(reverse('actnaturalapp:animal', args=[animal.id]))
-            
 
-            
+@login_required
+def animal_enrichment_items_waiting_approval(request, animal_id):
+    
+    # protects against the user typing an animal_id into the url that doesn't exist
+    try: 
+        animal = Animal.objects.get(pk=animal_id)
+    except:
+        return redirect(reverse('actnaturalapp:animals'))
+
+    team = Team.objects.get(pk=animal.team_id)
+    employee = Employee.objects.get(pk=request.user.employee.id)
+    users = User.objects.all()
+
+    notes = AnimalNote.objects.filter(animal_id=animal_id)
+    enrichment_log_entries = EnrichmentLogEntry.objects.filter(animal_id=animal_id)
+
+    species = Species.objects.get(pk=animal.species_id)
+    all_animal_enrichment_items = AnimalEnrichmentItem.objects.filter(animal_id=animal_id)
+    enrichment_items = EnrichmentItem.objects.all()
+
+    approved_animal_enrichment_items = []
+    unapproved_animal_enrichment_items = []
+    for item in all_animal_enrichment_items:
+        if (item.is_manager_approved == True & item.is_vet_approved == True):
+            approved_animal_enrichment_items.append(item)
+        else:
+            unapproved_animal_enrichment_items.append(item)
+
+    # this grabs the name of each enrichment type associated with each enrichment item in the list of animal enrichment item objects
+    enrichment_types = []
+    for item in unapproved_animal_enrichment_items:
+        item = item.enrichment_item.enrichment_type.name
+        enrichment_types.append(item)
+
+    # turn into a set to remove duplicates, then turn back to a list to be iterated
+    enrichment_types = set(enrichment_types)
+    enrichment_types = list(enrichment_types)   
+
+    if request.method == 'GET':
+
+        # protects against the user viewing another team's animal's details
+        if request.user.employee.team_id == animal.team_id:
+
+            template = 'animals/animal_enrichment_items_waiting_approval.html'
+            context = {
+                'animal': animal,
+                'team': team,
+                'species': species,
+                'employee': employee,
+                'users': users,
+                'notes': notes,
+                'unapproved_animal_enrichment_items': unapproved_animal_enrichment_items,
+                'enrichment_items': enrichment_items,
+                'enrichment_log_entries': enrichment_log_entries,
+                'enrichment_types': enrichment_types
+            }
+
+            return render(request, template, context)
+
+        else: 
+            return redirect(reverse('actnaturalapp:animals'))

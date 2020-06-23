@@ -52,7 +52,7 @@
 
             {% if enrichment_item.id is None %}
                 <div class="input-div">
-                    <label>Animals:</label>
+                    <label>Animal(s) Seeking Approval For:</label>
                     <div class="animal-list-container">
                         {% for animal in animals %}
                             <p class="animal-list-item">
@@ -72,7 +72,7 @@
                     <button type="submit" class="waves-effect waves-light btn" value="Update">Update</button>
                     <a class= "cancel-button-link" href="{% url 'actnaturalapp:enrichment_item' enrichment_item.id %}">Cancel</a>
                 {% else %}
-                    <button type="submit" class="waves-effect waves-light btn" value="Add">Add</button>
+                    <button type="submit" class="waves-effect waves-light btn" value="Add">Add Item & Submit Animal(s)</button>
                     <a class= "cancel-button-link" href="{% url 'actnaturalapp:enrichment_items' %}">Cancel</a>
                 {% endif %}
             </div>
