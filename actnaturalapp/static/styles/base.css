@@ -24,6 +24,24 @@ nav {
     color: black;
 }
 
+/* @media screen and (max-width: 640px) {
+    nav {
+        display: flex !important;
+    }
+    .nav-link {
+        display: none;
+    }
+    .nav-wrapper {
+        display: flex !important;
+        width: 100% !important;
+        border: 2px solid blue;
+        justify-content: flex-end;
+    }
+    .site-title {
+        justify-self: flex-start !important;
+    }
+} */
+
 /* LIST STYLING */ 
 
 .home-page {
@@ -43,6 +61,15 @@ nav {
     align-self: center;
     margin-top: 40px;
 }
+
+/* @media screen and (max-width: 640px) {
+    .home-page-line-1 {
+        align-self: center;
+    }
+    .home-page-line-2,.home-page-line-3 {
+        text-align: center;
+    }
+} */
 
 .home-button {
     align-self: center;

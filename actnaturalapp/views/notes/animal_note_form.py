@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect, reverse
 from django.contrib.auth.decorators import login_required
 from actnaturalapp.models import Animal, AnimalNote
+import datetime 
 
 
 @login_required
@@ -15,9 +16,12 @@ def animal_note_form(request, animal_id):
 
         if request.user.employee.team_id == animal.team_id:
 
+            date = str(datetime.date.today())
+
             template = 'notes/animal_note_form.html'
             context = {
-                'animal': animal
+                'animal': animal,
+                'date': date
             }
 
             return render(request, template, context)

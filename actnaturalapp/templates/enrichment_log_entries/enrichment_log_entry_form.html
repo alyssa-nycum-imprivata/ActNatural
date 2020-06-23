@@ -20,7 +20,7 @@
 
                 <div class="input-div">
                     <label for="date">Date: </label>
-                    <input required id="date" type="date" name="date" value="{{ enrichment_log_entry.date }}">
+                    <input required id="date" type="date" name="date" {% if enrichment_log_entry.id %}value="{{ enrichment_log_entry.date }}"{% else %}value="{{ date }}"{% endif %}>
                 </div>
 
                 <div class="input-div">
