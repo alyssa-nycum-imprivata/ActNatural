@@ -12,8 +12,13 @@ def enrichment_log_entry_form_2(request):
     animal = form_data['animal']
     date = form_data['date']
 
-    animal_enrichment_items = AnimalEnrichmentItem.objects.filter(animal_id=animal)
+    all_animal_enrichment_items = AnimalEnrichmentItem.objects.filter(animal_id=animal)
     enrichment_items = EnrichmentItem.objects.all()
+
+    approved_animal_enrichment_items = []
+    for item in all_animal_enrichment_items:
+        if (item.is_manager_approved == True & item.is_vet_approved == True):
+            approved_animal_enrichment_items.append(item)
 
     if request.method == 'GET':
 
@@ -21,7 +26,7 @@ def enrichment_log_entry_form_2(request):
         context = {
             "animal": animal,
             "date": date,
-            "animal_enrichment_items": animal_enrichment_items,
+            "approved_animal_enrichment_items": approved_animal_enrichment_items,
             "enrichment_items": enrichment_items
         }
 
@@ -40,8 +45,13 @@ def enrichment_log_entry_edit_form_2(request, enrichment_log_entry_id):
     animal = form_data['animal']
     date = form_data['date']
 
-    animal_enrichment_items = AnimalEnrichmentItem.objects.filter(animal_id=animal)
+    all_animal_enrichment_items = AnimalEnrichmentItem.objects.filter(animal_id=animal)
     enrichment_items = EnrichmentItem.objects.all()
+
+    approved_animal_enrichment_items = []
+    for item in all_animal_enrichment_items:
+        if (item.is_manager_approved == True & item.is_vet_approved == True):
+            approved_animal_enrichment_items.append(item)
 
     if request.method == 'GET':
 
@@ -51,7 +61,7 @@ def enrichment_log_entry_edit_form_2(request, enrichment_log_entry_id):
             context = {
                 "animal": animal,
                 "date": date,
-                "animal_enrichment_items": animal_enrichment_items,
+                "approved_animal_enrichment_items": approved_animal_enrichment_items,
                 "enrichment_items": enrichment_items,
                 "enrichment_log_entry": enrichment_log_entry
             }
