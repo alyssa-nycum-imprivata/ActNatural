@@ -64,8 +64,6 @@ def enrichment_item_details(request, enrichment_item_id):
                 enrichment_item.enrichment_type_id = enrichment_item.enrichment_type_id
                 enrichment_item.name = enrichment_item.name
                 enrichment_item.note = enrichment_item.note
-                enrichment_item.is_manager_approved = enrichment_item.is_manager_approved
-                enrichment_item.is_vet_approved = enrichment_item.is_vet_approved
                 enrichment_item.image = form_files['image']
 
                 enrichment_item.save()
@@ -77,8 +75,6 @@ def enrichment_item_details(request, enrichment_item_id):
                 enrichment_item.enrichment_type_id = form_data['enrichment_type']
                 enrichment_item.name = form_data['name']
                 enrichment_item.note = form_data['note']
-                enrichment_item.is_manager_approved = False
-                enrichment_item.is_vet_approved = False
                 enrichment_item.image = enrichment_item.image
 
                 enrichment_item.save()
@@ -102,7 +98,9 @@ def enrichment_item_details(request, enrichment_item_id):
                 animal_instance = Animal.objects.get(pk=animal)
                 new_animal_enrichment_item = AnimalEnrichmentItem.objects.create(
                     animal = animal_instance,
-                    enrichment_item = enrichment_item
+                    enrichment_item = enrichment_item,
+                    is_manager_approved = False,
+                    is_vet_approved = False
                 )
 
             return redirect(reverse('actnaturalapp:enrichment_item', args=[enrichment_item.id]))

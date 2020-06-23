@@ -161,7 +161,9 @@ def animal_details(request, animal_id):
                 enrichment_instance = EnrichmentItem.objects.get(pk=item)
                 new_animal_enrichment_item = AnimalEnrichmentItem.objects.create(
                     enrichment_item = enrichment_instance,
-                    animal = animal
+                    animal = animal,
+                    is_manager_approved = False,
+                    is_vet_approved = False
                 )
 
             return redirect(reverse('actnaturalapp:animal', args=[animal.id]))
