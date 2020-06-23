@@ -12,14 +12,25 @@ def enrichment_item_details(request, enrichment_item_id):
     except: 
         return redirect(reverse('actnaturalapp:enrichment_items'))
 
-    enrichment_type = EnrichmentType.objects.get(pk=enrichment_item.enrichment_type_id)
-    animal_enrichment_items = AnimalEnrichmentItem.objects.filter(enrichment_item_id=enrichment_item.id)
     employee = Employee.objects.get(pk=request.user.employee.id)
     team = Team.objects.get(pk=enrichment_item.team_id)
+    
+    enrichment_type = EnrichmentType.objects.get(pk=enrichment_item.enrichment_type_id)
+
+    all_animal_enrichment_items = AnimalEnrichmentItem.objects.filter(enrichment_item_id=enrichment_item.id)
+
+    approved_animal_enrichment_items = []
+    unapproved_animal_enrichment_items = []
+    for item in all_animal_enrichment_items:
+        if (item.is_manager_approved == True & item.is_vet_approved == True):
+            approved_animal_enrichment_items.append(item)
+        else:
+            unapproved_animal_enrichment_items.append(item)
+
     animals = Animal.objects.all()
 
     species = []
-    for animal in animal_enrichment_items:
+    for animal in approved_animal_enrichment_items:
         animal = animal.animal.species.name
         species.append(animal)
 
@@ -36,7 +47,7 @@ def enrichment_item_details(request, enrichment_item_id):
                 "enrichment_type": enrichment_type,
                 "employee": employee,
                 "team": team,
-                "animal_enrichment_items": animal_enrichment_items,
+                "approved_animal_enrichment_items": approved_animal_enrichment_items,
                 "species": species,
                 "animals": animals
             }
@@ -104,6 +115,59 @@ def enrichment_item_details(request, enrichment_item_id):
                 )
 
             return redirect(reverse('actnaturalapp:enrichment_item', args=[enrichment_item.id]))
+
+@login_required
+def enrichment_item_animals_waiting_approval(request, enrichment_item_id):
+
+    try:
+        enrichment_item = EnrichmentItem.objects.get(pk=enrichment_item_id)
+    except: 
+        return redirect(reverse('actnaturalapp:enrichment_items'))
+
+    employee = Employee.objects.get(pk=request.user.employee.id)
+    team = Team.objects.get(pk=enrichment_item.team_id)
+    
+    enrichment_type = EnrichmentType.objects.get(pk=enrichment_item.enrichment_type_id)
+
+    all_animal_enrichment_items = AnimalEnrichmentItem.objects.filter(enrichment_item_id=enrichment_item.id)
+
+    approved_animal_enrichment_items = []
+    unapproved_animal_enrichment_items = []
+    for item in all_animal_enrichment_items:
+        if (item.is_manager_approved == True & item.is_vet_approved == True):
+            approved_animal_enrichment_items.append(item)
+        else:
+            unapproved_animal_enrichment_items.append(item)
+
+    animals = Animal.objects.all()
+
+    species = []
+    for animal in unapproved_animal_enrichment_items:
+        animal = animal.animal.species.name
+        species.append(animal)
+
+    species = set(species)
+    species = list(species)
+    
+    if request.method == 'GET':
+
+        if request.user.employee.team_id == enrichment_item.team_id:
+
+            template = 'enrichment_items/enrichment_item_animals_waiting_approval.html'
+            context = {
+                "enrichment_item": enrichment_item,
+                "enrichment_type": enrichment_type,
+                "employee": employee,
+                "team": team,
+                "unapproved_animal_enrichment_items": unapproved_animal_enrichment_items,
+                "species": species,
+                "animals": animals
+            }
+
+            return render(request, template, context)
+
+        else:
+            return redirect(reverse('actnaturalapp:enrichment_items'))
 
 
     

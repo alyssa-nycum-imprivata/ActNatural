@@ -31,6 +31,7 @@ urlpatterns = [
 
     path('enrichment_items/', enrichment_item_list, name='enrichment_items'),
     path('enrichment_items/<int:enrichment_item_id>/', enrichment_item_details, name='enrichment_item'),
+    path('enrichment_items/<int:enrichment_item_id>/animals_waiting_approval', enrichment_item_animals_waiting_approval, name='enrichment_item_animals_waiting_approval'),
     path('enrichment_items/add_enrichment_item/', enrichment_item_form, name='enrichment_item_form'),
     path('enrichment_items/<int:enrichment_item_id>/edit_enrichment_item', enrichment_item_edit_form, name="enrichment_item_edit_form"),
     path('enrichment_items/<int:enrichment_item_id>/change_photo', enrichment_item_photo_edit_form, name='enrichment_item_photo_edit_form'),

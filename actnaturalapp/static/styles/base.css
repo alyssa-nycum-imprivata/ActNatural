@@ -244,6 +244,14 @@ nav {
     margin-top: 10px;
 }
 
+.add-approval-button {
+    margin-bottom: 20px;
+}
+
+.approved-for-header {
+    margin-top: 40px;
+}
+
 .back-link {
     text-decoration: underline;
     margin-top: 20px;
@@ -322,6 +330,24 @@ nav {
     justify-content: space-between;
 }
 
+.approval-animal-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.approved-by-text {
+    font-size: 10px;
+}
+
+.approval-delete-icon {
+    display: flex;
+    align-items: center;
+}
+
+.waiting-approval-back-link {
+    margin-bottom: 30px;
+}
+
 .approved-for-link {
     align-self: center;
 }
@@ -354,6 +380,10 @@ nav {
 
 .approved-for-icon-button:focus {
     background-color: white !important;
+}
+
+.waiting-approval-link {
+    text-decoration: underline !important;
 }
 
 /* FORM STYLING */
