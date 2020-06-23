@@ -268,13 +268,13 @@ nav {
 .pending-approval-all-animals {
     display: flex;
     flex-wrap: wrap;
-    margin-left: 10px;
+    margin-left: 20%;
     margin-top: 10px;
     margin-bottom: 10px;
 }
 
 .pending-approval-animal-container {
-    width: 32%;
+    width: 100%;
 }
 
 .pending-approval-button {
