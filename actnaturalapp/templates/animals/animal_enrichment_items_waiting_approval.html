@@ -2,59 +2,55 @@
 
 {% block content %}
 
-    <div class="details-container">
-
-        <div class="approved-for-container">
-            <div class="approved-for-header">
-                <h4>Waiting For {{ animal.name }} Approval:</h4>
-            </div>
-            {% if unapproved_animal_enrichment_items %}
-                <div class="collection-container">
-                    {% for type in enrichment_types %}
-                        <ul class="collection with-header">
-                            <li class="collection-header">
-                                <div class="species-name">
-                                    {{ type }}
-                                </div>
-                            </li>
-                            {% for item in unapproved_animal_enrichment_items %}
-                                {% if item.enrichment_item.enrichment_type.name == type %}
-                                    <li class="collection-item approved-for-list-item">
-                                        <div class="approval-animal-info">
-                                            <a class="page-link approved-for-link" href="{% url 'actnaturalapp:enrichment_item' item.enrichment_item.id %}">{{ item.enrichment_item.name}}</a>
-                                            {% if item.is_manager_approved == False %}
-                                                <em class="approved-by-text">Waiting For {{item.enrichment_item.team.name}} Manager Approval</em>
-                                            {% else %}
-                                                <em class="approved-by-text">Approved By {{item.enrichment_item.team.name}} Manager</em>
-                                            {% endif %}
-                                            {% if item.is_vet_approved == False %}
-                                                <em class="approved-by-text">Waiting For Vet Approval</em>
-                                            {% else %}
-                                                <em class="approved-by-text">Approved By Vet</em>
-                                            {% endif %}
-                                        </div>
-                                        <div class="approval-delete-icon">
-                                            <form action="{% url 'actnaturalapp:animal_enrichment_item' item.id %}" method="POST">
-                                                {% csrf_token %}
-                                                <input type="hidden" name="actual_method" value="DELETE">
-                                                <input type="hidden" name="animal_page">
-                                                <button class="approved-for-icon-button"><i class="small material-icons">delete</i></button>
-                                            </form>
-                                        </div>
-                                    </li>
-                                {% endif %}
-                            {% endfor %}
-                        </ul>
-                    {% endfor %}
-                </div>
-            {% else %}
-                <h5>There are no enrichment items waiting for approval</h5>
-            {% endif %}
-            <div class="back-link waiting-approval-back-link">
-                <a class="page-link" href="{% url 'actnaturalapp:animal' animal.id %}">Back</a>
-            </div>
+    <div class="pending-approval-div">
+        <div class="approved-for-header">
+            <h3>Waiting For {{ animal.name }} Approval:</h3>
         </div>
-
+        {% if unapproved_animal_enrichment_items %}
+            <div class="collection-container">
+                {% for type in enrichment_types %}
+                    <ul class="collection with-header">
+                        <li class="collection-header">
+                            <div class="species-name">
+                                {{ type }}
+                            </div>
+                        </li>
+                        {% for item in unapproved_animal_enrichment_items %}
+                            {% if item.enrichment_item.enrichment_type.name == type %}
+                                <li class="collection-item approved-for-list-item">
+                                    <div class="approval-animal-info">
+                                        <a class="page-link approved-for-link" href="{% url 'actnaturalapp:enrichment_item' item.enrichment_item.id %}">{{ item.enrichment_item.name}}</a>
+                                        {% if item.is_manager_approved == False %}
+                                            <em class="approved-by-text">Waiting For {{item.enrichment_item.team.name}} Manager Approval</em>
+                                        {% else %}
+                                            <em class="approved-by-text">Approved By {{item.enrichment_item.team.name}} Manager</em>
+                                        {% endif %}
+                                        {% if item.is_vet_approved == False %}
+                                            <em class="approved-by-text">Waiting For Vet Approval</em>
+                                        {% else %}
+                                            <em class="approved-by-text">Approved By Vet</em>
+                                        {% endif %}
+                                    </div>
+                                    <div class="approval-delete-icon">
+                                        <form action="{% url 'actnaturalapp:animal_enrichment_item' item.id %}" method="POST">
+                                            {% csrf_token %}
+                                            <input type="hidden" name="actual_method" value="DELETE">
+                                            <input type="hidden" name="animal_page">
+                                            <button class="approved-for-icon-button"><i class="small material-icons">delete</i></button>
+                                        </form>
+                                    </div>
+                                </li>
+                            {% endif %}
+                        {% endfor %}
+                    </ul>
+                {% endfor %}
+            </div>
+        {% else %}
+            <h5>There are no enrichment items waiting for approval</h5>
+        {% endif %}
+        <div class="back-link waiting-approval-back-link">
+            <a class="page-link" href="{% url 'actnaturalapp:animal' animal.id %}">Back</a>
+        </div>
     </div>
 
 {% endblock content %}

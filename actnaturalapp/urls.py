@@ -46,6 +46,7 @@ urlpatterns = [
     path('animals/<int:animal_id>/enrichment_items/add_approval', animal_enrichment_item_form_2, name='animal_enrichment_item_form_2'),
     path('enrichment_items/pending_manager_approval', animal_enrichment_items_pending_manager_approval, name="animal_enrichment_items_pending_manager_approval"),
     path('enrichment_items/pending_vet_approval', animal_enrichment_items_pending_vet_approval, name="animal_enrichment_items_pending_vet_approval"),
+    path('enrichment_items/pending_approval', animal_enrichment_items_pending_approval, name="animal_enrichment_items_pending_approval"),
 
     path('enrichment_log_entries/', enrichment_log_entry_list, name='enrichment_log_entries'),
     path('enrichment_log_entries/<int:enrichment_log_entry_id>/', enrichment_log_entry_details, name='enrichment_log_entry'),

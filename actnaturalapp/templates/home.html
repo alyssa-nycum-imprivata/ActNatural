@@ -2,7 +2,11 @@
 
 {% block content %}
     <div class="home-page">
-        <h4 class="home-page-line-1">Hi, {{ user.first_name }}!</h4>
+        {% if request.user.employee.position == "Vet" %}
+            <h4 class="home-page-line-1">Hi, Dr. {{ user.first_name }}!</h4>
+        {% else %}
+            <h4 class="home-page-line-1">Hi, {{ user.first_name }}!</h4>
+        {% endif %}
         <h1 class="home-page-line-2">Welcome to Act Natural</h1>
         <h5 class="home-page-line-3">What will the animals on the {{ employee.team.name}} team get for enrichment today?</h5>
         <form class="home-button" action="{% url 'actnaturalapp:enrichment_log_entry_form' %}" method="get">
