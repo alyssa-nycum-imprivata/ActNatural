@@ -234,6 +234,7 @@ nav {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-evenly;
+    margin-top: 30px;
 }
 
 .pending-approval-item {
@@ -294,6 +295,12 @@ nav {
 }
 
 .no-pending-approvals {
+    text-align: center;
+}
+
+.pending-approval-div {
+    display: flex;
+    flex-direction: column;
     text-align: center;
 }
 
@@ -469,6 +476,10 @@ nav {
 
 .waiting-approval-link {
     text-decoration: underline !important;
+}
+
+.approval-animal-info-text {
+    text-align: center;
 }
 
 /* FORM STYLING */

@@ -1,0 +1,54 @@
+{% extends 'shared/base.html' %}
+
+{% block content %}
+
+    <div class="pending-approval-page-container">
+        <div class="page-header">
+            <h3>{{ team.name }} Items Waiting For Approval:</h3>
+        </div>
+        {% if unapproved_team_animal_enrichment_items %}
+            <div class="pending-approval-items-container">
+                {% for item in enrichment_items %}
+                    <ul class="pending-approval-item collection with-header">
+                        <li class="pending-approval-item-container collection-header">
+                            <span><a class="pending-approval-item-link" href="{% url 'actnaturalapp:enrichment_item' item.id %}">{{ item.name }}</a></span>
+                            <span>{{ item.enrichment_type.name }}</span>
+                        </li>
+                        <div>
+                            {% for animal in unapproved_team_animal_enrichment_items %}
+                                {% if animal.enrichment_item_id == item.id %}
+                                    <li class="collection-item approved-for-list-item">
+                                        <div class="approval-animal-info approval-animal-info-text">
+                                            <span><a class="page-link approved-for-link" href="{% url 'actnaturalapp:animal' animal.animal.id %}">{{ animal.animal.name}}</a> - {{ animal.animal.species.name }}</span>
+                                            {% if animal.is_manager_approved == False %}
+                                                <em class="approved-by-text">Waiting For {{animal.animal.team.name}} Manager Approval</em>
+                                            {% else %}
+                                                <em class="approved-by-text">Approved By {{animal.animal.team.name}} Manager</em>
+                                            {% endif %}
+                                            {% if animal.is_vet_approved == False %}
+                                                <em class="approved-by-text">Waiting For Vet Approval</em>
+                                            {% else %}
+                                                <em class="approved-by-text">Approved By Vet</em>
+                                            {% endif %}
+                                        </div>
+                                        <div class="approval-delete-icon">
+                                            <form action="{% url 'actnaturalapp:animal_enrichment_item' animal.id %}" method="POST">
+                                                {% csrf_token %}
+                                                <input type="hidden" name="actual_method" value="DELETE">
+                                                <input type="hidden" name="pending_approval_page">
+                                                <button class="approved-for-icon-button"><i class="small material-icons">delete</i></button>
+                                            </form>
+                                        </div>
+                                    </li>
+                                {% endif %}
+                            {% endfor %}
+                        </div>
+                    </ul>
+                {% endfor %}
+            </div>
+        {% else %}
+            <h5 class="no-pending-approvals">There are no items waiting for approval</h5>
+        {% endif %}
+    </div>
+
+{% endblock content %}

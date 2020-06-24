@@ -39,3 +39,9 @@ def animal_enrichment_item_details(request, animal_enrichment_item_id):
                 animal_enrichment_item.delete()
 
                 return redirect(reverse('actnaturalapp:animal', args=[animal.id]))
+
+            elif ("pending_approval_page" in form_data):
+
+                animal_enrichment_item.delete()
+
+                return redirect(reverse('actnaturalapp:animal_enrichment_items_pending_approval'))
