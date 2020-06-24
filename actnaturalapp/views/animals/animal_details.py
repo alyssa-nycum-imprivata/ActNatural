@@ -8,50 +8,49 @@ from django.contrib.auth.models import User
 @login_required
 def animal_details(request, animal_id):
 
-    # if the animal id exists, grab the specific animal
-    # if it doesn't re-direct to the animals list
+    # protects against the user typing an animal_id into the url that doesn't exist
     try: 
         animal = Animal.objects.get(pk=animal_id)
     except:
         return redirect(reverse('actnaturalapp:animals'))
 
-    # grabs the team object that matches the specified animal's team_id
     team = Team.objects.get(pk=animal.team_id)
-    # grabs the species object that matches the specified animal's species_id
-    species = Species.objects.get(pk=animal.species_id)
-    # grabs the logged in user's employee object
     employee = Employee.objects.get(pk=request.user.employee.id)
-    # grabs all of the notes that have an animal_id that matches the specified animal's id
-    notes = AnimalNote.objects.filter(animal_id=animal_id)
-    # grabs all of the user objects
     users = User.objects.all()
-    # grabs all of the animal enrichment item objects that have the same animal_id as the specified animal's id
-    animal_enrichment_items = AnimalEnrichmentItem.objects.filter(animal_id=animal_id)
-    # grabs all of the enrichment items
-    enrichment_items = EnrichmentItem.objects.all()
-    # grabs all of the enrichment log entries that have the same animal_id as the specified animal's id
+
+    notes = AnimalNote.objects.filter(animal_id=animal_id)
     enrichment_log_entries = EnrichmentLogEntry.objects.filter(animal_id=animal_id)
 
-    # for each item in animal enrichment item objects, set the item to equal the name of the enrichment type of the enrichment item and then append the item to the enrichment_types list
+    species = Species.objects.get(pk=animal.species_id)
+    all_animal_enrichment_items = AnimalEnrichmentItem.objects.filter(animal_id=animal_id)
+    enrichment_items = EnrichmentItem.objects.all()
+
+    approved_animal_enrichment_items = []
+    unapproved_animal_enrichment_items = []
+    for item in all_animal_enrichment_items:
+        if (item.is_manager_approved == True & item.is_vet_approved == True):
+            approved_animal_enrichment_items.append(item)
+        else:
+            unapproved_animal_enrichment_items.append(item)
+
+    # this grabs the name of each enrichment type associated with each enrichment item in the list of animal enrichment item objects
     enrichment_types = []
-    for item in animal_enrichment_items:
+    for item in approved_animal_enrichment_items:
         item = item.enrichment_item.enrichment_type.name
         enrichment_types.append(item)
 
-    # this turns the list into a set to remove duplicates
+    # turn into a set to remove duplicates, then turn back to a list to be iterated
     enrichment_types = set(enrichment_types)
-    # this turns the set back into a list so it can be iterated
     enrichment_types = list(enrichment_types)
 
-    # for each entry in the enrichment log entries, set the date equal to the date of the enrichment log entry and then append the date to the dates list
+    # this grabs the date of each enrichment log entry
     dates = []
     for date in enrichment_log_entries:
         date = date.date
         dates.append(date)
 
-    # this turns the list into a set to remove duplicates
+    # turn into a set to remove duplicates, then turn back to a list to be iterated
     dates = set(dates)
-    # this turns the set back into a list so it can be iterated
     dates = list(dates)
 
     # this sorts the dates in the list from most recent to least recent
@@ -59,7 +58,7 @@ def animal_details(request, animal_id):
 
     if request.method == 'GET':
 
-        # if the logged in user's team_id matches the animals team_id, render the animal's details page
+        # protects against the user viewing another team's animal's details
         if request.user.employee.team_id == animal.team_id:
 
             template = 'animals/animal_details.html'
@@ -70,7 +69,7 @@ def animal_details(request, animal_id):
                 'employee': employee,
                 'users': users,
                 'notes': notes,
-                'animal_enrichment_items': animal_enrichment_items,
+                'approved_animal_enrichment_items': approved_animal_enrichment_items,
                 'enrichment_items': enrichment_items,
                 'enrichment_log_entries': enrichment_log_entries,
                 'enrichment_types': enrichment_types,
@@ -80,7 +79,6 @@ def animal_details(request, animal_id):
             return render(request, template, context)
 
         else: 
-            # if the logged in user's team_id does not match the animal's team_id, redirect to the animals list
             return redirect(reverse('actnaturalapp:animals'))
 
     elif request.method == 'POST':
@@ -161,10 +159,71 @@ def animal_details(request, animal_id):
                 enrichment_instance = EnrichmentItem.objects.get(pk=item)
                 new_animal_enrichment_item = AnimalEnrichmentItem.objects.create(
                     enrichment_item = enrichment_instance,
-                    animal = animal
+                    animal = animal,
+                    is_manager_approved = False,
+                    is_vet_approved = False
                 )
 
             return redirect(reverse('actnaturalapp:animal', args=[animal.id]))
-            
 
-            
+@login_required
+def animal_enrichment_items_waiting_approval(request, animal_id):
+    
+    # protects against the user typing an animal_id into the url that doesn't exist
+    try: 
+        animal = Animal.objects.get(pk=animal_id)
+    except:
+        return redirect(reverse('actnaturalapp:animals'))
+
+    team = Team.objects.get(pk=animal.team_id)
+    employee = Employee.objects.get(pk=request.user.employee.id)
+    users = User.objects.all()
+
+    notes = AnimalNote.objects.filter(animal_id=animal_id)
+    enrichment_log_entries = EnrichmentLogEntry.objects.filter(animal_id=animal_id)
+
+    species = Species.objects.get(pk=animal.species_id)
+    all_animal_enrichment_items = AnimalEnrichmentItem.objects.filter(animal_id=animal_id)
+    enrichment_items = EnrichmentItem.objects.all()
+
+    approved_animal_enrichment_items = []
+    unapproved_animal_enrichment_items = []
+    for item in all_animal_enrichment_items:
+        if (item.is_manager_approved == True & item.is_vet_approved == True):
+            approved_animal_enrichment_items.append(item)
+        else:
+            unapproved_animal_enrichment_items.append(item)
+
+    # this grabs the name of each enrichment type associated with each enrichment item in the list of animal enrichment item objects
+    enrichment_types = []
+    for item in unapproved_animal_enrichment_items:
+        item = item.enrichment_item.enrichment_type.name
+        enrichment_types.append(item)
+
+    # turn into a set to remove duplicates, then turn back to a list to be iterated
+    enrichment_types = set(enrichment_types)
+    enrichment_types = list(enrichment_types)   
+
+    if request.method == 'GET':
+
+        # protects against the user viewing another team's animal's details
+        if request.user.employee.team_id == animal.team_id:
+
+            template = 'animals/animal_enrichment_items_waiting_approval.html'
+            context = {
+                'animal': animal,
+                'team': team,
+                'species': species,
+                'employee': employee,
+                'users': users,
+                'notes': notes,
+                'unapproved_animal_enrichment_items': unapproved_animal_enrichment_items,
+                'enrichment_items': enrichment_items,
+                'enrichment_log_entries': enrichment_log_entries,
+                'enrichment_types': enrichment_types
+            }
+
+            return render(request, template, context)
+
+        else: 
+            return redirect(reverse('actnaturalapp:animals'))

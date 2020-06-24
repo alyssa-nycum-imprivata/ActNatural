@@ -1,9 +1,10 @@
 from .home import home
+from .base import base
 from .auth.logout import logout_user
 from .auth.register import register
 
 from .animals.animal_list import animal_list
-from .animals.animal_details import animal_details
+from .animals.animal_details import animal_details, animal_enrichment_items_waiting_approval
 from .animals.animal_form import animal_form, animal_edit_form, animal_photo_edit_form
 
 from .species.species_form import species_form, species_edit_form
@@ -12,13 +13,14 @@ from .notes.animal_note_details import animal_note_details
 from .notes.animal_note_form import animal_note_form, animal_note_edit_form
 
 from .enrichment_items.enrichment_item_list import enrichment_item_list
-from .enrichment_items.enrichment_item_details import enrichment_item_details
+from .enrichment_items.enrichment_item_details import enrichment_item_details, enrichment_item_animals_waiting_approval
 from .enrichment_items.enrichment_item_form import enrichment_item_form, enrichment_item_edit_form, enrichment_item_photo_edit_form
 
 from .enrichment_types.enrichment_type_form import enrichment_type_form, enrichment_type_edit_form
 
 from .animal_enrichment_items.animal_enrichment_item_details import animal_enrichment_item_details
 from .animal_enrichment_items.animal_enrichment_item_form import animal_enrichment_item_form, animal_enrichment_item_form_2
+from .animal_enrichment_items.animal_enrichment_item_pending import animal_enrichment_items_pending_manager_approval, animal_enrichment_items_pending_vet_approval
 
 from .enrichment_log_entries.enrichment_log_entry_list import enrichment_log_entry_list
 from .enrichment_log_entries.enrichment_log_entry_details import enrichment_log_entry_details

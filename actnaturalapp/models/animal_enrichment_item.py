@@ -8,6 +8,8 @@ class AnimalEnrichmentItem(models.Model):
 
     animal = models.ForeignKey(Animal, on_delete=models.CASCADE)
     enrichment_item = models.ForeignKey(EnrichmentItem, on_delete=models.CASCADE)
+    is_manager_approved = models.BooleanField()
+    is_vet_approved = models.BooleanField()
 
     class Meta: 
         verbose_name = ("AnimalEnrichmentItem")

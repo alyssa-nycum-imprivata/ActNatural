@@ -4,7 +4,7 @@
 {% block content %}
 
 
-    <h4 class="page-header">Add Animal(s) For Approval:</h4>
+    <h4 class="page-header">Submit Animal(s) For Approval:</h4>
     <h5 class="page-header">For Enrichment Item: {{ enrichment_item.name }}</h5>
 
     <div class="form-div">
@@ -30,14 +30,14 @@
                         </div>
                     {% else %}
                         <div class="no-animal-list">
-                            <p>This item is already approved for all of the animals on the team.</p>
+                            <p>This item has been submitted for approval for all of the animals on the team.</p>
                         </div>
                     {% endif %}
             </div>
 
             <div class="form-button-container">
                 {% if unapproved_animals %}
-                <button type="submit" class="waves-effect waves-light btn" value="Add">Add</button>
+                <button type="submit" class="waves-effect waves-light btn" value="Add">Submit</button>
                 {% endif %}
                 <a class= "cancel-button-link" href="{% url 'actnaturalapp:enrichment_item' enrichment_item.id %}">Cancel</a>
             </div>

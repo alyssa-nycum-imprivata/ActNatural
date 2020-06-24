@@ -1,0 +1,60 @@
+{% extends 'shared/base.html' %}
+
+{% block content %}
+
+    <div class="details-container">
+
+        <div class="approved-for-container">
+            <div class="approved-for-header">
+                <h4>Waiting For {{ enrichment_item.name }} Approval:</h4>
+            </div>
+            {% if unapproved_animal_enrichment_items %}
+                <div class="collection-container">
+                    {% for specie in species %}
+                        <ul class="collection with-header">
+                            <li class="collection-header">
+                                <div class="species-name">
+                                    {{ specie }}
+                                </div>
+                            </li>
+                            {% for animal in unapproved_animal_enrichment_items %}
+                                {% if animal.animal.species.name == specie %}
+                                    <li class="collection-item approved-for-list-item">
+                                        <div class="approval-animal-info">
+                                            <a class="page-link approved-for-link" href="{% url 'actnaturalapp:animal' animal.animal.id %}">{{ animal.animal.name}}</a>
+                                            {% if animal.is_manager_approved == False %}
+                                                <em class="approved-by-text">Waiting For {{animal.animal.team.name}} Manager Approval</em>
+                                            {% else %}
+                                                <em class="approved-by-text">Approved By {{animal.animal.team.name}} Manager</em>
+                                            {% endif %}
+                                            {% if animal.is_vet_approved == False %}
+                                                <em class="approved-by-text">Waiting For Vet Approval</em>
+                                            {% else %}
+                                                <em class="approved-by-text">Approved By Vet</em>
+                                            {% endif %}
+                                        </div>
+                                        <div class="approval-delete-icon">
+                                            <form action="{% url 'actnaturalapp:animal_enrichment_item' animal.id %}" method="POST">
+                                                {% csrf_token %}
+                                                <input type="hidden" name="actual_method" value="DELETE">
+                                                <input type="hidden" name="enrichment_page">
+                                                <button class="approved-for-icon-button"><i class="small material-icons">delete</i></button>
+                                            </form>
+                                        </div>
+                                    </li>
+                                {% endif %}
+                            {% endfor %}
+                        </ul>
+                    {% endfor %}
+                </div>
+            {% else %}
+                <h5>There are no animals waiting for approval</h5>
+            {% endif %}
+            <div class="back-link waiting-approval-back-link">
+                <a class="page-link" href="{% url 'actnaturalapp:enrichment_item' enrichment_item.id %}">Back</a>
+            </div>
+        </div>
+
+    </div>
+
+{% endblock content %}

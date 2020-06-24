@@ -10,8 +10,6 @@ class EnrichmentItem(models.Model):
     enrichment_type = models.ForeignKey(EnrichmentType, on_delete=models.CASCADE)
     name = models.CharField(max_length=100)
     note = models.CharField(max_length=500, null=True)
-    is_manager_approved = models.BooleanField()
-    is_vet_approved = models.BooleanField()
     image = models.FileField()
 
     class Meta:

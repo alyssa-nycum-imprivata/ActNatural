@@ -17,6 +17,7 @@ urlpatterns = [
 
     path('animals/', animal_list, name='animals'),
     path('animals/<int:animal_id>/', animal_details, name='animal'),
+    path('animals/<int:animal_id>/enrichment_items_waiting_approval', animal_enrichment_items_waiting_approval, name='animal_enrichment_items_waiting_approval'),
     path('animals/add_animal/', animal_form, name='animal_form'),
     path('animals/<int:animal_id>/edit_animal', animal_edit_form, name='animal_edit_form'),
     path('animals/<int:animal_id>/change_photo', animal_photo_edit_form, name='animal_photo_edit_form'),
@@ -31,6 +32,7 @@ urlpatterns = [
 
     path('enrichment_items/', enrichment_item_list, name='enrichment_items'),
     path('enrichment_items/<int:enrichment_item_id>/', enrichment_item_details, name='enrichment_item'),
+    path('enrichment_items/<int:enrichment_item_id>/animals_waiting_approval', enrichment_item_animals_waiting_approval, name='enrichment_item_animals_waiting_approval'),
     path('enrichment_items/add_enrichment_item/', enrichment_item_form, name='enrichment_item_form'),
     path('enrichment_items/<int:enrichment_item_id>/edit_enrichment_item', enrichment_item_edit_form, name="enrichment_item_edit_form"),
     path('enrichment_items/<int:enrichment_item_id>/change_photo', enrichment_item_photo_edit_form, name='enrichment_item_photo_edit_form'),
@@ -42,6 +44,8 @@ urlpatterns = [
     path('animal_enrichment_items/<int:animal_enrichment_item_id>/', animal_enrichment_item_details, name='animal_enrichment_item'),
     path('enrichment_items/<int:enrichment_item_id>/animals/add_approval', animal_enrichment_item_form, name='animal_enrichment_item_form'),
     path('animals/<int:animal_id>/enrichment_items/add_approval', animal_enrichment_item_form_2, name='animal_enrichment_item_form_2'),
+    path('enrichment_items/pending_manager_approval', animal_enrichment_items_pending_manager_approval, name="animal_enrichment_items_pending_manager_approval"),
+    path('enrichment_items/pending_vet_approval', animal_enrichment_items_pending_vet_approval, name="animal_enrichment_items_pending_vet_approval"),
 
     path('enrichment_log_entries/', enrichment_log_entry_list, name='enrichment_log_entries'),
     path('enrichment_log_entries/<int:enrichment_log_entry_id>/', enrichment_log_entry_details, name='enrichment_log_entry'),

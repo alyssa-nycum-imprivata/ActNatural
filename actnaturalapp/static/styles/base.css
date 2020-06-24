@@ -127,6 +127,14 @@ nav {
     border: none;
 }
 
+.collection-header-link {
+    color: white;
+}
+
+.collection-header-link:hover {
+    color: black;
+}
+
 .page-link {
     color: black !important;
 }
@@ -212,6 +220,83 @@ nav {
     justify-content: flex-start;
 }
 
+.pending-approval-page-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.pending-approval-form {
+    display: flex;
+    flex-direction: column;
+}
+
+.pending-approval-items-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+}
+
+.pending-approval-item {
+    width: 30%;
+    display: flex;
+    flex-direction: column;
+}
+
+.pending-approval-item-link {
+    color: white;
+}
+
+.pending-approval-item-link:hover {
+    color: black;
+}
+
+.pending-approval-image-container {
+    display: flex;
+    justify-content: center;
+}
+
+.pending-approval-image {
+    max-width: 100%;
+    height: 200px;
+}
+
+.pending-approval-item-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.pending-approval-note-container {
+    text-align: center;
+}
+
+.pending-approval-all-animals {
+    display: flex;
+    flex-wrap: wrap;
+    margin-left: 20%;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.pending-approval-animal-container {
+    width: 100%;
+}
+
+.pending-approval-button-container {
+    display: flex;
+    margin-bottom: 40px;
+    align-self: center;
+}
+
+.pending-approval-button {
+    padding-left: 75px !important;
+    padding-right: 75px !important;
+}
+
+.no-pending-approvals {
+    text-align: center;
+}
+
 /* DETAILS STYLING */
 
 .details-container {
@@ -242,6 +327,14 @@ nav {
 
 .add-note-button,.add-approval-button {
     margin-top: 10px;
+}
+
+.add-approval-button {
+    margin-bottom: 20px;
+}
+
+.approved-for-header {
+    margin-top: 40px;
 }
 
 .back-link {
@@ -322,6 +415,24 @@ nav {
     justify-content: space-between;
 }
 
+.approval-animal-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.approved-by-text {
+    font-size: 10px;
+}
+
+.approval-delete-icon {
+    display: flex;
+    align-items: center;
+}
+
+.waiting-approval-back-link {
+    margin-bottom: 30px;
+}
+
 .approved-for-link {
     align-self: center;
 }
@@ -354,6 +465,10 @@ nav {
 
 .approved-for-icon-button:focus {
     background-color: white !important;
+}
+
+.waiting-approval-link {
+    text-decoration: underline !important;
 }
 
 /* FORM STYLING */
