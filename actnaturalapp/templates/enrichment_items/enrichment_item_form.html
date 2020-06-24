@@ -72,7 +72,7 @@
                     <button type="submit" class="waves-effect waves-light btn" value="Update">Update</button>
                     <a class= "cancel-button-link" href="{% url 'actnaturalapp:enrichment_item' enrichment_item.id %}">Cancel</a>
                 {% else %}
-                    <button type="submit" class="waves-effect waves-light btn" value="Add">Add Item & Submit Animal(s)</button>
+                    <button type="submit" class="waves-effect waves-light btn add-enrichment-item-button" value="Add">Add Item & Submit Animal(s)</button>
                     <a class= "cancel-button-link" href="{% url 'actnaturalapp:enrichment_items' %}">Cancel</a>
                 {% endif %}
             </div>

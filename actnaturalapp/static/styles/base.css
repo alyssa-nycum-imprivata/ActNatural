@@ -1,4 +1,4 @@
-/* UNIVERSAL STYLING */
+/* -------------------------------UNIVERSAL STYLING------------------------------- */
 
 body {
     margin: 0;
@@ -14,7 +14,7 @@ nav {
     padding: 0em 2em;
 }
 
-/* NAVBAR STYLING */
+/* -------------------------------NAVBAR STYLING------------------------------- */
 
 .nav-link {
     color: white;
@@ -24,7 +24,7 @@ nav {
     color: black;
 }
 
-/* LIST STYLING */ 
+/* -------------------------------LIST STYLING------------------------------- */ 
 
 .home-page {
     display: flex;
@@ -75,6 +75,21 @@ nav {
     margin-left: 5px !important;
     margin-right: 5px !important;
     margin-bottom: 30px !important;
+}
+
+@media screen and (max-width: 640px) {
+    .collection-container {
+        display: flex;
+        flex-wrap: wrap;
+        margin-top: 30px;
+    }
+    
+    .collection {
+        width: 100%;
+        margin-left: 5px !important;
+        margin-right: 5px !important;
+        margin-bottom: 30px !important;
+    }
 }
 
 .log-collection {
@@ -143,6 +158,17 @@ nav {
 .page-link-container {
     display: flex;
     justify-content: center
+}
+
+@media screen and (max-width: 640px) {
+    .page-link-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    .page-link-div {
+        margin-bottom: 5px;
+    }
 }
 
 .entry-log-button-container {
@@ -291,7 +317,7 @@ nav {
     text-align: center;
 }
 
-/* DETAILS STYLING */
+/* -------------------------------DETAILS STYLING------------------------------- */
 
 .details-container {
     display: flex;
@@ -321,6 +347,15 @@ nav {
 
 .add-note-button,.add-approval-button {
     margin-top: 10px;
+}
+
+@media screen and (max-width: 640px) {
+    .add-approval-button {
+        font-size: 13px !important;
+    }
+    .animal-approval-button {
+        font-size: 11px !important;
+    }
 }
 
 .add-approval-button {
@@ -354,6 +389,22 @@ nav {
     width: 100%;
 }
 
+@media screen and (max-width: 640px) {
+    .profile {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .profile-info {
+        margin-right: 0px;
+        margin-top: 0px;
+    }
+
+    .image-div {
+        margin-left: 0px;
+    }
+}
+
 .notes-container,.approved-for-container,.entry-log-container {
     margin-top: 50px;
     width: 100%;
@@ -376,6 +427,12 @@ nav {
     margin-left: 5px !important;
     margin-right: 5px !important;
     margin-bottom: 30px !important;
+}
+
+@media screen and (max-width: 640px) {
+    .note-card {
+        width: 100%;
+    }
 }
 
 .card-date {
@@ -469,7 +526,7 @@ nav {
     text-align: center;
 }
 
-/* FORM STYLING */
+/* -------------------------------FORM STYLING------------------------------- */
 
 .form {
     width: 30%;
@@ -478,6 +535,17 @@ nav {
 .form-div {
     display: flex;
     justify-content: center;
+}
+
+@media screen and (max-width: 640px) {
+    .form {
+        width: 100%;
+    }
+    
+    .form-div {
+        display: flex;
+        justify-content: center;
+    }
 }
 
 .form-button-container {
@@ -524,4 +592,10 @@ nav {
 
 .registration-link:hover {
     color: #26A69A;
+}
+
+@media screen and (max-width: 640px) {
+    .add-enrichment-item-button {
+        font-size: 13px !important;
+    }
 }
