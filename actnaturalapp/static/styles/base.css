@@ -45,7 +45,7 @@ nav {
 
 .home-page-line-3 {
     align-self: center;
-    margin-top: 40px;
+    margin-top: 20px;
 }
 
 @media screen and (max-width: 640px) {
@@ -334,6 +334,37 @@ nav {
     display: flex;
     flex-direction: column;
     text-align: center;
+}
+
+@media screen and (max-width: 640px) {
+    .pending-approval-item {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .approved-for-list-item {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .approval-delete-icon {
+        margin-top: 10px;
+    }
+
+    .pending-approval-image {
+        max-width: 100%;
+        height: 100px;
+    }
+
+    .pending-approval-all-animals {
+        display: flex;
+        flex-wrap: wrap;
+        margin-left: 10%;
+        margin-top: 10px;
+        margin-bottom: 10px;
+    }
 }
 
 /* -------------------------------DETAILS STYLING------------------------------- */
