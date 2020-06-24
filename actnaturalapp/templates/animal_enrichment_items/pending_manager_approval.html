@@ -32,7 +32,7 @@
 
                                                 <input class="filled-in" type="checkbox" id="item-{{animal.id}}" name="items" value="{{ animal.id }}"/>
 
-                                                <span><a class="page-link approved-for-link" href="{% url 'actnaturalapp:animal' animal.id %}">{{ animal.animal.name}}</a> - {{ animal.animal.species.name }}</span>
+                                                <span><a class="page-link approved-for-link" href="{% url 'actnaturalapp:animal' animal.animal.id %}">{{ animal.animal.name}}</a> - {{ animal.animal.species.name }}</span>
 
                                             </label>
                                         </li>
