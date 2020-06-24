@@ -225,6 +225,11 @@ nav {
     flex-direction: column;
 }
 
+.pending-approval-form {
+    display: flex;
+    flex-direction: column;
+}
+
 .pending-approval-items-container {
     display: flex;
     flex-wrap: wrap;
@@ -277,10 +282,19 @@ nav {
     width: 100%;
 }
 
-.pending-approval-button {
-    width: 20%;
+.pending-approval-button-container {
+    display: flex;
     margin-bottom: 40px;
     align-self: center;
+}
+
+.pending-approval-button {
+    padding-left: 75px !important;
+    padding-right: 75px !important;
+}
+
+.no-pending-approvals {
+    text-align: center;
 }
 
 /* DETAILS STYLING */

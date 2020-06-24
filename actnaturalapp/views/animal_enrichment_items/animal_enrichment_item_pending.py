@@ -49,6 +49,29 @@ def animal_enrichment_items_pending_manager_approval(request):
         else:
             return redirect(reverse('actnaturalapp:enrichment_items'))
 
+    if request.method == 'POST':
+
+        form_data = request.POST
+
+        if (
+            "actual_method" in form_data
+            and form_data["actual_method"] == "PUT"
+        ):
+
+            selected_items = form_data.getlist('items')
+
+            for item in selected_items:
+                animal_enrichment_item = AnimalEnrichmentItem.objects.get(pk=item)
+                animal_enrichment_item.animal_id = animal_enrichment_item.animal_id
+                animal_enrichment_item.enrichment_item_id = animal_enrichment_item.enrichment_item_id
+                animal_enrichment_item.is_manager_approved = True
+                animal_enrichment_item.is_vet_approved = animal_enrichment_item.is_vet_approved
+                animal_enrichment_item.save()
+
+            return redirect(reverse('actnaturalapp:animal_enrichment_items_pending_manager_approval'))
+
+
+
 def animal_enrichment_items_pending_vet_approval(request):
 
     all_animal_enrichment_items = AnimalEnrichmentItem.objects.all()

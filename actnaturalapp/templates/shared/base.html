@@ -31,7 +31,10 @@
                     <li><a class="nav-link" href="{% url 'actnaturalapp:enrichment_items' %}">Enrichment Items</a></li>
                     <li><a class="nav-link" href="{% url 'actnaturalapp:enrichment_log_entries' %}">Enrichment Log</a></li>
                     {% if request.user.employee.position == "Manager" %}
-                        <li><a class="nav-link" href="">Approval Pending</a></li>
+                        <li><a class="nav-link" href="{% url 'actnaturalapp:animal_enrichment_items_pending_manager_approval' %}">Pending Approvals({{ count }})</a></li>
+                    {% endif %}
+                    {% if request.user.employee.position == "Vet" %}
+                        <li><a class="nav-link" href="">Pending Approvals</a></li>
                     {% endif %}
                     <li><a class="nav-link" href="{% url 'actnaturalapp:logout' %}">Logout</a></li>
                 {% else %}
