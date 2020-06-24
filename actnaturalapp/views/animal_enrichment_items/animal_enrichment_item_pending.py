@@ -86,9 +86,12 @@ def animal_enrichment_items_pending_vet_approval(request):
             unapproved_animal_enrichment_items.append(item)
 
     teams = []
+    enrichment_items = []
     for item in unapproved_animal_enrichment_items:
         team = item.animal.team.name
         teams.append(team)
+        enrichment_item = EnrichmentItem.objects.get(pk=item.enrichment_item.id)
+        enrichment_items.append(enrichment_item)
 
     teams = set(teams)
     teams = list(teams)
