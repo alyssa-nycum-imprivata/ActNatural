@@ -48,7 +48,7 @@
             <div>
                 <form action="{% url 'actnaturalapp:animal_enrichment_item_form' enrichment_item.id %}" method="GET">
                     {% csrf_token %}
-                    <button class="waves-effect waves-light btn add-approval-button">Submit Animal(s) For Approval</button>
+                    <button class="waves-effect waves-light btn add-approval-button animal-approval-button">Submit Animal(s) For Approval</button>
                 </form>
                 <a class="page-link waiting-approval-link" href="{% url 'actnaturalapp:enrichment_item_animals_waiting_approval' enrichment_item.id %}">View Animals Waiting Approval</a>
                 {% if approved_animal_enrichment_items %}

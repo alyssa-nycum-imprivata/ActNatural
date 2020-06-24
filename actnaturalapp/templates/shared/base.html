@@ -24,7 +24,8 @@
     <nav>
         <div class="nav-wrapper">
             <a href="{% url 'actnaturalapp:home' %}" class="brand-logo nav-link site-title">Act Natural</a>
-            <ul id="nav-mobile" class="right hid-on-med-and-down">
+            <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+            <ul id="nav-mobile" class="right hide-on-med-and-down">
                 {% if request.user.is_authenticated %}
                     <li><a class="nav-link" href="{% url 'actnaturalapp:home' %}">Home</a></li>
                     <li><a class="nav-link" href="{% url 'actnaturalapp:animals' %}">Animals</a></li>
@@ -47,12 +48,36 @@
         </div>
     </nav>
 
+    <ul class="sidenav" id="mobile-demo">
+        {% if request.user.is_authenticated %}
+            <li><a class="nav-link" href="{% url 'actnaturalapp:home' %}">Home</a></li>
+            <li><a class="nav-link" href="{% url 'actnaturalapp:animals' %}">Animals</a></li>
+            <li><a class="nav-link" href="{% url 'actnaturalapp:enrichment_items' %}">Enrichment Items</a></li>
+            <li><a class="nav-link" href="{% url 'actnaturalapp:enrichment_log_entries' %}">Enrichment Log</a></li>
+            {% if request.user.employee.position == "Manager" %}
+                <li><a class="nav-link" href="{% url 'actnaturalapp:animal_enrichment_items_pending_manager_approval' %}">Pending Approvals</a></li>
+            {% endif %}
+            {% if request.user.employee.position == "Vet" %}
+                <li><a class="nav-link" href="{% url 'actnaturalapp:animal_enrichment_items_pending_vet_approval' %}">Pending Approvals</a></li>
+            {% endif %}
+            {% if request.user.employee.position == "Keeper" or request.user.employee.position == "Vet Tech" %}
+                <li><a class="nav-link" href="{% url 'actnaturalapp:animal_enrichment_items_pending_approval' %}">Pending Approvals</a></li>
+            {% endif %}
+            <li><a class="nav-link" href="{% url 'actnaturalapp:logout' %}">Logout</a></li>
+        {% else %}
+            <li><a class="nav-link" href="{% url 'actnaturalapp:login' %}">Login</a></li>
+        {% endif %}
+    </ul>
+
     <main class="main-content">
         {% block content %}
         {% endblock %}
     </main>
 
     {% block scripts %}
+    
+    <script src="{% static 'scripts/base.js' %}"></script>
+
     {% endblock scripts %}
 
 </body>
