@@ -24,6 +24,10 @@ nav {
     color: black;
 }
 
+.sidenav {
+    width: 60% !important
+}
+
 /* -------------------------------LIST STYLING------------------------------- */ 
 
 .home-page {
@@ -90,17 +94,6 @@ nav {
         margin-right: 5px !important;
         margin-bottom: 30px !important;
     }
-}
-
-.log-collection {
-    width: 50% !important;
-    margin-bottom: 5px !important;
-    display: flex;
-    justify-content: space-between;
-}
-
-.entry-log-button-container {
-    display: flex;
 }
 
 .collection-header {
@@ -171,13 +164,6 @@ nav {
     }
 }
 
-.entry-log-button-container {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    margin-left: 30px;
-}
-
 .log-icon-button {
     background-color: white !important;
     border: none !important;
@@ -217,6 +203,39 @@ nav {
 .log-collection-item {
     display: flex;
     justify-content: space-between;
+}
+
+.entry-log-button-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-left: 30px;
+}
+
+@media screen and (max-width: 640px) {
+    .log-collection-item {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .log-entry-content {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+
+    .log-entry-note {
+        display: flex;
+        justify-content: center;
+        text-align: center;
+    }
+
+    .entry-log-button-container {
+        display: flex;
+        flex-direction: row;
+        margin-left: 0px;
+    }
 }
 
 .log-content-container {
