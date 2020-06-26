@@ -93,6 +93,8 @@ def animal_enrichment_items_pending_vet_approval(request):
         enrichment_item = EnrichmentItem.objects.get(pk=item.enrichment_item.id)
         enrichment_items.append(enrichment_item)
 
+    enrichment_items = set(enrichment_items)
+    enrichment_items = list(enrichment_items)
     teams = set(teams)
     teams = list(teams)
 

@@ -164,7 +164,7 @@ def animal_details(request, animal_id):
                     is_vet_approved = False
                 )
 
-            return redirect(reverse('actnaturalapp:animal', args=[animal.id]))
+            return redirect(reverse('actnaturalapp:animal_enrichment_items_waiting_approval', args=[animal.id]))
 
 @login_required
 def animal_enrichment_items_waiting_approval(request, animal_id):
