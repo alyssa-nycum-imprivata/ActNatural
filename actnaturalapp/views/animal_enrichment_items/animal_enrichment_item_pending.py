@@ -36,7 +36,7 @@ def animal_enrichment_items_pending_manager_approval(request):
 
     if request.method == 'GET':
 
-        """Gets the animal enrichment items that have been submitted and have not been approved by the Manager yet."""
+        """GETS the animal enrichment items that have been submitted and have not been approved by the Manager yet."""
 
         if request.user.employee.position == "Manager":
 
@@ -64,7 +64,7 @@ def animal_enrichment_items_pending_manager_approval(request):
             and form_data["actual_method"] == "PUT"
         ):
 
-            """Gets the values from the selected checkboxes and makes a PUT request for each animal enrichment item object that the Manager selected to approve."""
+            """Gets the values from the selected checkboxes and makes a PUT request for each animal enrichment item object that the Manager selected to approve, then re-directs to the items pending manager approval page."""
 
             selected_items = form_data.getlist('items')
 
@@ -113,7 +113,7 @@ def animal_enrichment_items_pending_vet_approval(request):
 
     if request.method == 'GET':
 
-        """Gets the animal enrichment items that have been submitted and have not been approved by the Vet yet."""
+        """GETS the animal enrichment items that have been submitted and have not been approved by the Vet yet."""
 
         if request.user.employee.position == "Vet":
 
@@ -141,7 +141,7 @@ def animal_enrichment_items_pending_vet_approval(request):
             and form_data["actual_method"] == "PUT"
         ):
 
-            """Gets the values from the selected checkboxes and makes a PUT request for each animal enrichment item object that the Vet selected to approve."""
+            """Gets the values from the selected checkboxes and makes a PUT request for each animal enrichment item object that the Vet selected to approve, then re-directs to the items pending vet approval page."""
 
             selected_items = form_data.getlist('items')
 
@@ -193,7 +193,7 @@ def animal_enrichment_items_pending_approval(request):
 
     if request.method == 'GET':
 
-        """Gets the animal enrichment items that have been submitted and have not been approved by the Manager and/or Vet yet."""
+        """GETS the animal enrichment items that have been submitted and have not been approved by the Manager and/or Vet yet."""
 
         template = 'animal_enrichment_items/pending_approval.html'
         context = {

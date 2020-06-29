@@ -8,7 +8,7 @@ def animal_enrichment_item_form(request, enrichment_item_id):
 
     if request.method == 'GET':
 
-        """Gets the animals that have not yet been approved for a specific enrichment item."""
+        """GETS the animals that have not yet been approved for a specific enrichment item."""
         
         all_animals = Animal.objects.filter(team_id=request.user.employee.team_id)
         enrichment_item = EnrichmentItem.objects.get(pk=enrichment_item_id)
@@ -36,7 +36,7 @@ def animal_enrichment_item_form_2(request, animal_id):
 
     if request.method == 'GET':
 
-        """Gets the enrichment items that have not yet been approved for a specific animal."""
+        """GETS the enrichment items that have not yet been approved for a specific animal."""
         
         all_enrichment_items = EnrichmentItem.objects.filter(team_id=request.user.employee.team_id)
         animal = Animal.objects.get(pk=animal_id)

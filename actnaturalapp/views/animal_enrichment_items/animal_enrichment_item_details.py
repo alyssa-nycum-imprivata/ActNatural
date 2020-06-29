@@ -21,7 +21,7 @@ def animal_enrichment_item_details(request, animal_enrichment_item_id):
 
             if ("enrichment_page" in form_data):
 
-                """Deletes an animal enrichment item object and re-directs to the enrichment item's details page."""
+                """DELETES an animal enrichment item object and then re-directs to the enrichment item's details page."""
 
                 animal_enrichment_item.delete()
 
@@ -29,7 +29,7 @@ def animal_enrichment_item_details(request, animal_enrichment_item_id):
 
             elif ("animal_page" in form_data):
 
-                """Deletes an animal enrichment item object and re-directs to the animals's details page."""
+                """DELETES an animal enrichment item object and then re-directs to the animals's details page."""
 
                 animal_enrichment_item.delete()
 
@@ -37,7 +37,7 @@ def animal_enrichment_item_details(request, animal_enrichment_item_id):
 
             elif ("pending_approval_page" in form_data):
 
-                """Deletes an animal enrichment item object and re-directs to the pending approvals page."""
+                """DELETES an animal enrichment item object and then re-directs to the pending approvals page."""
 
                 animal_enrichment_item.delete()
 
