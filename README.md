@@ -11,8 +11,12 @@ Act Natural allows keepers to collaborate with their fellow team members by bein
 * Django
 * Django ORM
 * JavaScript
-* [Pillow](https://pillow.readthedocs.io/en/stable/)
-* [Materialize CSS](https://materializecss.com/)
+* CSS
+* Materialize CSS
+* Pillow for Python
+* TablePlus
+* Visual Studio Code
+* Git/GitHub
 
 ## Installations to test locally:
 
@@ -57,3 +61,9 @@ $ python manage.py runserver
 ```
 
 7. Open http://localhost:8000 in your browser
+
+## Demo
+
+<a href="http://www.youtube.com/watch?feature=player_embedded&v=wD8I59EqAAY
+" target="_blank"><img src="src/BetaDataScreenshot.png" 
+alt="IMAGE ALT TEXT HERE" width="240" height="180" border="10" /></a>
