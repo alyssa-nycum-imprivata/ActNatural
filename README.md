@@ -64,6 +64,6 @@ $ python manage.py runserver
 
 ## Demo
 
-<a href="http://www.youtube.com/watch?feature=player_embedded&v=wD8I59EqAAY
+<a href="https://www.youtube.com/watch?v=wD8I59EqAAY&feature=youtu.be
 " target="_blank"><img src="src/BetaDataScreenshot.png" 
 alt="IMAGE ALT TEXT HERE" width="240" height="180" border="10" /></a>
