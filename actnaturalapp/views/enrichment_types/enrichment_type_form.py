@@ -7,6 +7,8 @@ from actnaturalapp.models import Team, EnrichmentType
 def enrichment_type_form(request):
     if request.method == 'GET':
 
+        """GETS the logged in user's team object to save in the add new enrichment type form."""
+
         team = Team.objects.get(pk=request.user.employee.team_id)
 
         template = 'enrichment_types/enrichment_type_form.html'
@@ -25,6 +27,8 @@ def enrichment_type_edit_form(request, enrichment_type_id):
         return redirect(reverse('actnaturalapp:enrichment_items'))
 
     if request.method == 'GET':
+
+        """GETS the details of a specific enrichment type to pre-fill the edit enrichment type form."""
 
         if request.user.employee.team_id == enrichment_type.team_id:
         
