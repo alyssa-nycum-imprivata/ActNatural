@@ -114,7 +114,7 @@ def enrichment_item_details(request, enrichment_item_id):
                     is_vet_approved = False
                 )
 
-            return redirect(reverse('actnaturalapp:enrichment_item', args=[enrichment_item.id]))
+            return redirect(reverse('actnaturalapp:enrichment_item_animals_waiting_approval', args=[enrichment_item.id]))
 
 @login_required
 def enrichment_item_animals_waiting_approval(request, enrichment_item_id):
