@@ -7,6 +7,8 @@ from actnaturalapp.models import Species, Team, Employee
 def species_form(request):
     if request.method == 'GET':
 
+        """GETS the logged in user's team object to save in the add new species form."""
+
         team = Team.objects.get(pk=request.user.employee.team_id)
 
         template = 'species/species_form.html'
@@ -25,6 +27,8 @@ def species_edit_form(request, species_id):
         return redirect(reverse('actnaturalapp:animals'))
 
     if request.method == 'GET':
+
+        """GETS the details of a specific species to pre-fill the edit species form."""
 
         if request.user.employee.team_id == species.team_id:
         

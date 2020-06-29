@@ -22,6 +22,8 @@ def enrichment_log_entry_details(request, enrichment_log_entry_id):
             if (form_data["actual_method"] == "DELETE"):
 
                 if ("animal_page" in form_data):
+
+                    """DELETES a specific enrichment log entry and then re-directs to the animal detail's page of the animal associated with that entry."""
                     
                     enrichment_log_entry.delete()
 
@@ -29,7 +31,7 @@ def enrichment_log_entry_details(request, enrichment_log_entry_id):
 
                 else:
 
-                    '''Deletes an enrichment log entry and re-directs to the main enrichment log page'''
+                    """DELETES a specific enrichment log entry and then re-directs to the enrichment log entries list page."""
 
                     enrichment_log_entry.delete()
 
@@ -37,7 +39,7 @@ def enrichment_log_entry_details(request, enrichment_log_entry_id):
 
             elif (form_data["actual_method"] == "PUT"):
 
-                '''Updates an enrichment log entry and re-directs to the main enrichment log page'''
+                """Makes a PUT request to edit a specific enrichment log entry and then re-directs to the enrichment log entries list page."""
 
                 enrichment_log_entry.employee_id = request.user.employee.id
                 enrichment_log_entry.animal_id = form_data['animal']

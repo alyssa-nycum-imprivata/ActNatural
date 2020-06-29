@@ -7,6 +7,8 @@ import datetime
 @login_required
 def enrichment_log_entry_form(request):
     if request.method == 'GET':
+
+        """GETS the animal objects created by the logged in user's team and the current date to populate in part 1 of the add enrichment log entry form."""
         
         employee = Employee.objects.get(pk=request.user.employee.id)
         animals = Animal.objects.filter(team_id=request.user.employee.team_id)
@@ -31,6 +33,8 @@ def enrichment_log_entry_edit_form(request, enrichment_log_entry_id):
         return redirect(reverse('actnaturalapp:enrichment_log_entries'))
 
     if request.method == 'GET':
+
+        """GETS the details of a specific enrichment log entry to pre-fill part 1 of the edit enrichment log entry form."""
 
         if request.user.employee.id == enrichment_log_entry.employee_id:
         

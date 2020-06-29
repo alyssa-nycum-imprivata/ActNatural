@@ -10,25 +10,29 @@ def enrichment_log_entry_list(request):
 
     if request.method == 'GET':
 
-        '''Gets all enrichment log entries for all employees on the logged in user's team and displays them on the main enrichment log page''' 
+        """GETS all of the enrichment log entries from all of the employees on the logged in user's team"""
 
         employees = Employee.objects.filter(team_id=request.user.employee.team_id)
         users = User.objects.all()
 
+        # grabs all of the enrichment log entries from the employees on the logged in user's team
         enrichment_log_entries = []
         for employee in employees:
             employee_entries = EnrichmentLogEntry.objects.filter(employee_id=employee.id)
             for entry in employee_entries:
                 enrichment_log_entries.append(entry)
 
+        # grabs the date on each enrichment log entry
         dates = []
         for date in enrichment_log_entries:
             date = date.date
             dates.append(date)
 
+        # gets a unique list of those dates
         dates = set(dates)
         dates = list(dates)
 
+        # sorts those dates from most recent to least recent
         dates = sorted(dates, key=lambda date:date, reverse=True)
 
         template = 'enrichment_log_entries/enrichment_log_entry_list.html'
@@ -43,7 +47,7 @@ def enrichment_log_entry_list(request):
     elif request.method == 'POST':
         form_data = request.POST
 
-        '''Posts a new enrichment log entry and re-directs to the main enrichment log page'''
+        """Makes a POST request to add a new enrichment log entry and then re-direct to the enrichment log entries list page."""
     
         new_enrichment_log_entry = EnrichmentLogEntry.objects.create(
             employee_id = request.user.employee.id,

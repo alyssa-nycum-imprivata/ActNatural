@@ -8,7 +8,6 @@ from django.contrib.auth.models import User
 @login_required
 def animal_details(request, animal_id):
 
-    # protects against the user typing an animal_id into the url that doesn't exist
     try: 
         animal = Animal.objects.get(pk=animal_id)
     except:
@@ -25,6 +24,7 @@ def animal_details(request, animal_id):
     all_animal_enrichment_items = AnimalEnrichmentItem.objects.filter(animal_id=animal_id)
     enrichment_items = EnrichmentItem.objects.all()
 
+    # sorts the approved and unapproved animal enrichment items into separate lists
     approved_animal_enrichment_items = []
     unapproved_animal_enrichment_items = []
     for item in all_animal_enrichment_items:
@@ -33,32 +33,33 @@ def animal_details(request, animal_id):
         else:
             unapproved_animal_enrichment_items.append(item)
 
-    # this grabs the name of each enrichment type associated with each enrichment item in the list of animal enrichment item objects
+    # grabs the associated enrichment type object for each approved animal enrichment item
     enrichment_types = []
     for item in approved_animal_enrichment_items:
         item = item.enrichment_item.enrichment_type.name
         enrichment_types.append(item)
 
-    # turn into a set to remove duplicates, then turn back to a list to be iterated
+    # gets a unique list of those enrichment type objects
     enrichment_types = set(enrichment_types)
     enrichment_types = list(enrichment_types)
 
-    # this grabs the date of each enrichment log entry
+    # grabs the date of each enrichment log entry
     dates = []
     for date in enrichment_log_entries:
         date = date.date
         dates.append(date)
 
-    # turn into a set to remove duplicates, then turn back to a list to be iterated
+    # gets a unique list of those dates
     dates = set(dates)
     dates = list(dates)
 
-    # this sorts the dates in the list from most recent to least recent
+    # sorts the dates from most recent to least recent
     dates = sorted(dates, key=lambda date:date, reverse=True)
 
     if request.method == 'GET':
 
-        # protects against the user viewing another team's animal's details
+        """GETS all of a specific animal's details, notes, approved animal enrichment items, and enrichment log entries."""
+
         if request.user.employee.team_id == animal.team_id:
 
             template = 'animals/animal_details.html'
@@ -90,13 +91,12 @@ def animal_details(request, animal_id):
             "actual_method" in form_data
             and form_data["actual_method"] == "PUT"
         ):
-            # if there is a hidden input field where the value is "PUT"
 
             if (
                 "updated_photo" in form_data
             ):
 
-                # if there is also a hidden field with name="updated_photo", then pull the new image path from the form and save it with the rest of the saved animal info, then redirect to the specific animal's details page
+                """Makes a PUT request to edit a specific animal's image and then re-directs to the animal's details page."""
 
                 animal.team_id = request.user.employee.team_id
                 animal.species_id = animal.species_id
@@ -112,7 +112,8 @@ def animal_details(request, animal_id):
 
             else:
 
-                # other wise pull all of the animal's edited info from the form and save it, then redirect to the animal's details page
+                """Makes a PUT request to edit a specific animal's details and then re-directs to the animal's details page."""
+
                 animal.team_id = request.user.employee.team_id
                 animal.species_id = form_data['species']
                 animal.name = form_data['name']
@@ -130,7 +131,7 @@ def animal_details(request, animal_id):
             and form_data["actual_method"] == "DELETE"
         ):
 
-            # if there is a hidden input field where the value is "DELETE", then delete the specific animal and redirect to the animals list
+            """DELETES a specific animal and then re-directs to the animals list."""
                     
             animal.delete()
 
@@ -138,7 +139,7 @@ def animal_details(request, animal_id):
 
         elif ("note" in form_data):
 
-            # if note is a property in the form_data, then post a new animal note object and redirect to the animal detail's page
+            """Makes a POST request to add a new note to a specific animal and then re-directs to the animal's details page."""
 
             new_note = AnimalNote.objects.create(
                 employee_id = request.user.employee.id,
@@ -151,10 +152,10 @@ def animal_details(request, animal_id):
 
         else:
 
-            # grabs all the values from the checkbox inputs with name="enrichment_items" and saves them to the selected_enrichment list
+            """Gets the values from the selected checkboxes and makes a POST request for each animal enrichment item object that the user selected to get approved for a specific animal, then re-directs to the items pending approval page for the animal."""
+
             selected_enrichment = form_data.getlist('enrichment_items')
 
-            # for each item in the selected_enrichment list, make an instance of the enrichment item and then post a new animal enrichment item instance using that item as the enrichment_item and the specified animal as the animal, then redirect the the specified animal's details page
             for item in selected_enrichment:
                 enrichment_instance = EnrichmentItem.objects.get(pk=item)
                 new_animal_enrichment_item = AnimalEnrichmentItem.objects.create(
@@ -164,12 +165,11 @@ def animal_details(request, animal_id):
                     is_vet_approved = False
                 )
 
-            return redirect(reverse('actnaturalapp:animal', args=[animal.id]))
+            return redirect(reverse('actnaturalapp:animal_enrichment_items_waiting_approval', args=[animal.id]))
 
 @login_required
 def animal_enrichment_items_waiting_approval(request, animal_id):
     
-    # protects against the user typing an animal_id into the url that doesn't exist
     try: 
         animal = Animal.objects.get(pk=animal_id)
     except:
@@ -186,6 +186,7 @@ def animal_enrichment_items_waiting_approval(request, animal_id):
     all_animal_enrichment_items = AnimalEnrichmentItem.objects.filter(animal_id=animal_id)
     enrichment_items = EnrichmentItem.objects.all()
 
+    # sorts the approved and unapproved animal enrichment items into separate lists
     approved_animal_enrichment_items = []
     unapproved_animal_enrichment_items = []
     for item in all_animal_enrichment_items:
@@ -194,19 +195,20 @@ def animal_enrichment_items_waiting_approval(request, animal_id):
         else:
             unapproved_animal_enrichment_items.append(item)
 
-    # this grabs the name of each enrichment type associated with each enrichment item in the list of animal enrichment item objects
+    # grabs the associated enrichment type object for each approved animal enrichment item
     enrichment_types = []
     for item in unapproved_animal_enrichment_items:
         item = item.enrichment_item.enrichment_type.name
         enrichment_types.append(item)
 
-    # turn into a set to remove duplicates, then turn back to a list to be iterated
+    # gets a unique list of those enrichment type objects
     enrichment_types = set(enrichment_types)
     enrichment_types = list(enrichment_types)   
 
     if request.method == 'GET':
 
-        # protects against the user viewing another team's animal's details
+        """GETS all of a specific animal's submitted unapproved animal enrichment items."""
+
         if request.user.employee.team_id == animal.team_id:
 
             template = 'animals/animal_enrichment_items_waiting_approval.html'

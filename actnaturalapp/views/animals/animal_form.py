@@ -6,14 +6,11 @@ from actnaturalapp.models import Animal, Species, Employee
 @login_required
 def animal_form(request):
     if request.method == 'GET':
-        
-        # grabs the logged in user's employee object
-        employee = Employee.objects.get(pk=request.user.employee.id)
-        # grabs all of the animals with a team_id that matches the logged in user's team_id
-        animals = Animal.objects.filter(team_id=request.user.employee.team_id)
-        # grabs all of the species with a team_id that matches the logged in user's team_id
-        species = Species.objects.filter(team_id=request.user.employee.team_id)
 
+        """GETS the species objects created by the logged in user's team to populate in the add animal form."""
+        
+        employee = Employee.objects.get(pk=request.user.employee.id)
+        species = Species.objects.filter(team_id=request.user.employee.team_id)
 
         template = 'animals/animal_form.html'
         context = {
@@ -26,8 +23,6 @@ def animal_form(request):
 @login_required
 def animal_edit_form(request, animal_id):
 
-    # if the animal id exists, grab the specific animal
-    # if it doesn't re-direct to the animals list
     try:
         animal = Animal.objects.get(pk=animal_id)
     except:
@@ -35,12 +30,11 @@ def animal_edit_form(request, animal_id):
 
     if request.method == 'GET':
 
-        # if the logged in user's team_id matches the animal's team_id
+        """GETS the details of a specific animal to pre-fill the edit animal form."""
+
         if request.user.employee.team_id == animal.team_id:
 
-            # grabs all of the species with the same team_id as the logged in user's team_id
             species = Species.objects.filter(team_id=request.user.employee.team_id)
-            # grabs the employee object of the logged in user
             employee = Employee.objects.get(pk=request.user.employee.id)
 
             template = 'animals/animal_form.html'
@@ -53,14 +47,11 @@ def animal_edit_form(request, animal_id):
             return render(request, template, context)
 
         else:
-            # if the logged in user's team_id does not match the animal's team_id, redirect to the animals list
             return redirect(reverse('actnaturalapp:animals'))
 
 @login_required
 def animal_photo_edit_form(request, animal_id):
 
-    # if the animal id exists, grab the specific animal
-    # if it doesn't re-direct to the animals list
     try:
         animal = Animal.objects.get(pk=animal_id)
     except:
@@ -68,12 +59,11 @@ def animal_photo_edit_form(request, animal_id):
 
     if request.method == 'GET':
 
-        # if the logged in user's team_id matches the animal's team_id
+        """GETS the details of a specific animal for the edit photo form."""
+
         if request.user.employee.team_id == animal.team_id:
 
-            # grabs all of the species with the same team_id as the logged in user's team_id
             species = Species.objects.filter(team_id=request.user.employee.team_id)
-            # grabs the employee object of the logged in user
             employee = Employee.objects.get(pk=request.user.employee.id)
 
             template = 'animals/animal_photo_edit_form.html'
@@ -86,5 +76,4 @@ def animal_photo_edit_form(request, animal_id):
             return render(request, template, context)
 
         else:
-            # if the logged in user's team_id does not match the animal's team_id, redirect to the animals list
             return redirect(reverse('actnaturalapp:animals'))

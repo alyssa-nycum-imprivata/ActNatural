@@ -10,6 +10,8 @@ def home(request):
 
     if request.method == 'GET':
 
+        """Gets the logged in user's employee and team info to display on the home page."""
+
         template = 'home.html'
         context = {
             'employee': employee,
