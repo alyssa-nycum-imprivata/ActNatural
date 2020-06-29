@@ -15,12 +15,15 @@ def enrichment_log_entry_form_2(request):
     all_animal_enrichment_items = AnimalEnrichmentItem.objects.filter(animal_id=animal)
     enrichment_items = EnrichmentItem.objects.all()
 
+    # grabs the approved animal enrichment items associated with a specific animal
     approved_animal_enrichment_items = []
     for item in all_animal_enrichment_items:
         if (item.is_manager_approved == True & item.is_vet_approved == True):
             approved_animal_enrichment_items.append(item)
 
     if request.method == 'GET':
+
+        """GETS the approved animal enrichment items associated with a specific animal to populate in part 2 of the add new enrichment log entry form."""
 
         template = 'enrichment_log_entries/enrichment_log_entry_form_2.html'
         context = {
@@ -48,12 +51,15 @@ def enrichment_log_entry_edit_form_2(request, enrichment_log_entry_id):
     all_animal_enrichment_items = AnimalEnrichmentItem.objects.filter(animal_id=animal)
     enrichment_items = EnrichmentItem.objects.all()
 
+    # grabs the approved animal enrichment items associated with a specific animal
     approved_animal_enrichment_items = []
     for item in all_animal_enrichment_items:
         if (item.is_manager_approved == True & item.is_vet_approved == True):
             approved_animal_enrichment_items.append(item)
 
     if request.method == 'GET':
+
+        """GETS the details of a specific enrichment log entry to pre-fill part 2 of the edit enrichment log entry form."""
 
         if request.user.employee.id == enrichment_log_entry.employee_id:
 
