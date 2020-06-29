@@ -6,11 +6,12 @@ from django.contrib.auth import authenticate, login
 from actnaturalapp.models import Employee, Team
 from django.forms import ValidationError
 
-# TODO: Need to clean appearance of error messages for registration
 
 def register(request):
     if request.method == 'POST':
         form_data = request.POST
+
+        """Makes a POST request to add a new user and a new employee object and re-directs to the home page if the registration criteria is valid."""
         
         try:
             if form_data['password'] != form_data['password_confirmation']:
