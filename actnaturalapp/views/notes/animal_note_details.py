@@ -18,6 +18,8 @@ def animal_note_details(request, note_id):
             "actual_method" in form_data and form_data["actual_method"] == "DELETE"
         ):
 
+            """DELETES a specific animal note and then re-directs to the animal details page of the animal associated with that note."""
+
             note.delete()
 
             return redirect(reverse('actnaturalapp:animal', args=[animal.id]))
@@ -25,6 +27,8 @@ def animal_note_details(request, note_id):
         elif (
             "actual_method" in form_data and form_data["actual_method"] == "PUT"
         ):
+
+            """Makes a PUT request to edit a specific animal note and then re-directs to the animal details page of the animal associated with that note."""
 
             note.employee_id = request.user.employee.id
             note.animal_id = animal.id

@@ -14,6 +14,8 @@ def animal_note_form(request, animal_id):
 
     if request.method == 'GET':
 
+        """GETS the current date to pre-fill in the add new animal note form."""
+
         if request.user.employee.team_id == animal.team_id:
 
             date = str(datetime.date.today())
@@ -38,6 +40,8 @@ def animal_note_edit_form(request, note_id):
         return redirect(reverse('actnaturalapp:animals'))
 
     if request.method == 'GET':
+
+        """GETS the details of a specific animal note to pre-fill the edit animal note form."""
 
         if request.user.employee.id == note.employee_id:
 
