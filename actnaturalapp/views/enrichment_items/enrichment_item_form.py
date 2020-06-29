@@ -7,6 +7,8 @@ from actnaturalapp.models import Employee, EnrichmentType, EnrichmentItem, Anima
 def enrichment_item_form(request):
 
     if request.method == 'GET':
+
+        """GETS the enrichment type objects and animal objects created by the logged in user's team to populate in the add enrichment item form."""
         
         employee = Employee.objects.get(pk=request.user.employee.id)
         enrichment_types = EnrichmentType.objects.filter(team_id=request.user.employee.team_id)
@@ -33,6 +35,8 @@ def enrichment_item_edit_form(request, enrichment_item_id):
 
     
     if request.method == 'GET':
+
+        """GETS the details of a specific enrichment item to pre-fill the edit enrichment item form."""
 
         if request.user.employee.team_id == enrichment_item.team_id:
 
@@ -65,6 +69,8 @@ def enrichment_item_photo_edit_form(request, enrichment_item_id):
         return redirect(reverse('actnaturalapp:enrichment_items'))
 
     if request.method == 'GET':
+
+        """GETS the details of a specific enrichment item for the edit photo form."""
 
         if request.user.employee.team_id == enrichment_item.team_id:
 

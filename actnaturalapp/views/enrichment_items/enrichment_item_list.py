@@ -7,10 +7,10 @@ from actnaturalapp.models import EnrichmentItem, EnrichmentType, AnimalEnrichmen
 def enrichment_item_list(request, enrichment_type_id=None):
 
     if request.method == 'GET':
+
+        """GETS all of the enrichment type and enrichment item objects associated with the logged in user's team."""
         
-        # grabs the enrichment items with a team_id that matches the logged in user's team_id
         enrichment_items = EnrichmentItem.objects.filter(team_id=request.user.employee.team_id)
-        # grabs the enrichment types with a team_id that matches the logged in user's team_id
         enrichment_types = EnrichmentType.objects.filter(team_id=request.user.employee.team_id)
 
         template = 'enrichment_items/enrichment_item_list.html'
@@ -29,7 +29,7 @@ def enrichment_item_list(request, enrichment_type_id=None):
             "note" in form_data
         ):
 
-            # if note is a property in form_data, post a new enrichment object
+            """Makes a POST request to add a new enrichment item and then re-directs to that new enrichment item's details page."""
 
             new_enrichment_item = EnrichmentItem.objects.create(
                 team_id = request.user.employee.team_id,
@@ -39,11 +39,9 @@ def enrichment_item_list(request, enrichment_type_id=None):
                 image = form_files['image']
             )
 
-            # then also grab the checkbox value's where name="animals" and store them in the selected_animals array
+            """Gets the values from the selected checkboxes and makes a POST request for each animal enrichment item object that the user selected to get approved for a specific enrichment item, then re-directs to the new enrichment item's details page."""
 
             selected_animals = form_data.getlist('animals')
-
-            # then for each animal in selected_animals, create an animal instance and then post a new animal enrichment item object with the animal instance as the animal and the above created enrichment item as the enrichment item and then re-direct to the new enrichment item's details page
 
             for animal in selected_animals:
                 animal_instance = Animal.objects.get(pk=animal)
@@ -64,7 +62,7 @@ def enrichment_item_list(request, enrichment_type_id=None):
 
             if (form_data["actual_method"] == "DELETE"):
 
-                # if there's a hidden input with a value of "DELETE", then delete the specified enrichment type and re-direct to the enrichment_items list
+                """DELETES a specific enrichment type and then re-directs to the enrichment items list page."""
 
                 enrichment_type.delete()
 
@@ -72,7 +70,7 @@ def enrichment_item_list(request, enrichment_type_id=None):
 
             elif (form_data["actual_method"] == "PUT"):
 
-                # if there's a hidden input with a value of "PUT", then grab the edited form data and save the edited enrichment type object and re-direct to the enrichment items list
+                """Makes a PUT request to edit a specific enrichment type and then re-directs to the enrichment items list page."""
 
                 enrichment_type.team_id = request.user.employee.team_id
                 enrichment_type.name = form_data["name"]
@@ -83,7 +81,7 @@ def enrichment_item_list(request, enrichment_type_id=None):
 
         else:
 
-            #  otherwise post a new enrichment type object with the data typed into the form and re-direct to the enrichment item form
+            """Makes a POST request to add a new enrichment type and then re-directs to the add enrichment item form."""
 
             new_enrichment_type = EnrichmentType.objects.create(
                 team_id = request.user.employee.team_id,
