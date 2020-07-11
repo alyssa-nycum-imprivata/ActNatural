@@ -35,7 +35,7 @@
                                         <form action="{% url 'actnaturalapp:animal_enrichment_item' item.id %}" method="POST">
                                             {% csrf_token %}
                                             <input type="hidden" name="actual_method" value="DELETE">
-                                            <input type="hidden" name="animal_page">
+                                            <input type="hidden" name="animal_pending_page">
                                             <button class="approved-for-icon-button"><i class="small material-icons">delete</i></button>
                                         </form>
                                     </div>
