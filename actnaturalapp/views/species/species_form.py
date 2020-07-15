@@ -27,7 +27,6 @@ def species_form(request):
             conn.row_factory = create_team
             db_cursor = conn.cursor()
             user_team_id = request.user.employee.team_id
-            print('LOOK HERE', user_team_id)
 
             db_cursor.execute("""
             SELECT *
@@ -36,7 +35,6 @@ def species_form(request):
             """, (user_team_id,))
             
             team = db_cursor.fetchone()
-            print('LOOK HERE', team)
             
         template = 'species/species_form.html'
         context = {
