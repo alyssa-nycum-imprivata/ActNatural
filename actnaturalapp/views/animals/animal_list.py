@@ -1,4 +1,6 @@
+import sqlite3
 from django.shortcuts import render, redirect, reverse
+from ..connection import Connection
 from django.contrib.auth.decorators import login_required
 from actnaturalapp.models import Animal, Species, Employee
 
@@ -10,15 +12,53 @@ def animal_list(request, species_id=None):
 
         """GETS all of the species and animal objects associated with the logged in user's team."""
 
-        employee = Employee.objects.get(pk=request.user.employee.id)
-        animals = Animal.objects.filter(team_id=request.user.employee.team_id)
-        species = Species.objects.filter(team_id=request.user.employee.team_id)
+        with sqlite3.connect(Connection.db_path) as conn:
+            conn.row_factory = sqlite3.Row
+            db_cursor = conn.cursor()
+            user_employee_id = request.user.employee.id
+
+            db_cursor.execute("""
+            SELECT e.id AS 'employee_id',
+                e.team_id AS 'employee_team',
+                a.id AS 'animal_id',
+                a.team_id AS 'animal_team',
+                a.name AS 'animal_name',
+                a.species_id AS 'animal_species',
+                s.id AS 'species_id',
+                s.name AS 'species_name',
+                s.team_id AS 'species_team'
+            FROM actnaturalapp_employee e
+            JOIN actnaturalapp_animal a ON e.team_id = a.team_id
+            JOIN actnaturalapp_species s ON a.species_id = s.id
+            WHERE e.id = ?
+            """, (user_employee_id,))
+
+            dataset = db_cursor.fetchall()
+            animals = []
+            species = []
+            
+            for row in dataset:
+                animal = Animal()
+                animal.id = row['animal_id']
+                animal.team_id = row['animal_team']
+                animal.name = row['animal_name']
+                animal.species_id = row['animal_species']
+                animals.append(animal)
+
+                specie = Species()
+                specie.id = row['species_id']
+                specie.team_id = row['species_team']
+                specie.name = row['species_name']
+                species.append(specie)
+            
+            # remove duplicate species
+            species = set(species)
+            species = list(species)
 
         template = 'animals/animal_list.html'
         context = {
             'animals': animals,
             'species': species,
-            'employee': employee
         }
 
         return render(request, template, context)
